@@ -1,0 +1,43 @@
+name: Daily post generation
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+jobs:
+  generate-posts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Anthropic SDK
+        run: npm install @anthropic-ai/sdk
+
+      - name: Generate posts
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/generate-posts.mjs
+
+      - name: Commit and push
+        run: |
+          git config --global user.name "MigrantScholar Bot"
+          git config --global user.email "bot@migrantscholar.com"
+          git add content/posts/
+          git diff --staged --quiet || git commit -m "chore: auto-generate posts $(date +%Y-%m-%d)"
+          git push
+
+      - name: Ping Google sitemap
+        run: curl -s "https://www.google.com/ping?sitemap=https://migrantscholar.vercel.app/sitemap.xml" || true
