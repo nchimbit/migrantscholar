@@ -29,19 +29,31 @@ async function generatePost(topic) {
   const today = new Date().toISOString().split("T")[0];
   const response = await client.chat.completions.create({
     model: "llama-3.3-70b-versatile",
-    max_tokens: 2000,
+    max_tokens: 3000,
     messages: [{
       role: "user",
-      content: `Write a complete SEO blog post for MigrantScholar.com about: ${topic.title}
+      content: `Write a fully SEO-optimised blog post for MigrantScholar.com.
+
+Topic: ${topic.title}
 Focus: ${topic.focus}
 Audience: ${topic.target}
 Country: ${topic.country}
 Date: ${today}
 
-Include: direct answer opening, who qualifies, 4-6 real scholarships with coverage and deadlines, step-by-step application, documents checklist, 6 FAQ entries.
+STRICT REQUIREMENTS:
+1. Opening paragraph: directly answer the main question in 2-3 sentences. Google AI pulls this.
+2. "Who qualifies" section: bullet list of exact visa/status categories
+3. List 5-6 real scholarships each with: full name, coverage amount, who can apply, deadline, official website URL
+4. Step-by-step numbered application process (8 steps minimum)
+5. Documents checklist as bullet points
+6. 8 FAQ entries — write questions exactly how migrants search them e.g. "Can I apply without settled status?" each with a detailed answer of 2-3 sentences
+7. External authority links: include 2-3 links to official government or university pages
+8. Closing paragraph encouraging action
+9. Total length: minimum 900 words
+10. Use ## for main headings, ### for scholarship names, **bold** for key terms
 
-Respond ONLY with valid JSON, no markdown, no backticks:
-{"title":"...","metaDescription":"...","excerpt":"...","content":"...","tags":["tag1","tag2"],"readingTime":6}`
+Respond ONLY with valid JSON, no markdown fences, no backticks:
+{"title":"...","metaDescription":"150 char SEO description","excerpt":"2 sentence summary","content":"full markdown content here minimum 900 words","tags":["tag1","tag2","tag3"],"readingTime":8,"faqs":[{"question":"...","answer":"..."}]}`
     }]
   });
   const raw = response.choices[0].message.content.trim().replace(/^```json\n?/,"").replace(/\n?```$/,"");
@@ -52,6 +64,11 @@ function savePost(topic, post) {
   const today = new Date().toISOString().split("T")[0];
   const postsDir = path.join(__dirname, "../content/posts");
   if (!fs.existsSync(postsDir)) fs.mkdirSync(postsDir, { recursive: true });
+
+  const faqSection = post.faqs && post.faqs.length > 0
+    ? "\n\n## Frequently asked questions\n\n" + post.faqs.map(f => `### ${f.question}\n${f.answer}`).join("\n\n")
+    : "";
+
   const mdx = `---
 title: "${post.title.replace(/"/g,'\\"')}"
 date: "${today}"
@@ -64,8 +81,13 @@ metaDescription: "${post.metaDescription.replace(/"/g,'\\"')}"
 readingTime: ${post.readingTime}
 ---
 
-${post.content}
+${post.content}${faqSection}
+
+---
+
+*Found this guide helpful? Share it with someone who needs it. Browse more [scholarship guides for migrants](https://migrantscholar.vercel.app/blog) on MigrantScholar.*
 `;
+
   const filename = today + "-" + topic.slug + ".mdx";
   fs.writeFileSync(path.join(postsDir, filename), mdx, "utf8");
   console.log("✅ Saved: " + filename);
@@ -83,7 +105,7 @@ async function main() {
         const post = await generatePost(topic);
         const file = savePost(topic, post);
         saved.push(file);
-        await new Promise(r => setTimeout(r, 1000));
+        await new Promise(r => setTimeout(r, 1500));
       } catch (err) {
         console.error("❌ Failed: " + topic.title + " — " + err.message);
       }
