@@ -1,16 +1,16 @@
-import Anthropic from "@anthropic-ai/sdk";
+import Groq from "groq-sdk";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+const client = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 async function getTrendingTopics() {
   console.log("🔍 Finding trending topics...");
   const today = new Date().toISOString().split("T")[0];
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-20250514",
+  const response = await client.chat.completions.create({
+    model: "llama-3.3-70b-versatile",
     max_tokens: 1000,
     messages: [{
       role: "user",
@@ -20,16 +20,16 @@ Respond ONLY with valid JSON, no markdown, no backticks:
 {"topics":[{"title":"...","slug":"...","focus":"...","target":"...","country":"...","type":"..."}]}`
     }]
   });
-  const raw = response.content[0].text.trim().replace(/^```json\n?/,"").replace(/\n?```$/,"");
+  const raw = response.choices[0].message.content.trim().replace(/^```json\n?/,"").replace(/\n?```$/,"");
   return JSON.parse(raw).topics;
 }
 
 async function generatePost(topic) {
   console.log("✍️  Writing: " + topic.title);
   const today = new Date().toISOString().split("T")[0];
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-20250514",
-    max_tokens: 1000,
+  const response = await client.chat.completions.create({
+    model: "llama-3.3-70b-versatile",
+    max_tokens: 2000,
     messages: [{
       role: "user",
       content: `Write a complete SEO blog post for MigrantScholar.com about: ${topic.title}
@@ -44,7 +44,7 @@ Respond ONLY with valid JSON, no markdown, no backticks:
 {"title":"...","metaDescription":"...","excerpt":"...","content":"...","tags":["tag1","tag2"],"readingTime":6}`
     }]
   });
-  const raw = response.content[0].text.trim().replace(/^```json\n?/,"").replace(/\n?```$/,"");
+  const raw = response.choices[0].message.content.trim().replace(/^```json\n?/,"").replace(/\n?```$/,"");
   return JSON.parse(raw);
 }
 
@@ -83,7 +83,7 @@ async function main() {
         const post = await generatePost(topic);
         const file = savePost(topic, post);
         saved.push(file);
-        await new Promise(r => setTimeout(r, 2000));
+        await new Promise(r => setTimeout(r, 1000));
       } catch (err) {
         console.error("❌ Failed: " + topic.title + " — " + err.message);
       }
