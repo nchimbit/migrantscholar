@@ -54,7 +54,7 @@ function savePost(topic, content) {
 
   const mdx = `---
 title: "${topic.title.replace(/"/g,'\\"')}"
-date: "${today}"
+date: "${new Date().toISOString()}"
 slug: "${topic.slug}"
 country: "${topic.country}"
 type: "${topic.type}"
