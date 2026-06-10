@@ -1,18 +1,23 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useState } from "react";
 import { Navbar, Footer, AdBanner } from "../components/Layout";
 import { getAllPosts, formatDate } from "../lib/posts";
 
 const countryColors = {
-  UK: { bg: "#DBEAFE", color: "#1E40AF" },
-  Germany: { bg: "#EEF2FF", color: "#3730A3" },
-  Canada: { bg: "#FFF7ED", color: "#9A3412" },
-  Australia: { bg: "#F0FDF4", color: "#166534" },
-  USA: { bg: "#FDF4FF", color: "#7E22CE" },
-  Turkey: { bg: "#FFFBEB", color: "#92400E" },
+  UK:{bg:"#DBEAFE",color:"#1E40AF"},
+  Germany:{bg:"#EEF2FF",color:"#3730A3"},
+  Canada:{bg:"#FFF7ED",color:"#9A3412"},
+  Australia:{bg:"#F0FDF4",color:"#166534"},
+  USA:{bg:"#FDF4FF",color:"#7E22CE"},
+  Turkey:{bg:"#FFFBEB",color:"#92400E"},
 };
 
 export default function Home({ posts }) {
+  const [visible, setVisible] = useState(18);
+  const showing = posts.slice(0, visible);
+  const hasMore = visible < posts.length;
+
   return (
     <>
       <Head>
@@ -45,22 +50,23 @@ export default function Home({ posts }) {
           </div>
 
           {/* Ad */}
-          <div style={{background:"#fff",border:"0.5px dashed #BFDBFE",borderRadius:"8px",height:"52px",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"11px",color:"#BFDBFE",marginBottom:"1rem"}}>
-            Advertisement
-          </div>
+          <AdBanner />
 
           {/* Section head */}
           <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:".75rem"}}>
-            <span style={{fontSize:"11px",fontWeight:600,color:"#3B82F6",textTransform:"uppercase",letterSpacing:".08em"}}>Latest guides</span>
-            <Link href="/blog" style={{fontSize:"12px",color:"#1D4ED8",fontWeight:500}}>View all →</Link>
+            <div style={{display:"flex",alignItems:"center",gap:".5rem"}}>
+              <span style={{fontSize:"11px",fontWeight:600,color:"#3B82F6",textTransform:"uppercase",letterSpacing:".08em"}}>Latest guides</span>
+              <span style={{background:"#DBEAFE",color:"#1D4ED8",fontSize:"10px",padding:"1px 7px",borderRadius:"4px",fontWeight:500}}>{posts.length} guides</span>
+            </div>
+            <Link href="/blog" style={{fontSize:"12px",color:"#1D4ED8",fontWeight:500,textDecoration:"none"}}>View all →</Link>
           </div>
 
           {/* Cards */}
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(280px,1fr))",gap:".75rem",marginBottom:"1rem"}}>
-            {posts.slice(0,6).map(post=>{
+            {showing.map(post=>{
               const c = countryColors[post.country] || {bg:"#DBEAFE",color:"#1E40AF"};
               return (
-                <Link key={post.slug} href={`/blog/${post.slug}`} style={{display:"block",background:"#fff",border:"0.5px solid #BFDBFE",borderRadius:"8px",padding:".875rem 1rem",color:"inherit",textDecoration:"none",transition:"border-color .15s"}}
+                <Link key={post.slug} href={`/blog/${post.slug}`} style={{display:"block",background:"#fff",border:"0.5px solid #BFDBFE",borderRadius:"8px",padding:".875rem 1rem",color:"inherit",textDecoration:"none"}}
                   onMouseEnter={e=>e.currentTarget.style.borderColor="#1D4ED8"}
                   onMouseLeave={e=>e.currentTarget.style.borderColor="#BFDBFE"}
                 >
@@ -78,6 +84,20 @@ export default function Home({ posts }) {
               );
             })}
           </div>
+
+          {/* Load more button */}
+          {hasMore && (
+            <div style={{textAlign:"center",marginBottom:"1.5rem"}}>
+              <button
+                onClick={()=>setVisible(v=>v+18)}
+                style={{background:"#fff",border:"0.5px solid #BFDBFE",borderRadius:"8px",padding:".625rem 2rem",fontSize:"13px",color:"#1D4ED8",fontWeight:500,cursor:"pointer",transition:"all .15s"}}
+                onMouseEnter={e=>{e.currentTarget.style.background="#EFF6FF";e.currentTarget.style.borderColor="#1D4ED8"}}
+                onMouseLeave={e=>{e.currentTarget.style.background="#fff";e.currentTarget.style.borderColor="#BFDBFE"}}
+              >
+                Load more guides ({posts.length - visible} remaining)
+              </button>
+            </div>
+          )}
 
           {/* CTA */}
           <div id="alerts" style={{background:"#DBEAFE",border:"0.5px solid #BFDBFE",borderRadius:"8px",padding:"1rem 1.25rem",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:".75rem",marginBottom:"1rem"}}>
