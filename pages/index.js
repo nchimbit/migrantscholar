@@ -1,20 +1,34 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
-import { Navbar, Footer, AdBanner } from "../components/Layout";
+import { Navbar, Footer } from "../components/Layout";
 import { getAllPosts, formatDate } from "../lib/posts";
 
 const countryColors = {
-  UK:{bg:"#DBEAFE",color:"#1E40AF"},
-  Germany:{bg:"#EEF2FF",color:"#3730A3"},
-  Canada:{bg:"#FFF7ED",color:"#9A3412"},
-  Australia:{bg:"#F0FDF4",color:"#166534"},
-  USA:{bg:"#FDF4FF",color:"#7E22CE"},
-  Turkey:{bg:"#FFFBEB",color:"#92400E"},
+  UK:{bg:"#0D6E6E"}, Germany:{bg:"#3730A3"}, Canada:{bg:"#9A3412"},
+  Australia:{bg:"#166534"}, USA:{bg:"#7E22CE"}, Turkey:{bg:"#92400E"},
 };
 
+const countries = [
+  ["🇬🇧","United Kingdom","Sanctuary Scholarships · £17k+","UK"],
+  ["🇩🇪","Germany","DAAD · Fully Funded","Germany"],
+  ["🇨🇦","Canada","Vanier · $50,000/yr","Canada"],
+  ["🇦🇺","Australia","Australia Awards · Full funding","Australia"],
+  ["🇺🇸","USA","Fulbright · Graduate awards","USA"],
+  ["🇹🇷","Turkey","Türkiye Bursları · 180+ countries","Turkey"],
+];
+
+const types = [
+  ["⭐","Fully Funded","Complete coverage — tuition, living costs, travel, and health insurance included.","#E6F4EF"],
+  ["🎓","Undergraduate","Bachelor's degree awards open to refugees and asylum seekers at top universities.","#FEF3C7"],
+  ["📚","Master's Degrees","Postgraduate scholarships for migrants pursuing Master's programmes abroad.","#EEF2FF"],
+  ["🔬","PhD Research","Doctoral scholarships for forced migrants with research ambitions.","#FDF4FF"],
+  ["🛡️","Refugee Specific","Awards exclusively for refugees and asylum seekers — no settled status required.","#FFF7ED"],
+  ["💰","Partially Funded","Tuition waivers and partial bursaries to reduce the cost of study abroad.","#F0FDF4"],
+];
+
 export default function Home({ posts }) {
-  const [visible, setVisible] = useState(18);
+  const [visible, setVisible] = useState(9);
   const showing = posts.slice(0, visible);
   const hasMore = visible < posts.length;
 
@@ -27,101 +41,136 @@ export default function Home({ posts }) {
       </Head>
       <Navbar />
 
-      <div style={{background:"#EFF6FF",minHeight:"100vh",padding:"1rem 2rem 2rem"}}>
-        <div style={{maxWidth:"1080px",margin:"0 auto"}}>
-
-          {/* Hero */}
-          <div style={{background:"#fff",border:"0.5px solid #BFDBFE",borderRadius:"10px",padding:".875rem 1.25rem",display:"flex",alignItems:"center",justifyContent:"space-between",gap:"1.5rem",flexWrap:"wrap",marginBottom:"1rem"}}>
-            <div style={{flex:1,minWidth:"220px"}}>
-              <div style={{display:"inline-block",background:"#EFF6FF",border:"0.5px solid #BFDBFE",color:"#1D4ED8",fontSize:"10px",padding:"2px 8px",borderRadius:"20px",marginBottom:".4rem",fontWeight:500}}>Updated daily · 2026</div>
-              <h1 style={{fontSize:"1rem",fontWeight:500,color:"#1E3A8A",lineHeight:1.3,marginBottom:".25rem"}}>
-                Scholarships for <em style={{fontStyle:"normal",color:"#1D4ED8"}}>Migrant Students</em> Worldwide
-              </h1>
-              <p style={{fontSize:"11px",color:"#3B82F6"}}>Verified fully funded awards open to refugees, asylum seekers, and forced migrants.</p>
-            </div>
-            <div style={{display:"flex",border:"0.5px solid #BFDBFE",borderRadius:"8px",overflow:"hidden",flexShrink:0}}>
-              {[["70+","Universities"],["£17k+","Top Award"],["Free","Always"]].map(([val,label],i)=>(
-                <div key={label} style={{padding:".5rem .9rem",textAlign:"center",borderRight:i<2?"0.5px solid #BFDBFE":"none"}}>
-                  <strong style={{display:"block",fontSize:".9rem",fontWeight:500,color:"#1E3A8A"}}>{val}</strong>
-                  <span style={{fontSize:"10px",color:"#93C5FD",textTransform:"uppercase",letterSpacing:".05em"}}>{label}</span>
-                </div>
-              ))}
+      {/* HERO */}
+      <div style={{background:"linear-gradient(135deg,#0D6E6E 0%,#0A5555 100%)",padding:"3rem 2rem",position:"relative",overflow:"hidden"}}>
+        <div style={{maxWidth:"1080px",margin:"0 auto",display:"grid",gridTemplateColumns:"1fr 1fr",gap:"2rem",alignItems:"center"}}>
+          <div>
+            <div style={{display:"inline-block",background:"#F5A623",color:"#0A2A2A",fontSize:"11px",fontWeight:700,padding:"4px 12px",borderRadius:"4px",marginBottom:"1rem",textTransform:"uppercase",letterSpacing:".08em"}}>Updated Daily · 2026</div>
+            <h1 style={{fontSize:"2.25rem",fontWeight:900,color:"#fff",lineHeight:1.15,marginBottom:".75rem",letterSpacing:"-0.02em"}}>
+              Find Your<br/><em style={{fontStyle:"normal",color:"#F5A623"}}>Scholarship</em><br/>As A Migrant!
+            </h1>
+            <p style={{fontSize:"14px",color:"rgba(255,255,255,.8)",marginBottom:"1.5rem",lineHeight:1.65,maxWidth:"420px"}}>Verified fully funded awards open to refugees, asylum seekers, and forced migrants. Free to use, updated every single day.</p>
+            <div style={{display:"flex",gap:".75rem",flexWrap:"wrap"}}>
+              <Link href="/blog" style={{background:"#F5A623",color:"#0A2A2A",padding:"10px 22px",borderRadius:"6px",fontSize:"13px",fontWeight:700,textDecoration:"none"}}>Browse Scholarships</Link>
+              <Link href="/alerts" style={{background:"rgba(255,255,255,.15)",color:"#fff",border:"1.5px solid rgba(255,255,255,.4)",padding:"10px 22px",borderRadius:"6px",fontSize:"13px",fontWeight:600,textDecoration:"none"}}>Get Free Alerts</Link>
             </div>
           </div>
-
-          {/* Ad */}
-          <AdBanner />
-
-          {/* Section head */}
-          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:".75rem"}}>
-            <div style={{display:"flex",alignItems:"center",gap:".5rem"}}>
-              <span style={{fontSize:"11px",fontWeight:600,color:"#3B82F6",textTransform:"uppercase",letterSpacing:".08em"}}>Latest guides</span>
-              <span style={{background:"#DBEAFE",color:"#1D4ED8",fontSize:"10px",padding:"1px 7px",borderRadius:"4px",fontWeight:500}}>{posts.length} guides</span>
-            </div>
-            <Link href="/blog" style={{fontSize:"12px",color:"#1D4ED8",fontWeight:500,textDecoration:"none"}}>View all →</Link>
+          <div style={{display:"flex",gap:"1rem",flexWrap:"wrap"}}>
+            {[["70+","Universities"],["28+","Guides"],["£17k+","Top Award"],["Free","Always"]].map(([val,label])=>(
+              <div key={label} style={{textAlign:"center",background:"rgba(255,255,255,.1)",border:"1px solid rgba(255,255,255,.15)",borderRadius:"8px",padding:".75rem 1.25rem",flex:"1 1 100px"}}>
+                <strong style={{display:"block",fontSize:"1.5rem",fontWeight:800,color:"#fff"}}>{val}</strong>
+                <span style={{fontSize:"11px",color:"rgba(255,255,255,.7)",textTransform:"uppercase",letterSpacing:".06em"}}>{label}</span>
+              </div>
+            ))}
           </div>
-
-          {/* Cards */}
-          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(280px,1fr))",gap:".75rem",marginBottom:"1rem"}}>
-            {showing.map(post=>{
-              const c = countryColors[post.country] || {bg:"#DBEAFE",color:"#1E40AF"};
-              return (
-                <Link key={post.slug} href={`/blog/${post.slug}`} style={{display:"block",background:"#fff",border:"0.5px solid #BFDBFE",borderRadius:"8px",padding:".875rem 1rem",color:"inherit",textDecoration:"none"}}
-                  onMouseEnter={e=>e.currentTarget.style.borderColor="#1D4ED8"}
-                  onMouseLeave={e=>e.currentTarget.style.borderColor="#BFDBFE"}
-                >
-                  <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:".5rem"}}>
-                    <span style={{fontSize:"10px",fontWeight:500,padding:"2px 7px",borderRadius:"4px",background:c.bg,color:c.color}}>{post.country}</span>
-                    <span style={{fontSize:"10px",color:"#93C5FD"}}>{post.readingTime} min read</span>
-                  </div>
-                  <h3 style={{fontSize:"12px",fontWeight:500,color:"#1E3A8A",lineHeight:1.4,marginBottom:".4rem"}}>{post.title}</h3>
-                  <p style={{fontSize:"11px",color:"#64748b",lineHeight:1.5,marginBottom:".6rem"}}>{post.excerpt.slice(0,110)}...</p>
-                  <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",borderTop:"0.5px solid #DBEAFE",paddingTop:".5rem"}}>
-                    <span style={{fontSize:"10px",color:"#93C5FD"}}>{formatDate(post.date)}</span>
-                    <span style={{fontSize:"11px",color:"#1D4ED8",fontWeight:500}}>Read guide →</span>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-
-          {/* Load more button */}
-          {hasMore && (
-            <div style={{textAlign:"center",marginBottom:"1.5rem"}}>
-              <button
-                onClick={()=>setVisible(v=>v+18)}
-                style={{background:"#fff",border:"0.5px solid #BFDBFE",borderRadius:"8px",padding:".625rem 2rem",fontSize:"13px",color:"#1D4ED8",fontWeight:500,cursor:"pointer",transition:"all .15s"}}
-                onMouseEnter={e=>{e.currentTarget.style.background="#EFF6FF";e.currentTarget.style.borderColor="#1D4ED8"}}
-                onMouseLeave={e=>{e.currentTarget.style.background="#fff";e.currentTarget.style.borderColor="#BFDBFE"}}
-              >
-                Load more guides ({posts.length - visible} remaining)
-              </button>
-            </div>
-          )}
-
-          {/* CTA */}
-          <div id="alerts" style={{background:"#DBEAFE",border:"0.5px solid #BFDBFE",borderRadius:"8px",padding:"1rem 1.25rem",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:".75rem",marginBottom:"1rem"}}>
-            <div>
-              <h3 style={{fontSize:".85rem",fontWeight:500,color:"#1E3A8A",marginBottom:".15rem"}}>Never miss a scholarship deadline</h3>
-              <p style={{fontSize:"11px",color:"#3B82F6"}}>Free alerts when new awards open for migrants, refugees, and asylum seekers.</p>
-            </div>
-            <div style={{display:"flex",gap:".35rem"}}>
-              <input type="email" placeholder="your@email.com" style={{background:"#fff",border:"0.5px solid #BFDBFE",color:"#1E3A8A",padding:"6px 10px",borderRadius:"6px",fontSize:"12px",outline:"none",minWidth:"170px"}} />
-              <button style={{background:"#1E40AF",color:"#fff",border:"none",padding:"6px 14px",borderRadius:"6px",fontSize:"12px",fontWeight:500,cursor:"pointer",whiteSpace:"nowrap"}}>Get free alerts</button>
-            </div>
-          </div>
-
-          {/* Footer box */}
-          <div style={{background:"#fff",border:"0.5px solid #BFDBFE",borderRadius:"8px",padding:".875rem 1.25rem",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:".5rem"}}>
-            <p style={{fontSize:"11px",color:"#93C5FD"}}>© 2026 MigrantScholar.com — Free, independent scholarship resource</p>
-            <div style={{display:"flex",gap:"1rem"}}>
-              <Link href="/about" style={{fontSize:"11px",color:"#3B82F6",textDecoration:"none"}}>About</Link>
-              <Link href="/sitemap.xml" style={{fontSize:"11px",color:"#3B82F6",textDecoration:"none"}}>Sitemap</Link>
-            </div>
-          </div>
-
         </div>
       </div>
+
+      <div style={{maxWidth:"1080px",margin:"0 auto",padding:"2rem"}}>
+
+        {/* Countries */}
+        <div style={{textAlign:"center",marginBottom:"1.75rem"}}>
+          <div style={{display:"inline-block",background:"#F5A623",color:"#0A2A2A",fontSize:"11px",fontWeight:700,padding:"3px 12px",borderRadius:"4px",marginBottom:".5rem",textTransform:"uppercase",letterSpacing:".08em"}}>Browse by Country</div>
+          <h2 style={{fontSize:"1.5rem",fontWeight:800,color:"#0D6E6E",letterSpacing:"-0.02em"}}>Countries We Cover</h2>
+        </div>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"1rem",marginBottom:"2.5rem"}}>
+          {countries.map(([flag,name,desc,code])=>(
+            <Link key={code} href={`/blog?country=${code}`} style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",padding:"1.25rem",display:"flex",alignItems:"center",gap:".875rem",textDecoration:"none",cursor:"pointer"}}>
+              <div style={{fontSize:"2rem",flexShrink:0}}>{flag}</div>
+              <div style={{flex:1}}>
+                <strong style={{display:"block",fontSize:".9rem",fontWeight:700,color:"#0A2A2A",marginBottom:".15rem"}}>{name}</strong>
+                <span style={{fontSize:"11px",color:"#6b7280"}}>{desc}</span>
+              </div>
+              <div style={{color:"#0D6E6E",fontSize:"16px",fontWeight:700}}>→</div>
+            </Link>
+          ))}
+        </div>
+
+        {/* Types */}
+        <div style={{textAlign:"center",marginBottom:"1.75rem"}}>
+          <div style={{display:"inline-block",background:"#F5A623",color:"#0A2A2A",fontSize:"11px",fontWeight:700,padding:"3px 12px",borderRadius:"4px",marginBottom:".5rem",textTransform:"uppercase",letterSpacing:".08em"}}>Scholarship Types</div>
+          <h2 style={{fontSize:"1.5rem",fontWeight:800,color:"#0D6E6E",letterSpacing:"-0.02em"}}>What We Cover</h2>
+        </div>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"1rem",marginBottom:"2.5rem"}}>
+          {types.map(([icon,title,desc,bg])=>(
+            <div key={title} style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",padding:"1.25rem",textAlign:"center"}}>
+              <div style={{width:"48px",height:"48px",borderRadius:"10px",background:bg,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto .75rem",fontSize:"22px"}}>{icon}</div>
+              <h3 style={{fontSize:".85rem",fontWeight:700,color:"#0A2A2A",marginBottom:".25rem"}}>{title}</h3>
+              <p style={{fontSize:"11px",color:"#6b7280",lineHeight:1.55}}>{desc}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Posts */}
+        <div style={{textAlign:"center",marginBottom:"1.75rem"}}>
+          <div style={{display:"inline-block",background:"#F5A623",color:"#0A2A2A",fontSize:"11px",fontWeight:700,padding:"3px 12px",borderRadius:"4px",marginBottom:".5rem",textTransform:"uppercase",letterSpacing:".08em"}}>Latest Guides</div>
+          <h2 style={{fontSize:"1.5rem",fontWeight:800,color:"#0D6E6E",letterSpacing:"-0.02em"}}>Today's Scholarship Posts</h2>
+        </div>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"1rem",marginBottom:"1.5rem"}}>
+          {showing.map(post=>{
+            const c = countryColors[post.country] || {bg:"#0D6E6E"};
+            return (
+              <Link key={post.slug} href={`/blog/${post.slug}`} style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",overflow:"hidden",textDecoration:"none",display:"block",color:"inherit"}}>
+                <div style={{background:c.bg,padding:".75rem 1rem",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+                  <span style={{fontSize:"10px",fontWeight:700,color:"#fff",background:"rgba(255,255,255,.2)",padding:"2px 8px",borderRadius:"4px",textTransform:"uppercase"}}>{post.country}</span>
+                  <span style={{fontSize:"10px",color:"rgba(255,255,255,.7)"}}>{post.readingTime} min read</span>
+                </div>
+                <div style={{padding:"1rem"}}>
+                  <h3 style={{fontSize:".85rem",fontWeight:700,color:"#0A2A2A",lineHeight:1.4,marginBottom:".4rem"}}>{post.title}</h3>
+                  <p style={{fontSize:"11px",color:"#6b7280",lineHeight:1.55,marginBottom:".625rem"}}>{post.excerpt.slice(0,100)}...</p>
+                  <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",borderTop:"1px solid #f0faf9",paddingTop:".625rem"}}>
+                    <span style={{fontSize:"10px",color:"#9ca3af"}}>{formatDate(post.date)}</span>
+                    <span style={{fontSize:"11px",color:"#0D6E6E",fontWeight:700}}>Read guide →</span>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+
+        {hasMore && (
+          <div style={{textAlign:"center",marginBottom:"2rem"}}>
+            <button onClick={()=>setVisible(v=>v+9)} style={{background:"#fff",border:"1.5px solid #0D6E6E",borderRadius:"8px",padding:".75rem 2rem",fontSize:"13px",color:"#0D6E6E",fontWeight:700,cursor:"pointer"}}>
+              Load more guides ({posts.length - visible} remaining)
+            </button>
+          </div>
+        )}
+
+        {/* Why */}
+        <div style={{background:"#0D6E6E",borderRadius:"12px",padding:"2rem",marginBottom:"2rem"}}>
+          <h2 style={{fontSize:"1.1rem",fontWeight:800,color:"#fff",marginBottom:"1.25rem",textAlign:"center"}}>WHY CHOOSE MIGRANTSCHOLAR?</h2>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(5,1fr)",gap:"1rem"}}>
+            {[["✓","Verified Scholarships"],["📅","Updated Daily"],["🌍","7 Countries"],["🔓","Always Free"],["⚡","AI Powered"]].map(([icon,label])=>(
+              <div key={label} style={{textAlign:"center"}}>
+                <div style={{width:"44px",height:"44px",background:"rgba(255,255,255,.15)",borderRadius:"8px",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto .5rem",fontSize:"20px"}}>{icon}</div>
+                <span style={{fontSize:"11px",color:"rgba(255,255,255,.85)",fontWeight:500}}>{label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* CTA */}
+        <div id="alerts" style={{background:"#F5A623",borderRadius:"12px",padding:"2rem",display:"flex",alignItems:"center",justifyContent:"space-between",gap:"1.5rem",flexWrap:"wrap",marginBottom:"2rem"}}>
+          <div>
+            <h2 style={{fontSize:"1.25rem",fontWeight:800,color:"#0A2A2A",marginBottom:".25rem"}}>NEVER MISS A DEADLINE AGAIN!</h2>
+            <p style={{fontSize:"13px",color:"rgba(10,42,42,.7)"}}>Free alerts when new scholarships open for migrants, refugees, and asylum seekers.</p>
+          </div>
+          <Link href="/alerts" style={{background:"#0D6E6E",color:"#fff",border:"none",padding:"10px 24px",borderRadius:"6px",fontSize:"13px",fontWeight:700,textDecoration:"none",whiteSpace:"nowrap"}}>GET FREE ALERTS</Link>
+        </div>
+
+      </div>
+
+      {/* Contact bar */}
+      <div style={{background:"#0A2A2A",padding:".875rem 2rem"}}>
+        <div style={{maxWidth:"1080px",margin:"0 auto",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:"1rem"}}>
+          <div style={{display:"flex",alignItems:"center",gap:".5rem",color:"rgba(255,255,255,.85)",fontSize:"12px"}}>📍 Access from anywhere, anytime</div>
+          <div style={{display:"flex",alignItems:"center",gap:".5rem",color:"rgba(255,255,255,.85)",fontSize:"12px"}}>📧 contact@migrantscholar.com</div>
+          <div style={{display:"flex",alignItems:"center",gap:".5rem",color:"rgba(255,255,255,.85)",fontSize:"12px"}}>🌐 migrantscholar.com</div>
+          <Link href="/blog" style={{background:"#F5A623",color:"#0A2A2A",padding:"6px 18px",borderRadius:"6px",fontSize:"12px",fontWeight:700,textDecoration:"none"}}>BROWSE NOW</Link>
+        </div>
+      </div>
+
+      <Footer />
     </>
   );
 }
