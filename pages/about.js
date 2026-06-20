@@ -12,6 +12,9 @@ export default function About() {
     setSent(true);
   }
 
+  const inp = {width:"100%",background:"#E6F4F1",border:"1px solid #A7D4CC",borderRadius:"6px",padding:"8px 12px",fontSize:"13px",color:"#0A2A2A",outline:"none",fontFamily:"inherit"};
+  const lbl = {display:"block",fontSize:"11px",fontWeight:700,color:"#0A2A2A",marginBottom:".3rem"};
+
   return (
     <>
       <Head>
@@ -21,130 +24,126 @@ export default function About() {
       </Head>
       <Navbar />
 
-      <div style={{background:"#EFF6FF",minHeight:"100vh",padding:"1rem 2rem 2rem"}}>
-        <div style={{maxWidth:"1080px",margin:"0 auto"}}>
+      {/* Hero */}
+      <div style={{background:"linear-gradient(135deg,#0D6E6E 0%,#0A5555 100%)",padding:"2.5rem 2rem",textAlign:"center"}}>
+        <div style={{display:"inline-block",background:"#F5A623",color:"#0A2A2A",fontSize:"11px",fontWeight:700,padding:"4px 12px",borderRadius:"4px",marginBottom:"1rem",textTransform:"uppercase",letterSpacing:".08em"}}>Our Mission</div>
+        <h1 style={{fontSize:"1.85rem",fontWeight:900,color:"#fff",lineHeight:1.25,marginBottom:".75rem",letterSpacing:"-0.02em"}}>Helping migrants find the<br/>education funding they deserve</h1>
+        <p style={{fontSize:"13px",color:"rgba(255,255,255,.8)",maxWidth:"540px",margin:"0 auto",lineHeight:1.7}}>MigrantScholar is a free, independent scholarship resource built specifically for migrants, refugees, and asylum seekers. We verify every award, track every deadline, and publish new guides every single day.</p>
+      </div>
 
-          {/* Breadcrumb */}
-          <div style={{background:"#fff",border:"0.5px solid #BFDBFE",borderRadius:"8px",padding:".5rem 1rem",marginBottom:"1rem",fontSize:"11px",color:"#93C5FD",display:"flex",alignItems:"center",gap:".35rem"}}>
-            <Link href="/" style={{color:"#3B82F6",textDecoration:"none"}}>Home</Link>
-            <span>›</span>
-            <span>About</span>
-          </div>
+      <div style={{maxWidth:"1080px",margin:"0 auto",padding:"2rem"}}>
 
-          {/* Hero */}
-          <div style={{background:"#fff",border:"0.5px solid #BFDBFE",borderRadius:"10px",padding:"1.75rem",marginBottom:"1rem",textAlign:"center"}}>
-            <div style={{display:"inline-block",background:"#EFF6FF",border:"0.5px solid #BFDBFE",color:"#1D4ED8",fontSize:"10px",padding:"2px 8px",borderRadius:"20px",marginBottom:".75rem",fontWeight:500}}>Our mission</div>
-            <h1 style={{fontSize:"1.35rem",fontWeight:500,color:"#1E3A8A",marginBottom:".5rem",lineHeight:1.3}}>Helping migrants find the education<br/>funding they deserve</h1>
-            <p style={{fontSize:"13px",color:"#64748b",maxWidth:"520px",margin:"0 auto",lineHeight:1.7}}>MigrantScholar is a free, independent scholarship resource built specifically for migrants, refugees, and asylum seekers. We verify every award, track every deadline, and publish new guides every single day — so you never miss an opportunity.</p>
-          </div>
-
-          {/* Stats */}
-          <div style={{background:"#DBEAFE",border:"0.5px solid #BFDBFE",borderRadius:"10px",padding:"1.25rem",marginBottom:"1rem",display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:"1rem",textAlign:"center"}}>
-            {[["28+","Guides published"],["7","Countries covered"],["Daily","New posts"],["Free","Always, forever"]].map(([val,label])=>(
-              <div key={label}>
-                <strong style={{display:"block",fontSize:"1.25rem",fontWeight:500,color:"#1E3A8A"}}>{val}</strong>
-                <span style={{fontSize:"11px",color:"#3B82F6"}}>{label}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Mission + Why */}
-          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"1rem",marginBottom:"1rem"}}>
-            <div style={{background:"#fff",border:"0.5px solid #BFDBFE",borderRadius:"10px",padding:"1.25rem"}}>
-              <div style={{fontSize:"10px",fontWeight:600,color:"#3B82F6",textTransform:"uppercase",letterSpacing:".08em",marginBottom:".5rem"}}>What we do</div>
-              <h2 style={{fontSize:".95rem",fontWeight:500,color:"#1E3A8A",marginBottom:".75rem"}}>Your dedicated scholarship guide</h2>
-              <p style={{fontSize:"12px",color:"#64748b",lineHeight:1.7,marginBottom:".625rem"}}>Finding scholarships as a migrant is genuinely hard. Most scholarship databases are built for standard international students — not for people navigating asylum claims, protection visas, or humanitarian status.</p>
-              <p style={{fontSize:"12px",color:"#64748b",lineHeight:1.7}}>MigrantScholar was built to fix that. Every guide on this site is written specifically for migrants, refugees, forced migrants, and asylum seekers. We explain eligibility in plain language, list real deadlines, and link directly to official application pages.</p>
+        {/* Stats */}
+        <div style={{background:"#0D6E6E",borderRadius:"10px",padding:"1.5rem",marginBottom:"2rem",display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:"1rem",textAlign:"center"}}>
+          {[["28+","Guides published"],["7","Countries covered"],["Daily","New posts"],["Free","Always, forever"]].map(([val,label])=>(
+            <div key={label}>
+              <strong style={{display:"block",fontSize:"1.5rem",fontWeight:800,color:"#fff"}}>{val}</strong>
+              <span style={{fontSize:"11px",color:"rgba(255,255,255,.75)",textTransform:"uppercase",letterSpacing:".05em"}}>{label}</span>
             </div>
-            <div style={{background:"#fff",border:"0.5px solid #BFDBFE",borderRadius:"10px",padding:"1.25rem"}}>
-              <div style={{fontSize:"10px",fontWeight:600,color:"#3B82F6",textTransform:"uppercase",letterSpacing:".08em",marginBottom:".5rem"}}>Why we built this</div>
-              <h2 style={{fontSize:".95rem",fontWeight:500,color:"#1E3A8A",marginBottom:".75rem"}}>Education should not depend on where you were born</h2>
-              <p style={{fontSize:"12px",color:"#64748b",lineHeight:1.7,marginBottom:".625rem"}}>Millions of displaced people around the world have the talent and ambition to pursue higher education — but lack access to clear, reliable information about the funding available to them.</p>
-              <p style={{fontSize:"12px",color:"#64748b",lineHeight:1.7}}>We built MigrantScholar to be the resource we wish existed. No paywalls, no sign-up requirements. Just honest, verified scholarship information updated every day.</p>
-            </div>
-          </div>
-
-          {/* Values */}
-          <div style={{fontSize:"10px",fontWeight:600,color:"#3B82F6",textTransform:"uppercase",letterSpacing:".08em",marginBottom:".5rem"}}>Our values</div>
-          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:".75rem",marginBottom:"1rem"}}>
-            {[
-              ["✓","Verified and accurate","Every scholarship is checked against official university and government pages before publishing. We never list awards we cannot verify."],
-              ["🔓","Free forever","MigrantScholar will always be free to use. We are supported by advertising, not by charging users who need this information most."],
-              ["📅","Updated daily","New scholarship guides are published every day. Deadlines, eligibility, and coverage amounts are reviewed and updated regularly."],
-              ["🌍","Built for migrants","Unlike generic scholarship sites, every guide here is written with migrants and refugees specifically in mind — from eligibility to documentation."],
-            ].map(([icon,title,desc])=>(
-              <div key={title} style={{background:"#fff",border:"0.5px solid #BFDBFE",borderRadius:"8px",padding:"1rem"}}>
-                <div style={{width:"32px",height:"32px",background:"#EFF6FF",borderRadius:"6px",display:"flex",alignItems:"center",justifyContent:"center",marginBottom:".6rem",fontSize:"16px"}}>{icon}</div>
-                <h3 style={{fontSize:"12px",fontWeight:500,color:"#1E3A8A",marginBottom:".3rem"}}>{title}</h3>
-                <p style={{fontSize:"11px",color:"#64748b",lineHeight:1.6}}>{desc}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* How it works */}
-          <div style={{fontSize:"10px",fontWeight:600,color:"#3B82F6",textTransform:"uppercase",letterSpacing:".08em",marginBottom:".5rem"}}>How it works</div>
-          <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:".75rem",marginBottom:"1rem"}}>
-            {[
-              ["1","Browse by country","Use the Countries menu to find scholarships in the UK, Germany, Canada, Australia, USA, or Turkey."],
-              ["2","Read the guide","Each guide covers eligibility, coverage, deadlines, application steps, and FAQs written for migrants."],
-              ["3","Apply directly","Every guide links to the official scholarship application page — no middlemen, no sign-up required."],
-            ].map(([num,title,desc])=>(
-              <div key={num} style={{background:"#fff",border:"0.5px solid #BFDBFE",borderRadius:"8px",padding:"1rem",textAlign:"center"}}>
-                <div style={{width:"28px",height:"28px",background:"#1E40AF",color:"#fff",borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"12px",fontWeight:600,margin:"0 auto .6rem"}}>{num}</div>
-                <h3 style={{fontSize:"12px",fontWeight:500,color:"#1E3A8A",marginBottom:".3rem"}}>{title}</h3>
-                <p style={{fontSize:"11px",color:"#64748b",lineHeight:1.6}}>{desc}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Contact form */}
-          <div style={{background:"#fff",border:"0.5px solid #BFDBFE",borderRadius:"10px",padding:"1.25rem",marginBottom:"1rem"}}>
-            <div style={{fontSize:"10px",fontWeight:600,color:"#3B82F6",textTransform:"uppercase",letterSpacing:".08em",marginBottom:".5rem"}}>Get in touch</div>
-            <h2 style={{fontSize:".95rem",fontWeight:500,color:"#1E3A8A",marginBottom:".25rem"}}>Contact us</h2>
-            <p style={{fontSize:"12px",color:"#64748b",marginBottom:"1rem"}}>Have a question, found an error, or want to suggest a scholarship? We read every message.</p>
-
-            {sent ? (
-              <div style={{background:"#F0FDF4",border:"0.5px solid #BBF7D0",borderRadius:"8px",padding:"1rem",textAlign:"center"}}>
-                <div style={{fontSize:"1.5rem",marginBottom:".5rem"}}>✓</div>
-                <h3 style={{fontSize:".9rem",fontWeight:500,color:"#166534",marginBottom:".25rem"}}>Message sent!</h3>
-                <p style={{fontSize:"12px",color:"#4B7C5A"}}>Thank you for reaching out. We will get back to you within 2 business days.</p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit}>
-                <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:".75rem",marginBottom:".75rem"}}>
-                  <div>
-                    <label style={{display:"block",fontSize:"11px",fontWeight:500,color:"#1E3A8A",marginBottom:".3rem"}}>Your name</label>
-                    <input type="text" required placeholder="Your full name" value={form.name} onChange={e=>setForm({...form,name:e.target.value})}
-                      style={{width:"100%",background:"#EFF6FF",border:"0.5px solid #BFDBFE",borderRadius:"6px",padding:"7px 10px",fontSize:"12px",color:"#1E3A8A",outline:"none"}} />
-                  </div>
-                  <div>
-                    <label style={{display:"block",fontSize:"11px",fontWeight:500,color:"#1E3A8A",marginBottom:".3rem"}}>Email address</label>
-                    <input type="email" required placeholder="you@email.com" value={form.email} onChange={e=>setForm({...form,email:e.target.value})}
-                      style={{width:"100%",background:"#EFF6FF",border:"0.5px solid #BFDBFE",borderRadius:"6px",padding:"7px 10px",fontSize:"12px",color:"#1E3A8A",outline:"none"}} />
-                  </div>
-                </div>
-                <div style={{marginBottom:".75rem"}}>
-                  <label style={{display:"block",fontSize:"11px",fontWeight:500,color:"#1E3A8A",marginBottom:".3rem"}}>Subject</label>
-                  <select value={form.subject} onChange={e=>setForm({...form,subject:e.target.value})}
-                    style={{width:"100%",background:"#EFF6FF",border:"0.5px solid #BFDBFE",borderRadius:"6px",padding:"7px 10px",fontSize:"12px",color:"#1E3A8A",outline:"none"}}>
-                    <option>General question</option>
-                    <option>Report an error</option>
-                    <option>Suggest a scholarship</option>
-                    <option>Partnership inquiry</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-                <div style={{marginBottom:".75rem"}}>
-                  <label style={{display:"block",fontSize:"11px",fontWeight:500,color:"#1E3A8A",marginBottom:".3rem"}}>Message</label>
-                  <textarea required placeholder="Tell us how we can help..." value={form.message} onChange={e=>setForm({...form,message:e.target.value})}
-                    style={{width:"100%",background:"#EFF6FF",border:"0.5px solid #BFDBFE",borderRadius:"6px",padding:"7px 10px",fontSize:"12px",color:"#1E3A8A",outline:"none",minHeight:"100px",resize:"vertical",fontFamily:"inherit"}} />
-                </div>
-                <button type="submit" style={{background:"#1E40AF",color:"#fff",border:"none",padding:"8px 24px",borderRadius:"6px",fontSize:"13px",fontWeight:500,cursor:"pointer"}}>Send message</button>
-              </form>
-            )}
-          </div>
-
+          ))}
         </div>
+
+        {/* What we do / Why */}
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"1.25rem",marginBottom:"2rem"}}>
+          <div style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",padding:"1.5rem"}}>
+            <div style={{fontSize:"10px",fontWeight:700,color:"#F5A623",textTransform:"uppercase",letterSpacing:".08em",marginBottom:".5rem"}}>What we do</div>
+            <h2 style={{fontSize:"1.05rem",fontWeight:800,color:"#0D6E6E",marginBottom:".875rem"}}>Your dedicated scholarship guide</h2>
+            <p style={{fontSize:"13px",color:"#374151",lineHeight:1.75,marginBottom:".75rem"}}>Finding scholarships as a migrant is genuinely hard. Most scholarship databases are built for standard international students — not for people navigating asylum claims, protection visas, or humanitarian status.</p>
+            <p style={{fontSize:"13px",color:"#374151",lineHeight:1.75}}>MigrantScholar was built to fix that. Every guide is written specifically for migrants, refugees, forced migrants, and asylum seekers — with plain-language eligibility, real deadlines, and direct application links.</p>
+          </div>
+          <div style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",padding:"1.5rem"}}>
+            <div style={{fontSize:"10px",fontWeight:700,color:"#F5A623",textTransform:"uppercase",letterSpacing:".08em",marginBottom:".5rem"}}>Why we built this</div>
+            <h2 style={{fontSize:"1.05rem",fontWeight:800,color:"#0D6E6E",marginBottom:".875rem"}}>Education shouldn't depend on where you were born</h2>
+            <p style={{fontSize:"13px",color:"#374151",lineHeight:1.75,marginBottom:".75rem"}}>Millions of displaced people around the world have the talent and ambition to pursue higher education — but lack access to clear, reliable information about funding.</p>
+            <p style={{fontSize:"13px",color:"#374151",lineHeight:1.75}}>We built MigrantScholar to be the resource we wish existed. No paywalls, no sign-up requirements — just honest, verified information updated every day.</p>
+          </div>
+        </div>
+
+        {/* Values */}
+        <div style={{textAlign:"center",marginBottom:"1.5rem"}}>
+          <div style={{display:"inline-block",background:"#F5A623",color:"#0A2A2A",fontSize:"11px",fontWeight:700,padding:"3px 12px",borderRadius:"4px",marginBottom:".5rem",textTransform:"uppercase",letterSpacing:".08em"}}>Our Values</div>
+          <h2 style={{fontSize:"1.4rem",fontWeight:800,color:"#0D6E6E"}}>What We Stand For</h2>
+        </div>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"1rem",marginBottom:"2rem"}}>
+          {[
+            ["✓","Verified and accurate","Every scholarship is checked against official university and government pages before publishing.","#E6F4EF"],
+            ["🔓","Free forever","MigrantScholar will always be free to use, supported by advertising — not by charging users.","#FEF3C7"],
+            ["📅","Updated daily","New guides published every day, with deadlines and coverage amounts reviewed regularly.","#EEF2FF"],
+            ["🌍","Built for migrants","Every guide is written with migrants and refugees specifically in mind — eligibility to documentation.","#FDF4FF"],
+          ].map(([icon,title,desc,bg])=>(
+            <div key={title} style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",padding:"1.25rem",display:"flex",gap:"1rem",alignItems:"flex-start"}}>
+              <div style={{width:"40px",height:"40px",background:bg,borderRadius:"8px",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"18px",flexShrink:0}}>{icon}</div>
+              <div>
+                <h3 style={{fontSize:".9rem",fontWeight:700,color:"#0A2A2A",marginBottom:".3rem"}}>{title}</h3>
+                <p style={{fontSize:"12px",color:"#6b7280",lineHeight:1.6}}>{desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* How it works */}
+        <div style={{textAlign:"center",marginBottom:"1.5rem"}}>
+          <div style={{display:"inline-block",background:"#F5A623",color:"#0A2A2A",fontSize:"11px",fontWeight:700,padding:"3px 12px",borderRadius:"4px",marginBottom:".5rem",textTransform:"uppercase",letterSpacing:".08em"}}>How It Works</div>
+          <h2 style={{fontSize:"1.4rem",fontWeight:800,color:"#0D6E6E"}}>Three Simple Steps</h2>
+        </div>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"1rem",marginBottom:"2rem"}}>
+          {[
+            ["1","Browse by country","Use the Countries menu to find scholarships in the UK, Germany, Canada, Australia, USA, or Turkey."],
+            ["2","Read the guide","Each guide covers eligibility, coverage, deadlines, application steps, and FAQs written for migrants."],
+            ["3","Apply directly","Every guide links to the official scholarship application page — no middlemen, no sign-up required."],
+          ].map(([num,title,desc])=>(
+            <div key={num} style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",padding:"1.5rem",textAlign:"center"}}>
+              <div style={{width:"36px",height:"36px",background:"#0D6E6E",color:"#fff",borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"14px",fontWeight:800,margin:"0 auto .75rem"}}>{num}</div>
+              <h3 style={{fontSize:".9rem",fontWeight:700,color:"#0A2A2A",marginBottom:".4rem"}}>{title}</h3>
+              <p style={{fontSize:"12px",color:"#6b7280",lineHeight:1.6}}>{desc}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Contact form */}
+        <div style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",padding:"1.75rem",marginBottom:"2rem"}}>
+          <div style={{fontSize:"10px",fontWeight:700,color:"#F5A623",textTransform:"uppercase",letterSpacing:".08em",marginBottom:".5rem"}}>Get in Touch</div>
+          <h2 style={{fontSize:"1.1rem",fontWeight:800,color:"#0D6E6E",marginBottom:".4rem"}}>Contact Us</h2>
+          <p style={{fontSize:"13px",color:"#6b7280",marginBottom:"1.25rem"}}>Have a question, found an error, or want to suggest a scholarship? We read every message.</p>
+
+          {sent ? (
+            <div style={{background:"#E6F4EF",border:"1.5px solid #9FE1CB",borderRadius:"8px",padding:"1.5rem",textAlign:"center"}}>
+              <div style={{fontSize:"2rem",marginBottom:".5rem"}}>✓</div>
+              <h3 style={{fontSize:"1rem",fontWeight:800,color:"#085041",marginBottom:".25rem"}}>Message sent!</h3>
+              <p style={{fontSize:"12px",color:"#0F6E56"}}>Thank you for reaching out. We will get back to you within 2 business days.</p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"1rem",marginBottom:"1rem"}}>
+                <div>
+                  <label style={lbl}>Your name</label>
+                  <input type="text" required placeholder="Your full name" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} style={inp} />
+                </div>
+                <div>
+                  <label style={lbl}>Email address</label>
+                  <input type="email" required placeholder="you@email.com" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} style={inp} />
+                </div>
+              </div>
+              <div style={{marginBottom:"1rem"}}>
+                <label style={lbl}>Subject</label>
+                <select value={form.subject} onChange={e=>setForm({...form,subject:e.target.value})} style={inp}>
+                  <option>General question</option>
+                  <option>Report an error</option>
+                  <option>Suggest a scholarship</option>
+                  <option>Partnership inquiry</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div style={{marginBottom:"1.25rem"}}>
+                <label style={lbl}>Message</label>
+                <textarea required placeholder="Tell us how we can help..." value={form.message} onChange={e=>setForm({...form,message:e.target.value})}
+                  style={{...inp,minHeight:"110px",resize:"vertical"}} />
+              </div>
+              <button type="submit" style={{background:"#F5A623",color:"#0A2A2A",border:"none",padding:"10px 28px",borderRadius:"6px",fontSize:"13px",fontWeight:700,cursor:"pointer"}}>Send message</button>
+            </form>
+          )}
+        </div>
+
       </div>
 
       <Footer />
