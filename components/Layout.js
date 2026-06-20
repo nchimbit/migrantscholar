@@ -83,7 +83,7 @@ export function Navbar() {
         <Link href="/about" style={{padding:".5rem .75rem",fontSize:"13px",color:"#374151",textDecoration:"none",fontWeight:500}}>About</Link>
       </div>
 
-      <Link href="/alerts" style={{background:"#F5A623",color:"#0A2A2A",border:"none",padding:"6px 16px",borderRadius:"6px",fontSize:"12px",fontWeight:700,textDecoration:"none"}}>Get Alerts</Link>
+      <Link href="/#alerts" style={{background:"#F5A623",color:"#0A2A2A",border:"none",padding:"6px 16px",borderRadius:"6px",fontSize:"12px",fontWeight:700,textDecoration:"none"}}>Get Alerts</Link>
     </nav>
   );
 }
