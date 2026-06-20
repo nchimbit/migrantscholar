@@ -56,7 +56,7 @@ export default function Home({ posts }) {
             </div>
           </div>
           <div style={{display:"flex",gap:"1rem",flexWrap:"wrap"}}>
-            {[["70+","Universities"],["28+","Guides"],["£17k+","Top Award"],["Free","Always"]].map(([val,label])=>(
+            {[["70+","Universities"],[`${posts.length}+`,"Guides"],["£17k+","Top Award"],["Free","Always"]].map(([val,label])=>(
               <div key={label} style={{textAlign:"center",background:"rgba(255,255,255,.1)",border:"1px solid rgba(255,255,255,.15)",borderRadius:"8px",padding:".75rem 1.25rem",flex:"1 1 100px"}}>
                 <strong style={{display:"block",fontSize:"1.5rem",fontWeight:800,color:"#fff"}}>{val}</strong>
                 <span style={{fontSize:"11px",color:"rgba(255,255,255,.7)",textTransform:"uppercase",letterSpacing:".06em"}}>{label}</span>
