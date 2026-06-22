@@ -8,6 +8,32 @@ const countryColors = {
   Australia:{bg:"#166534"}, USA:{bg:"#7E22CE"}, Turkey:{bg:"#92400E"},
 };
 
+function extractFAQSchema(content) {
+  try {
+    const faqMatch = content.match(/Frequently Asked Questions[\s\S]*?(?=
+
+[A-Z]|$)/i);
+    if (!faqMatch) return null;
+    const faqText = faqMatch[0];
+    const pairs = [];
+    const qaRegex = /Q:\s*(.+?)\s*A:\s*(.+?)(?=\s*Q:|$)/gs;
+    let match;
+    while ((match = qaRegex.exec(faqText)) !== null) {
+      pairs.push({ question: match[1].trim(), answer: match[2].trim() });
+    }
+    if (pairs.length === 0) return null;
+    return {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": pairs.map(p => ({
+        "@type": "Question",
+        "name": p.question,
+        "acceptedAnswer": { "@type": "Answer", "text": p.answer }
+      }))
+    };
+  } catch(e) { return null; }
+}
+
 function mdToHtml(md) {
   return md
     .replace(/^### (.+)$/gm,"<h3 style='font-size:1rem;font-weight:700;color:#0D6E6E;margin:1.5rem 0 .5rem'>$1</h3>")
@@ -34,6 +60,9 @@ export default function BlogPost({ post, related }) {
         <meta name="description" content={post.metaDescription || post.excerpt} />
         <link rel="canonical" href={`https://migrantscholar.vercel.app/blog/${post.slug}`} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({"@context":"https://schema.org","@type":"Article",headline:post.title,datePublished:post.date,publisher:{"@type":"Organization",name:"MigrantScholar",url:"https://migrantscholar.vercel.app"}})}} />
+        {extractFAQSchema(post.content) && (
+          <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(extractFAQSchema(post.content))}} />
+        )}
       </Head>
       <Navbar />
 
