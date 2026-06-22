@@ -175,5 +175,5 @@ export default function Home({ posts }) {
 
 export async function getStaticProps() {
   const posts = getAllPosts();
-  return { props: { posts }, revalidate: 3600 };
+  return { props: { posts }, revalidate: 60 };
 }
