@@ -117,7 +117,7 @@ export default function Home({ posts }) {
                   <p style={{fontSize:"11px",color:"#6b7280",lineHeight:1.55,marginBottom:".625rem"}}>{post.excerpt.slice(0,100)}...</p>
                   <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",borderTop:"1px solid #f0faf9",paddingTop:".625rem"}}>
                     <span style={{fontSize:"10px",color:"#9ca3af"}}>{formatDate(post.date)}</span>
-                    <span style={{fontSize:"11px",color:"#0D6E6E",fontWeight:700}}>Read guide →</span>
+                    <span style={{fontSize:"11px",color:"#0D6E6E",fontWeight:700}}>Read more →</span>
                   </div>
                 </div>
               </Link>
