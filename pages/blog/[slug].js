@@ -10,26 +10,28 @@ const countryColors = {
 
 function extractFAQSchema(content) {
   try {
-    const faqMatch = content.match(/Frequently Asked Questions[\s\S]*?(?=
-
-[A-Z]|$)/i);
-    if (!faqMatch) return null;
-    const faqText = faqMatch[0];
+    const faqSection = content.indexOf('Frequently Asked Questions');
+    if (faqSection === -1) return null;
+    const faqText = content.slice(faqSection);
     const pairs = [];
-    const qaRegex = /Q:\s*(.+?)\s*A:\s*(.+?)(?=\s*Q:|$)/gs;
-    let match;
-    while ((match = qaRegex.exec(faqText)) !== null) {
-      pairs.push({ question: match[1].trim(), answer: match[2].trim() });
-    }
+    const qMatches = faqText.match(/Q:\s*(.+?)\s*A:\s*(.+?)(?=Q:|$)/gs);
+    if (!qMatches) return null;
+    qMatches.forEach(function(m) {
+      const q = m.match(/Q:\s*(.+?)\s*A:/s);
+      const a = m.match(/A:\s*(.+?)$/s);
+      if (q && a) pairs.push({ question: q[1].trim(), answer: a[1].trim() });
+    });
     if (pairs.length === 0) return null;
     return {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      "mainEntity": pairs.map(p => ({
-        "@type": "Question",
-        "name": p.question,
-        "acceptedAnswer": { "@type": "Answer", "text": p.answer }
-      }))
+      "mainEntity": pairs.map(function(p) {
+        return {
+          "@type": "Question",
+          "name": p.question,
+          "acceptedAnswer": { "@type": "Answer", "text": p.answer }
+        };
+      })
     };
   } catch(e) { return null; }
 }
