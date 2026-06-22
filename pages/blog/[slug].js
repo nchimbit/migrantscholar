@@ -141,5 +141,5 @@ export async function getStaticProps({ params }) {
   if (!post) return { notFound: true };
   const allPosts = getAllPosts();
   const related = allPosts.filter(p=>p.slug!==post.slug&&p.country===post.country).slice(0,4);
-  return { props: { post, related }, revalidate: 3600 };
+  return { props: { post, related }, revalidate: 60 };
 }
