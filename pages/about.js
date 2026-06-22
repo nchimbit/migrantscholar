@@ -2,8 +2,9 @@ import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
 import { Navbar, Footer } from "../components/Layout";
+import { getAllPosts, getAllCountries } from "../lib/posts";
 
-export default function About() {
+export default function About({ totalGuides, totalCountries }) {
   const [form, setForm] = useState({ name:"", email:"", subject:"General question", message:"" });
   const [sent, setSent] = useState(false);
 
@@ -35,7 +36,7 @@ export default function About() {
 
         {/* Stats */}
         <div style={{background:"#0D6E6E",borderRadius:"10px",padding:"1.5rem",marginBottom:"2rem",display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:"1rem",textAlign:"center"}}>
-          {[["28+","Guides published"],["7","Countries covered"],["Daily","New posts"],["Free","Always, forever"]].map(([val,label])=>(
+          {[[`${totalGuides}+`,"Scholarships Published"],[`${totalCountries}`,"Countries Covered"],["Daily","New Posts"],["Free","Always, Forever"]].map(([val,label])=>(
             <div key={label}>
               <strong style={{display:"block",fontSize:"1.5rem",fontWeight:800,color:"#fff"}}>{val}</strong>
               <span style={{fontSize:"11px",color:"rgba(255,255,255,.75)",textTransform:"uppercase",letterSpacing:".05em"}}>{label}</span>
@@ -149,4 +150,16 @@ export default function About() {
       <Footer />
     </>
   );
+}
+
+export async function getStaticProps() {
+  const posts = getAllPosts();
+  const countries = getAllCountries();
+  return {
+    props: {
+      totalGuides: posts.length,
+      totalCountries: countries.length,
+    },
+    revalidate: 3600,
+  };
 }
