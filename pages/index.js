@@ -38,6 +38,7 @@ export default function Home({ posts }) {
         <title>MigrantScholar — Scholarships for Migrants and Refugees</title>
         <meta name="description" content="Find verified fully funded scholarships for migrants, refugees, and asylum seekers in the UK, Germany, Canada, Turkey and more. Updated daily." />
         <link rel="canonical" href="https://migrantscholar.vercel.app" />
+        <meta name="google-site-verification" content="xD-MIsy__wA8eoQYHgCK35xdAk0LjbPAxl2sDxAQifg" />
       </Head>
       <Navbar />
 
