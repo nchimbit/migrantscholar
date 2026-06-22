@@ -41,32 +41,29 @@ export default function Home({ posts }) {
       </Head>
       <Navbar />
 
-      {/* HERO */}
-      <div style={{background:"linear-gradient(135deg,#0D6E6E 0%,#0A5555 100%)",padding:"3rem 2rem",position:"relative",overflow:"hidden"}}>
-        <div style={{maxWidth:"1080px",margin:"0 auto",display:"grid",gridTemplateColumns:"1fr 1fr",gap:"2rem",alignItems:"center"}}>
-          <div>
-            <div style={{display:"inline-block",background:"#F5A623",color:"#0A2A2A",fontSize:"11px",fontWeight:700,padding:"4px 12px",borderRadius:"4px",marginBottom:"1rem",textTransform:"uppercase",letterSpacing:".08em"}}>Updated Daily · 2026</div>
-            <h1 style={{fontSize:"2.25rem",fontWeight:900,color:"#fff",lineHeight:1.15,marginBottom:".75rem",letterSpacing:"-0.02em"}}>
-              Find Your<br/><em style={{fontStyle:"normal",color:"#F5A623"}}>Scholarship</em><br/>As A Migrant!
+      <div style={{maxWidth:"1080px",margin:"0 auto",padding:"1.5rem 2rem 0"}}>
+        {/* Boxed compact HERO */}
+        <div style={{background:"linear-gradient(135deg,#0D6E6E 0%,#0A5555 100%)",borderRadius:"14px",padding:"1.5rem 2rem",display:"flex",alignItems:"center",justifyContent:"space-between",gap:"2rem",flexWrap:"wrap",marginBottom:"2rem"}}>
+          <div style={{flex:1,minWidth:"300px"}}>
+            <div style={{display:"inline-block",background:"#F5A623",color:"#0A2A2A",fontSize:"10px",fontWeight:700,padding:"3px 10px",borderRadius:"4px",marginBottom:".6rem",textTransform:"uppercase",letterSpacing:".07em"}}>Updated Daily · 2026</div>
+            <h1 style={{fontSize:"1.5rem",fontWeight:900,color:"#fff",lineHeight:1.2,marginBottom:".5rem",letterSpacing:"-0.02em"}}>
+              Find Your <em style={{fontStyle:"normal",color:"#F5A623"}}>Scholarship</em> As A Migrant!
             </h1>
-            <p style={{fontSize:"14px",color:"rgba(255,255,255,.8)",marginBottom:"1.5rem",lineHeight:1.65,maxWidth:"420px"}}>Verified fully funded awards open to refugees, asylum seekers, and forced migrants. Free to use, updated every single day.</p>
-            <div style={{display:"flex",gap:".75rem",flexWrap:"wrap"}}>
-              <Link href="/blog" style={{background:"#F5A623",color:"#0A2A2A",padding:"10px 22px",borderRadius:"6px",fontSize:"13px",fontWeight:700,textDecoration:"none"}}>Browse Scholarships</Link>
-              <Link href="/alerts" style={{background:"rgba(255,255,255,.15)",color:"#fff",border:"1.5px solid rgba(255,255,255,.4)",padding:"10px 22px",borderRadius:"6px",fontSize:"13px",fontWeight:600,textDecoration:"none"}}>Get Free Alerts</Link>
+            <p style={{fontSize:"12px",color:"rgba(255,255,255,.8)",marginBottom:".875rem",lineHeight:1.55,maxWidth:"380px"}}>Verified fully funded awards open to refugees, asylum seekers, and forced migrants.</p>
+            <div style={{display:"flex",gap:".6rem",flexWrap:"wrap"}}>
+              <Link href="/blog" style={{background:"#F5A623",color:"#0A2A2A",padding:"8px 18px",borderRadius:"6px",fontSize:"12px",fontWeight:700,textDecoration:"none"}}>Browse Scholarships</Link>
+              <Link href="/alerts" style={{background:"rgba(255,255,255,.15)",color:"#fff",border:"1.5px solid rgba(255,255,255,.4)",padding:"8px 18px",borderRadius:"6px",fontSize:"12px",fontWeight:600,textDecoration:"none"}}>Get Free Alerts</Link>
             </div>
           </div>
-          <div style={{display:"flex",gap:"1rem",flexWrap:"wrap"}}>
-            {[["70+","Universities"],[`${posts.length}+`,"Guides"],["£17k+","Top Award"],["Free","Always"]].map(([val,label])=>(
-              <div key={label} style={{textAlign:"center",background:"rgba(255,255,255,.1)",border:"1px solid rgba(255,255,255,.15)",borderRadius:"8px",padding:".75rem 1.25rem",flex:"1 1 100px"}}>
-                <strong style={{display:"block",fontSize:"1.5rem",fontWeight:800,color:"#fff"}}>{val}</strong>
-                <span style={{fontSize:"11px",color:"rgba(255,255,255,.7)",textTransform:"uppercase",letterSpacing:".06em"}}>{label}</span>
+          <div style={{display:"flex",borderLeft:"1px solid rgba(255,255,255,.15)",paddingLeft:"1.5rem",flexShrink:0}}>
+            {[["70+","Universities"],[`${posts.length}+`,"Guides"],["£17k+","Top Award"],["Free","Always"]].map(([val,label],i)=>(
+              <div key={label} style={{textAlign:"center",padding:"0 .9rem",borderRight:i<3?"1px solid rgba(255,255,255,.15)":"none"}}>
+                <strong style={{display:"block",fontSize:"1.1rem",fontWeight:800,color:"#fff"}}>{val}</strong>
+                <span style={{fontSize:"9px",color:"rgba(255,255,255,.65)",textTransform:"uppercase",letterSpacing:".05em"}}>{label}</span>
               </div>
             ))}
           </div>
         </div>
-      </div>
-
-      <div style={{maxWidth:"1080px",margin:"0 auto",padding:"2rem"}}>
 
         {/* Countries */}
         <div style={{textAlign:"center",marginBottom:"1.75rem"}}>
