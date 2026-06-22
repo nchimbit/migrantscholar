@@ -75,9 +75,7 @@ export default function BlogPost({ post, related }) {
           </div>
           <div style={{display:"flex",gap:".5rem",flexWrap:"wrap",marginBottom:".75rem"}}>
             <span style={{fontSize:"10px",fontWeight:700,color:"#fff",background:"rgba(255,255,255,.2)",padding:"3px 10px",borderRadius:"4px",textTransform:"uppercase"}}>{post.country}</span>
-            {(post.tags||[]).filter(t=>t.toLowerCase()!==post.country?.toLowerCase()&&t.toLowerCase()!=="scholarship"&&t.toLowerCase()!=="migrant").slice(0,3).map(t=>(
-              <span key={t} style={{fontSize:"10px",color:"rgba(255,255,255,.7)",background:"rgba(255,255,255,.1)",padding:"3px 10px",borderRadius:"4px",textTransform:"capitalize"}}>{t}</span>
-            ))}
+
           </div>
           <h1 style={{fontSize:"1.5rem",fontWeight:900,color:"#fff",lineHeight:1.3,marginBottom:".5rem",letterSpacing:"-0.01em"}}>{post.title}</h1>
           <div style={{display:"flex",gap:"1rem",fontSize:"12px",color:"rgba(255,255,255,.7)"}}>
