@@ -105,6 +105,8 @@ export default function BlogPost({ post, related }) {
           <div style={{display:"flex",gap:"1rem",fontSize:"12px",color:"rgba(255,255,255,.7)"}}>
             <span>Published {formatDate(post.date)}</span>
             <span>{post.readingTime} min read</span>
+            <span>✍ MigrantScholar Team</span>
+            <span>✓ Verified {formatDate(post.date)}</span>
             <span>✓ Verified by MigrantScholar Team</span>
           </div>
         </div>
