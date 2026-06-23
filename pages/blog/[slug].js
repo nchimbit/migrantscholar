@@ -36,6 +36,25 @@ function extractFAQSchema(content) {
   } catch(e) { return null; }
 }
 
+function extractFAQSchema(content) {
+  const faqMatches = [...content.matchAll(/###\s+(.+?)
+([\s\S]+?)(?=###|
+##|$)/g)];
+  if (!faqMatches.length) return null;
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqMatches.slice(0, 8).map(([, question, answer]) => ({
+      "@type": "Question",
+      "name": question.trim(),
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": answer.trim().replace(/\*\*/g, "").replace(/\*/g, "").slice(0, 500)
+      }
+    }))
+  };
+}
+
 function mdToHtml(md) {
   return md
     .replace(/^### (.+)$/gm,"<h3 style='font-size:1rem;font-weight:700;color:#0D6E6E;margin:1.5rem 0 .5rem'>$1</h3>")
@@ -62,6 +81,9 @@ export default function BlogPost({ post, related }) {
         <meta name="description" content={post.metaDescription || post.excerpt} />
         <link rel="canonical" href={`https://migrantscholar.vercel.app/blog/${post.slug}`} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({"@context":"https://schema.org","@type":"Article",headline:post.title,datePublished:post.date,publisher:{"@type":"Organization",name:"MigrantScholar",url:"https://migrantscholar.vercel.app"}})}} />
+        {extractFAQSchema(post.content) && (
+          <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(extractFAQSchema(post.content))}} />
+        )}
         {extractFAQSchema(post.content) && (
           <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(extractFAQSchema(post.content))}} />
         )}
