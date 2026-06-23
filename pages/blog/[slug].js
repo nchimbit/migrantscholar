@@ -2,6 +2,31 @@ import Head from "next/head";
 import Link from "next/link";
 import { Navbar, Footer } from "../../components/Layout";
 import { getAllPosts, getPostBySlug, formatDate } from "../../lib/posts";
+import { useEffect, useRef } from "react";
+
+function GiscusComments() {
+  const ref = useRef(null);
+  useEffect(() => {
+    if (!ref.current || ref.current.hasChildNodes()) return;
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.setAttribute("data-repo", "nchimbit/migrantscholar");
+    script.setAttribute("data-repo-id", "R_kgDOS0OEfQ");
+    script.setAttribute("data-category", "Announcements");
+    script.setAttribute("data-category-id", "DIC_kwDOS0OEfc4C_uZH");
+    script.setAttribute("data-mapping", "pathname");
+    script.setAttribute("data-strict", "0");
+    script.setAttribute("data-reactions-enabled", "1");
+    script.setAttribute("data-emit-metadata", "0");
+    script.setAttribute("data-input-position", "top");
+    script.setAttribute("data-theme", "light");
+    script.setAttribute("data-lang", "en");
+    script.crossOrigin = "anonymous";
+    script.async = true;
+    ref.current.appendChild(script);
+  }, []);
+  return <div ref={ref} />;
+}
 
 const countryColors = {
   UK:{bg:"#0D6E6E"}, Germany:{bg:"#3730A3"}, Canada:{bg:"#9A3412"},
@@ -121,6 +146,13 @@ export default function BlogPost({ post, related }) {
               <div style={{background:"#E6F4F1",border:"1px dashed #A7D4CC",borderRadius:"8px",padding:".75rem",marginBottom:"1.5rem",fontSize:"11px",color:"#6b7280",textAlign:"center"}}>Advertisement</div>
               <article dangerouslySetInnerHTML={{__html:mdToHtml(post.content)}} />
               <div style={{background:"#E6F4F1",border:"1px dashed #A7D4CC",borderRadius:"8px",padding:".75rem",marginTop:"1.5rem",fontSize:"11px",color:"#6b7280",textAlign:"center"}}>Advertisement</div>
+            </div>
+            {/* Comments */}
+            <div style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",padding:"1.5rem",marginBottom:"1rem"}}>
+              <div style={{fontSize:"10px",fontWeight:700,color:"#F5A623",textTransform:"uppercase",letterSpacing:".08em",marginBottom:".5rem"}}>Community Discussion</div>
+              <h3 style={{fontSize:"1rem",fontWeight:800,color:"#0D6E6E",marginBottom:"1rem"}}>Questions & Comments</h3>
+              <p style={{fontSize:"12px",color:"#6b7280",marginBottom:"1rem"}}>Sign in with GitHub to ask questions, share tips, or discuss this scholarship with other migrants and refugees.</p>
+              <GiscusComments />
             </div>
             <Link href="/blog" style={{display:"inline-block",background:"#fff",border:"1.5px solid #0D6E6E",borderRadius:"8px",padding:".625rem 1.25rem",fontSize:"13px",color:"#0D6E6E",fontWeight:700,textDecoration:"none"}}>← Back to all guides</Link>
           </div>
