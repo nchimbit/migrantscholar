@@ -73,7 +73,7 @@ export default function Home({ posts }) {
         </div>
         <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"1rem",marginBottom:"2.5rem"}}>
           {countries.map(([flag,name,desc,code])=>(
-            <Link key={code} href={`/blog?country=${code}`} style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",padding:"1.25rem",display:"flex",alignItems:"center",gap:".875rem",textDecoration:"none",cursor:"pointer"}}>
+            <Link key={code} href={`/countries/${code}`} style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",padding:"1.25rem",display:"flex",alignItems:"center",gap:".875rem",textDecoration:"none",cursor:"pointer"}}>
               <div style={{fontSize:"2rem",flexShrink:0}}>{flag}</div>
               <div style={{flex:1}}>
                 <strong style={{display:"block",fontSize:".9rem",fontWeight:700,color:"#0A2A2A",marginBottom:".15rem"}}>{name}</strong>
