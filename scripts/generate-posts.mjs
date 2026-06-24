@@ -36,7 +36,11 @@ async function generatePost(topic) {
     max_tokens: 3000,
     messages: [{
       role: "user",
-      content: "Write a fully SEO-optimised blog post in MARKDOWN for MigrantScholar.com.\n\nTopic: " + topic.title + "\nFocus: " + topic.focus + "\nAudience: " + topic.target + "\nCountry: " + topic.country + "\nDate: " + today + "\n\nInclude:\n1. Opening paragraph directly answering the main question in 2-3 sentences\n2. Who qualifies section with bullet list of exact visa categories\n3. Five real scholarships each with name, coverage amount, eligibility, deadline, official website URL\n4. Eight numbered application steps\n5. Documents checklist as bullet points\n6. Eight FAQ entries written as questions migrants actually search, each with 2-3 sentence answers\n7. Two external authority links to official government or university pages\n8. Closing sentence with internal link to https://migrantscholar.vercel.app/blog\n\nMinimum 1000 words. Use ## for main headings and ### for scholarship names.\n\nReturn ONLY the raw markdown text. No JSON. No backticks. No code fences. Just the markdown content."
+      content: "Write a fully SEO-optimised blog post in MARKDOWN for MigrantScholar.com.\n\nTopic: " + topic.title + "\nFocus: " + topic.focus + "\nAudience: " + topic.target + "\nCountry: " + topic.country + "\nDate: " + today + "\n\nInclude:\n1. Opening paragraph directly answering the main question in 2-3 sentences\n2. Who qualifies section with bullet list of exact visa categories\n3. Five real scholarships each with name, coverage amount, eligibility, deadline, official website URL\n4. Eight numbered application steps\n5. Documents checklist as bullet points\n6. Eight FAQ entries written as questions migrants actually search, each with 2-3 sentence answers\n7. Two external authority links to official government or university pages\n8. Closing sentence with internal link to https://migrantscholar.vercel.app/blog\n\nMinimum 1000 words. Use ## for main headings and ### for scholarship names.\n\nAt the very top of your response, before the markdown content, add TWO lines in this exact format:
+DEADLINE: [earliest deadline mentioned e.g. "March 2027" or "November 2026" or "Unknown"]
+FUNDING: [one-line funding summary e.g. "Full tuition + £10,000/year living costs" or "$50,000/year for 3 years"]
+
+Then return the full markdown content after those two lines. No backticks. No code fences."
     }]
   });
   return response.choices[0].message.content.trim();
@@ -46,6 +50,17 @@ function savePost(topic, content) {
   const today = new Date().toISOString().split("T")[0];
   const postsDir = path.join(__dirname, "../content/posts");
   if (!fs.existsSync(postsDir)) fs.mkdirSync(postsDir, { recursive: true });
+
+  // Extract deadline and funding from top of AI response
+  const responseLines = content.split("\n");
+  let deadline = "Unknown";
+  let funding = "";
+  let skipLines = 0;
+  for (let i = 0; i < Math.min(5, responseLines.length); i++) {
+    if (responseLines[i].startsWith("DEADLINE:")) { deadline = responseLines[i].replace("DEADLINE:", "").trim(); skipLines = i + 1; }
+    if (responseLines[i].startsWith("FUNDING:")) { funding = responseLines[i].replace("FUNDING:", "").trim(); skipLines = Math.max(skipLines, i + 1); }
+  }
+  if (skipLines > 0) content = responseLines.slice(skipLines).join("\n").trim();
 
   const readingTime = calculateReadingTime(content);
   const plainText = content.replace(/[#*[\]`]/g, "").replace(/\n+/g, " ").trim();
@@ -59,6 +74,8 @@ slug: "${topic.slug}"
 country: "${topic.country}"
 type: "${topic.type}"
 tags: ["${topic.country.toLowerCase()}", "scholarship", "migrant", "refugee"]
+deadline: "${deadline}"
+funding: "${funding.replace(/"/g,'\\"')}"
 excerpt: "${excerpt.replace(/"/g,'\\"')}"
 metaDescription: "${metaDesc.replace(/"/g,'\\"')}"
 readingTime: ${readingTime}
