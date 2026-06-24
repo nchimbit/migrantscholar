@@ -65,7 +65,7 @@ export function Navbar() {
           {countryOpen && (
             <div style={dropStyle}>
               {[["🇬🇧 UK","UK"],["🇩🇪 Germany","Germany"],["🇨🇦 Canada","Canada"],["🇦🇺 Australia","Australia"],["🇺🇸 USA","USA"],["🇹🇷 Turkey","Turkey"]].map(([label,country])=>(
-                <Link key={country} href={`/blog?country=${country}`} style={dropItem}
+                <Link key={country} href={`/countries/${country}`} style={dropItem}
                   onMouseEnter={e=>{e.currentTarget.style.background="#E6F4F1";e.currentTarget.style.color="#0D6E6E"}}
                   onMouseLeave={e=>{e.currentTarget.style.background="transparent";e.currentTarget.style.color="#374151"}}
                 >{label}</Link>
@@ -126,7 +126,7 @@ export function Footer() {
           <div>
             <h4 style={{fontSize:"11px",fontWeight:700,color:"#0D6E6E",textTransform:"uppercase",letterSpacing:".08em",marginBottom:".625rem"}}>Countries</h4>
             {[["🇬🇧 UK","UK"],["🇩🇪 Germany","Germany"],["🇨🇦 Canada","Canada"],["🇦🇺 Australia","Australia"],["🇺🇸 USA","USA"],["🇹🇷 Turkey","Turkey"]].map(([label,country])=>(
-              <Link key={country} href={`/blog?country=${country}`} style={{display:"block",fontSize:"12px",color:"#64748b",textDecoration:"none",marginBottom:".35rem"}}>{label}</Link>
+              <Link key={country} href={`/countries/${country}`} style={{display:"block",fontSize:"12px",color:"#64748b",textDecoration:"none",marginBottom:".35rem"}}>{label}</Link>
             ))}
           </div>
           <div>
