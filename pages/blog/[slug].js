@@ -132,7 +132,6 @@ export default function BlogPost({ post, related }) {
             <span>{post.readingTime} min read</span>
             <span>✍ MigrantScholar Team</span>
             <span>✓ Verified {formatDate(post.date)}</span>
-            <span>✓ Verified by MigrantScholar Team</span>
           </div>
         </div>
       </div>
