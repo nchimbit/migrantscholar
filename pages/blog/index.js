@@ -76,7 +76,7 @@ export default function BlogIndex({ posts, countries }) {
                     <p style={{fontSize:"11px",color:"#6b7280",lineHeight:1.55,marginBottom:".625rem"}}>{post.excerpt.slice(0,100)}...</p>
                     <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",borderTop:"1px solid #f0faf9",paddingTop:".625rem"}}>
                       <span style={{fontSize:"10px",color:"#9ca3af"}}>{formatDate(post.date)}</span>
-                      <span style={{display:"inline-block",background:c.bg,color:"#fff",fontSize:"11px",fontWeight:700,padding:"5px 12px",borderRadius:"6px"}}>Read More →</span>
+                      <span style={{display:"inline-block",background:"#0D6E6E",color:"#fff",fontSize:"11px",fontWeight:700,padding:"5px 12px",borderRadius:"6px"}}>Read More →</span>
                     </div>
                   </div>
                 </Link>
