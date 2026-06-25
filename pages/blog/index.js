@@ -67,9 +67,9 @@ export default function BlogIndex({ posts, countries }) {
               const c = countryColors[post.country] || {bg:"#0D6E6E"};
               return (
                 <Link key={post.slug} href={`/blog/${post.slug}`} style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",overflow:"hidden",textDecoration:"none",display:"block",color:"inherit"}}>
-                  <div style={{background:c.bg,padding:".75rem 1rem",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-                    <span style={{fontSize:"10px",fontWeight:700,color:"#fff",background:"rgba(255,255,255,.2)",padding:"2px 8px",borderRadius:"4px",textTransform:"uppercase"}}>{post.country}</span>
-                    <span style={{fontSize:"10px",color:"rgba(255,255,255,.7)"}}>{post.readingTime} min read</span>
+                  <div style={{background:"#E6F4F1",padding:".75rem 1rem",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+                    <span style={{fontSize:"10px",fontWeight:700,color:"#0D6E6E",background:"rgba(13,110,110,.1)",padding:"2px 8px",borderRadius:"4px",textTransform:"uppercase"}}>{post.country}</span>
+                    <span style={{fontSize:"10px",color:"#6b7280"}}>{post.readingTime} min read</span>
                   </div>
                   <div style={{padding:"1rem"}}>
                     <h3 style={{fontSize:".85rem",fontWeight:700,color:"#0A2A2A",lineHeight:1.4,marginBottom:".4rem"}}>{post.title}</h3>
