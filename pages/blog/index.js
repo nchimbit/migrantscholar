@@ -66,18 +66,20 @@ export default function BlogIndex({ posts, countries }) {
             {showing.map(post=>{
               const c = countryColors[post.country] || {bg:"#0D6E6E"};
               return (
-                <Link key={post.slug} href={`/blog/${post.slug}`} style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",padding:"1.25rem",display:"flex",flexDirection:"column",gap:".5rem",textDecoration:"none",color:"inherit"}}>
-                <div style={{display:"inline-block",background:"#E6F4F1",color:"#0D6E6E",fontSize:"11px",fontWeight:600,padding:"3px 10px",borderRadius:"20px",width:"fit-content"}}>{post.deadline && post.deadline!=="Unknown" ? `Deadline: ${post.deadline}` : "Deadline unknown"}</div>
-                <div style={{display:"flex",gap:".35rem",flexWrap:"wrap"}}>
-                  <span style={{fontSize:"10px",color:"#374151",background:"#f3f4f6",border:"1px solid #e5e7eb",padding:"2px 8px",borderRadius:"20px"}}>{post.country}</span>
-                  <span style={{fontSize:"10px",color:"#166534",background:"#F0FDF4",border:"1px solid #BBF7D0",padding:"2px 8px",borderRadius:"20px"}}>{post.type || "scholarship"}</span>
-                  <span style={{fontSize:"10px",color:"#1D4ED8",background:"#EFF6FF",border:"1px solid #BFDBFE",padding:"2px 8px",borderRadius:"20px"}}>open</span>
-                </div>
-                <h3 style={{fontSize:".9rem",fontWeight:700,color:"#0D6E6E",lineHeight:1.4}}>{post.title}</h3>
-                <p style={{fontSize:"12px",color:"#374151",lineHeight:1.6,flex:1}}>{post.excerpt.slice(0,120)}...</p>
-                {post.funding && <div style={{fontSize:"11px",color:"#6b7280",paddingTop:".4rem",borderTop:"1px solid #f0faf9"}}>{post.funding}</div>}
-                <div style={{background:"#0D6E6E",color:"#fff",textAlign:"center",padding:"8px",borderRadius:"7px",fontSize:"12px",fontWeight:700,marginTop:".25rem"}}>View details</div>
-              </Link>
+                <Link key={post.slug} href={`/blog/${post.slug}`} style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",overflow:"hidden",textDecoration:"none",display:"block",color:"inherit"}}>
+                  <div style={{background:c.bg,padding:".75rem 1rem",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+                    <span style={{fontSize:"10px",fontWeight:700,color:"#fff",background:"rgba(255,255,255,.2)",padding:"2px 8px",borderRadius:"4px",textTransform:"uppercase"}}>{post.country}</span>
+                    <span style={{fontSize:"10px",color:"rgba(255,255,255,.7)"}}>{post.readingTime} min read</span>
+                  </div>
+                  <div style={{padding:"1rem"}}>
+                    <h3 style={{fontSize:".85rem",fontWeight:700,color:"#0A2A2A",lineHeight:1.4,marginBottom:".4rem"}}>{post.title}</h3>
+                    <p style={{fontSize:"11px",color:"#6b7280",lineHeight:1.55,marginBottom:".625rem"}}>{post.excerpt.slice(0,100)}...</p>
+                    <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",borderTop:"1px solid #f0faf9",paddingTop:".625rem"}}>
+                      <span style={{fontSize:"10px",color:"#9ca3af"}}>{formatDate(post.date)}</span>
+                      <span style={{display:"inline-block",background:c.bg,color:"#fff",fontSize:"11px",fontWeight:700,padding:"5px 12px",borderRadius:"6px"}}>Read More →</span>
+                    </div>
+                  </div>
+                </Link>
               );
             })}
           </div>
