@@ -61,23 +61,6 @@ function extractFAQSchema(content) {
   } catch(e) { return null; }
 }
 
-function extractFAQSchema(content) {
-  const faqMatches = [...content.matchAll(/###[^\S\n]*([^\n]+)\n([\s\S]+?)(?=###|\n##|$)/g)];
-  if (!faqMatches.length) return null;
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqMatches.slice(0, 8).map(([, question, answer]) => ({
-      "@type": "Question",
-      "name": question.trim(),
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": answer.trim().replace(/\*\*/g, "").replace(/\*/g, "").slice(0, 500)
-      }
-    }))
-  };
-}
-
 function mdToHtml(md) {
   return md
     .replace(/^### (.+)$/gm,"<h3 style='font-size:1rem;font-weight:700;color:#0D6E6E;margin:1.5rem 0 .5rem'>$1</h3>")
