@@ -21,17 +21,11 @@ export default function CountryPage({ country, posts }) {
         <title>{info.flag} {country} Scholarships for Migrants & Refugees — MigrantScholar</title>
         <meta name="description" content={`Find fully-funded scholarships in ${country} for migrants, refugees and asylum seekers. ${info.description}`} />
         <link rel="canonical" href={`https://migrantscholar.vercel.app/countries/${country.toLowerCase()}`} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
-          "@context":"https://schema.org",
-          "@type":"CollectionPage",
-          "name":`${country} Scholarships for Migrants`,
-          "description":info.description,
-          "url":`https://migrantscholar.vercel.app/countries/${country.toLowerCase()}`
-        })}} />
       </Head>
       <Navbar />
 
       <div style={{maxWidth:"1080px",margin:"0 auto",padding:"1.5rem 2rem 0"}}>
+        {/* Boxed hero */}
         <div style={{background:`linear-gradient(135deg,${info.color} 0%,#0A2A2A 100%)`,borderRadius:"14px",padding:"1.5rem 2rem",display:"flex",alignItems:"center",justifyContent:"space-between",gap:"2rem",flexWrap:"wrap",marginBottom:"2rem"}}>
           <div style={{flex:1,minWidth:"280px"}}>
             <div style={{display:"flex",alignItems:"center",gap:".75rem",marginBottom:".6rem"}}>
@@ -42,11 +36,7 @@ export default function CountryPage({ country, posts }) {
             <p style={{fontSize:"12px",color:"rgba(255,255,255,.8)",lineHeight:1.55,maxWidth:"380px"}}>{info.description}</p>
           </div>
           <div style={{display:"flex",borderLeft:"1px solid rgba(255,255,255,.15)",paddingLeft:"1.5rem",flexShrink:0}}>
-            {[
-              [posts.length,"Guides"],
-              [info.topAward,"Top Award"],
-              [info.topScholarship,"Top Scholarship"]
-            ].map(([val,label],i)=>(
+            {[[posts.length,"Guides"],[info.topAward,"Top Award"],[info.topScholarship,"Top Scholarship"]].map(([val,label],i)=>(
               <div key={label} style={{textAlign:"center",padding:"0 .9rem",borderRight:i<2?"1px solid rgba(255,255,255,.15)":"none"}}>
                 <strong style={{display:"block",fontSize:"1.1rem",fontWeight:800,color:"#fff"}}>{val}</strong>
                 <span style={{fontSize:"9px",color:"rgba(255,255,255,.65)",textTransform:"uppercase",letterSpacing:".05em"}}>{label}</span>
@@ -55,13 +45,14 @@ export default function CountryPage({ country, posts }) {
           </div>
         </div>
 
-      <div style={{maxWidth:"1080px",margin:"0 auto",padding:"2rem"}}>
+        {/* Posts grid */}
         <div style={{textAlign:"center",marginBottom:"1.75rem"}}>
           <div style={{display:"inline-block",background:"#F5A623",color:"#0A2A2A",fontSize:"11px",fontWeight:700,padding:"3px 12px",borderRadius:"4px",marginBottom:".5rem",textTransform:"uppercase",letterSpacing:".08em"}}>All Guides</div>
           <h2 style={{fontSize:"1.4rem",fontWeight:800,color:"#0D6E6E"}}>All {country} Scholarship Guides</h2>
         </div>
+
         <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"1rem",marginBottom:"2rem"}}>
-          {posts.map(post => (
+          {posts.map(post=>(
             <Link key={post.slug} href={`/blog/${post.slug}`} style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",overflow:"hidden",textDecoration:"none",display:"block",color:"inherit"}}>
               <div style={{background:"#E6F4F1",padding:".75rem 1rem",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
                 <span style={{fontSize:"10px",fontWeight:700,color:"#0D6E6E",padding:"2px 8px",borderRadius:"4px",textTransform:"uppercase"}}>{post.country}</span>
@@ -78,7 +69,9 @@ export default function CountryPage({ country, posts }) {
             </Link>
           ))}
         </div>
-        <div style={{background:"#F5A623",borderRadius:"12px",padding:"2rem",display:"flex",alignItems:"center",justifyContent:"space-between",gap:"1.5rem",flexWrap:"wrap"}}>
+
+        {/* CTA */}
+        <div style={{background:"#F5A623",borderRadius:"12px",padding:"2rem",display:"flex",alignItems:"center",justifyContent:"space-between",gap:"1.5rem",flexWrap:"wrap",marginBottom:"2rem"}}>
           <div>
             <h2 style={{fontSize:"1.1rem",fontWeight:800,color:"#0A2A2A",marginBottom:".25rem"}}>Never miss a {country} scholarship deadline</h2>
             <p style={{fontSize:"13px",color:"rgba(10,42,42,.7)"}}>Free alerts when new {country} awards open for migrants and refugees.</p>
@@ -86,6 +79,7 @@ export default function CountryPage({ country, posts }) {
           <Link href="/alerts" style={{background:"#0D6E6E",color:"#fff",padding:"10px 24px",borderRadius:"6px",fontSize:"13px",fontWeight:700,textDecoration:"none",whiteSpace:"nowrap"}}>Get Free Alerts</Link>
         </div>
       </div>
+
       <Footer />
     </>
   );
@@ -93,15 +87,13 @@ export default function CountryPage({ country, posts }) {
 
 export async function getStaticPaths() {
   return {
-    paths: ["UK","Germany","Canada","Australia","USA","Turkey"].map(country => ({
-      params: { country }
-    })),
+    paths: ["UK","Germany","Canada","Australia","USA","Turkey"].map(country=>({params:{country}})),
     fallback: false
   };
 }
 
 export async function getStaticProps({ params }) {
   const allPosts = getAllPosts();
-  const posts = allPosts.filter(p => p.country === params.country);
+  const posts = allPosts.filter(p=>p.country===params.country);
   return { props: { country: params.country, posts }, revalidate: 3600 };
 }
