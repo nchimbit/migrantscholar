@@ -31,26 +31,29 @@ export default function CountryPage({ country, posts }) {
       </Head>
       <Navbar />
 
-      <div style={{background:`linear-gradient(135deg,${info.color} 0%,#0A2A2A 100%)`,padding:"2.5rem 2rem",textAlign:"center"}}>
-        <div style={{fontSize:"3rem",marginBottom:".5rem"}}>{info.flag}</div>
-        <div style={{display:"inline-block",background:"#F5A623",color:"#0A2A2A",fontSize:"11px",fontWeight:700,padding:"4px 12px",borderRadius:"4px",marginBottom:"1rem",textTransform:"uppercase",letterSpacing:".08em"}}>Country Guide</div>
-        <h1 style={{fontSize:"1.85rem",fontWeight:900,color:"#fff",lineHeight:1.25,marginBottom:".75rem",letterSpacing:"-0.02em"}}>{country} Scholarships for Migrants & Refugees</h1>
-        <p style={{fontSize:"13px",color:"rgba(255,255,255,.8)",maxWidth:"560px",margin:"0 auto 1.5rem",lineHeight:1.7}}>{info.description}</p>
-        <div style={{display:"flex",justifyContent:"center",gap:"1rem",flexWrap:"wrap"}}>
-          <div style={{background:"rgba(255,255,255,.1)",border:"1px solid rgba(255,255,255,.2)",borderRadius:"8px",padding:".75rem 1.25rem",textAlign:"center"}}>
-            <strong style={{display:"block",fontSize:"1.25rem",fontWeight:800,color:"#fff"}}>{posts.length}</strong>
-            <span style={{fontSize:"11px",color:"rgba(255,255,255,.7)",textTransform:"uppercase"}}>Guides</span>
+      <div style={{maxWidth:"1080px",margin:"0 auto",padding:"1.5rem 2rem 0"}}>
+        <div style={{background:`linear-gradient(135deg,${info.color} 0%,#0A2A2A 100%)`,borderRadius:"14px",padding:"1.5rem 2rem",display:"flex",alignItems:"center",justifyContent:"space-between",gap:"2rem",flexWrap:"wrap",marginBottom:"2rem"}}>
+          <div style={{flex:1,minWidth:"280px"}}>
+            <div style={{display:"flex",alignItems:"center",gap:".75rem",marginBottom:".6rem"}}>
+              <span style={{fontSize:"2rem"}}>{info.flag}</span>
+              <div style={{display:"inline-block",background:"#F5A623",color:"#0A2A2A",fontSize:"10px",fontWeight:700,padding:"3px 10px",borderRadius:"4px",textTransform:"uppercase",letterSpacing:".07em"}}>Country Guide</div>
+            </div>
+            <h1 style={{fontSize:"1.5rem",fontWeight:900,color:"#fff",lineHeight:1.2,marginBottom:".5rem",letterSpacing:"-0.02em"}}>{country} Scholarships for Migrants & Refugees</h1>
+            <p style={{fontSize:"12px",color:"rgba(255,255,255,.8)",lineHeight:1.55,maxWidth:"380px"}}>{info.description}</p>
           </div>
-          <div style={{background:"rgba(255,255,255,.1)",border:"1px solid rgba(255,255,255,.2)",borderRadius:"8px",padding:".75rem 1.25rem",textAlign:"center"}}>
-            <strong style={{display:"block",fontSize:"1.25rem",fontWeight:800,color:"#fff"}}>{info.topAward}</strong>
-            <span style={{fontSize:"11px",color:"rgba(255,255,255,.7)",textTransform:"uppercase"}}>Top Award</span>
-          </div>
-          <div style={{background:"rgba(255,255,255,.1)",border:"1px solid rgba(255,255,255,.2)",borderRadius:"8px",padding:".75rem 1.25rem",textAlign:"center"}}>
-            <strong style={{display:"block",fontSize:"1.1rem",fontWeight:800,color:"#fff"}}>{info.topScholarship}</strong>
-            <span style={{fontSize:"11px",color:"rgba(255,255,255,.7)",textTransform:"uppercase"}}>Top Scholarship</span>
+          <div style={{display:"flex",borderLeft:"1px solid rgba(255,255,255,.15)",paddingLeft:"1.5rem",flexShrink:0}}>
+            {[
+              [posts.length,"Guides"],
+              [info.topAward,"Top Award"],
+              [info.topScholarship,"Top Scholarship"]
+            ].map(([val,label],i)=>(
+              <div key={label} style={{textAlign:"center",padding:"0 .9rem",borderRight:i<2?"1px solid rgba(255,255,255,.15)":"none"}}>
+                <strong style={{display:"block",fontSize:"1.1rem",fontWeight:800,color:"#fff"}}>{val}</strong>
+                <span style={{fontSize:"9px",color:"rgba(255,255,255,.65)",textTransform:"uppercase",letterSpacing:".05em"}}>{label}</span>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
 
       <div style={{maxWidth:"1080px",margin:"0 auto",padding:"2rem"}}>
         <div style={{textAlign:"center",marginBottom:"1.75rem"}}>
