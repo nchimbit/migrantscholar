@@ -60,16 +60,16 @@ export default function CountryPage({ country, posts }) {
         <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"1rem",marginBottom:"2rem"}}>
           {posts.map(post => (
             <Link key={post.slug} href={`/blog/${post.slug}`} style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",overflow:"hidden",textDecoration:"none",display:"block",color:"inherit"}}>
-              <div style={{background:info.color,padding:".75rem 1rem",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-                <span style={{fontSize:"10px",fontWeight:700,color:"#fff",background:"rgba(255,255,255,.2)",padding:"2px 8px",borderRadius:"4px",textTransform:"uppercase"}}>{post.country}</span>
-                <span style={{fontSize:"10px",color:"rgba(255,255,255,.7)"}}>{post.readingTime} min read</span>
+              <div style={{background:"#E6F4F1",padding:".75rem 1rem",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+                <span style={{fontSize:"10px",fontWeight:700,color:"#0D6E6E",padding:"2px 8px",borderRadius:"4px",textTransform:"uppercase"}}>{post.country}</span>
+                <span style={{fontSize:"10px",color:"#6b7280"}}>{post.readingTime} min read</span>
               </div>
               <div style={{padding:"1rem"}}>
                 <h3 style={{fontSize:".85rem",fontWeight:700,color:"#0A2A2A",lineHeight:1.4,marginBottom:".4rem"}}>{post.title}</h3>
                 <p style={{fontSize:"11px",color:"#6b7280",lineHeight:1.55,marginBottom:".625rem"}}>{post.excerpt.slice(0,100)}...</p>
                 <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",borderTop:"1px solid #f0faf9",paddingTop:".625rem"}}>
                   <span style={{fontSize:"10px",color:"#9ca3af"}}>{formatDate(post.date)}</span>
-                  <span style={{display:"inline-block",background:info.color,color:"#fff",fontSize:"11px",fontWeight:700,padding:"5px 12px",borderRadius:"6px"}}>Read More →</span>
+                  <span style={{display:"inline-block",background:"#0D6E6E",color:"#fff",fontSize:"11px",fontWeight:700,padding:"5px 12px",borderRadius:"6px"}}>Read More →</span>
                 </div>
               </div>
             </Link>
