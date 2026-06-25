@@ -62,9 +62,7 @@ function extractFAQSchema(content) {
 }
 
 function extractFAQSchema(content) {
-  const faqMatches = [...content.matchAll(/###\s+(.+?)
-([\s\S]+?)(?=###|
-##|$)/g)];
+  const faqMatches = [...content.matchAll(/###[^\S\n]*([^\n]+)\n([\s\S]+?)(?=###|\n##|$)/g)];
   if (!faqMatches.length) return null;
   return {
     "@context": "https://schema.org",
