@@ -84,20 +84,7 @@ export default function Home({ posts }) {
           ))}
         </div>
 
-        {/* Types */}
-        <div style={{textAlign:"center",marginBottom:"1.75rem"}}>
-          <div style={{display:"inline-block",background:"#F5A623",color:"#0A2A2A",fontSize:"11px",fontWeight:700,padding:"3px 12px",borderRadius:"4px",marginBottom:".5rem",textTransform:"uppercase",letterSpacing:".08em"}}>Scholarship Types</div>
-          <h2 style={{fontSize:"1.5rem",fontWeight:800,color:"#0D6E6E",letterSpacing:"-0.02em"}}>What We Cover</h2>
-        </div>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"1rem",marginBottom:"2.5rem"}}>
-          {types.map(([icon,title,desc,bg])=>(
-            <div key={title} style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",padding:"1.25rem",textAlign:"center"}}>
-              <div style={{width:"48px",height:"48px",borderRadius:"10px",background:bg,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto .75rem",fontSize:"22px"}}>{icon}</div>
-              <h3 style={{fontSize:".85rem",fontWeight:700,color:"#0A2A2A",marginBottom:".25rem"}}>{title}</h3>
-              <p style={{fontSize:"11px",color:"#6b7280",lineHeight:1.55}}>{desc}</p>
-            </div>
-          ))}
-        </div>
+
 
         {/* Posts */}
         <div style={{textAlign:"center",marginBottom:"1.75rem"}}>
