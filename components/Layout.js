@@ -90,67 +90,91 @@ export function Navbar() {
 
 export function Footer() {
   return (
-    <footer style={{background:"#fff",borderTop:"0.5px solid #A7D4CC",marginTop:"1rem"}}>
-      <div style={{maxWidth:"1080px",margin:"0 auto",padding:"1.5rem 2rem"}}>
-
-        {/* CTA strip */}
-        <div style={{background:"#E6F4F1",border:"0.5px solid #A7D4CC",borderRadius:"8px",padding:".875rem 1.25rem",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:".75rem",marginBottom:"1.5rem"}}>
+    <footer>
+      {/* Alerts strip */}
+      <div style={{background:"#E6F4F1",padding:"1.25rem 2rem",borderTop:"1px solid #A7D4CC"}}>
+        <div style={{maxWidth:"1080px",margin:"0 auto",display:"flex",alignItems:"center",justifyContent:"space-between",gap:"1rem",flexWrap:"wrap"}}>
           <div>
-            <h3 style={{fontSize:".85rem",fontWeight:600,color:"#0A2A2A",marginBottom:".15rem"}}>Never miss a scholarship deadline</h3>
-            <p style={{fontSize:"11px",color:"#0D6E6E"}}>Free alerts when new awards open for migrants, refugees, and asylum seekers.</p>
+            <strong style={{fontSize:"13px",color:"#0A2A2A",display:"block"}}>Never miss a scholarship deadline</strong>
+            <span style={{fontSize:"12px",color:"#6b7280"}}>Free alerts when new awards open for migrants, refugees, and asylum seekers.</span>
           </div>
-          <div style={{display:"flex",gap:".35rem"}}>
-            <input type="email" placeholder="your@email.com" style={{background:"#fff",border:"0.5px solid #A7D4CC",color:"#0A2A2A",padding:"6px 10px",borderRadius:"6px",fontSize:"12px",outline:"none",minWidth:"160px"}}/>
-            <button style={{background:"#F5A623",color:"#0A2A2A",border:"none",padding:"6px 14px",borderRadius:"6px",fontSize:"12px",fontWeight:700,cursor:"pointer",whiteSpace:"nowrap"}}>Get free alerts</button>
+          <div style={{display:"flex",gap:".5rem"}}>
+            <input type="email" placeholder="your@email.com" style={{border:"1.5px solid #A7D4CC",borderRadius:"6px",padding:"7px 12px",fontSize:"12px",outline:"none",width:"200px"}} />
+            <button style={{background:"#F5A623",color:"#0A2A2A",border:"none",borderRadius:"6px",padding:"7px 16px",fontSize:"12px",fontWeight:700,cursor:"pointer"}}>Get free alerts</button>
           </div>
         </div>
+      </div>
 
-        {/* Grid */}
-        <div style={{display:"grid",gridTemplateColumns:"2fr 1fr 1fr 1fr",gap:"2rem",marginBottom:"1.25rem"}}>
-          <div>
-            <Link href="/" style={{display:"flex",alignItems:"center",gap:"8px",textDecoration:"none",marginBottom:".5rem"}}>
-              <LogoMark size={28}/>
-              <div style={{lineHeight:1.1}}>
-                <div style={{fontSize:".85rem",fontWeight:800,color:"#0A2A2A"}}>Migrant<span style={{color:"#0D6E6E"}}>Scholar</span></div>
-                <div style={{fontSize:"9px",color:"#A7D4CC",textTransform:"uppercase",letterSpacing:".04em"}}>Find Your Scholarship</div>
+      {/* Main footer */}
+      <div style={{background:"#0A2A2A",padding:"2.5rem 2rem 1.5rem"}}>
+        <div style={{maxWidth:"1080px",margin:"0 auto"}}>
+          <div style={{display:"grid",gridTemplateColumns:"1.5fr 1fr 1fr 1fr 1fr",gap:"2rem",marginBottom:"2rem"}}>
+            
+            {/* Brand */}
+            <div>
+              <div style={{display:"flex",alignItems:"center",gap:".5rem",marginBottom:".75rem"}}>
+                <div style={{width:"32px",height:"32px",background:"#0D6E6E",borderRadius:"6px",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"16px"}}>🌐</div>
+                <div>
+                  <strong style={{display:"block",fontSize:".9rem",color:"#fff"}}>Scholarship</strong>
+                  <span style={{fontSize:"10px",color:"rgba(255,255,255,.6)"}}>For Migrants</span>
+                </div>
               </div>
-            </Link>
-            <p style={{fontSize:"11px",color:"#6b7280",lineHeight:1.6,maxWidth:"220px"}}>Free, verified scholarship guides for migrants, refugees, and asylum seekers worldwide. Updated every day.</p>
+              <p style={{fontSize:"12px",color:"rgba(255,255,255,.6)",lineHeight:1.65,marginBottom:"1rem"}}>Find verified scholarships for migrants, refugees, asylum seekers, and international students.</p>
+              <div style={{display:"flex",gap:".5rem"}}>
+                {["f","t","in","ig","yt"].map(s=>(
+                  <div key={s} style={{width:"28px",height:"28px",background:"rgba(255,255,255,.1)",borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"11px",color:"rgba(255,255,255,.7)",cursor:"pointer"}}>{s}</div>
+                ))}
+              </div>
+            </div>
+
+            {/* Explore */}
+            <div>
+              <h4 style={{fontSize:"12px",fontWeight:700,color:"#fff",marginBottom:".875rem",textTransform:"uppercase",letterSpacing:".06em"}}>Explore</h4>
+              {["Latest Scholarships","Countries","Universities","Study Levels","Guides & Resources"].map(item=>(
+                <a key={item} href="/blog" style={{display:"block",fontSize:"12px",color:"rgba(255,255,255,.6)",textDecoration:"none",marginBottom:".4rem"}}>{item}</a>
+              ))}
+            </div>
+
+            {/* Top Scholarships */}
+            <div>
+              <h4 style={{fontSize:"12px",fontWeight:700,color:"#fff",marginBottom:".875rem",textTransform:"uppercase",letterSpacing:".06em"}}>Top Scholarships</h4>
+              {["DAAD Scholarships","Chevening Scholarships","Fulbright Scholarships","Vanier Scholarships","Türkiye Scholarships"].map(item=>(
+                <a key={item} href="/blog" style={{display:"block",fontSize:"12px",color:"rgba(255,255,255,.6)",textDecoration:"none",marginBottom:".4rem"}}>{item}</a>
+              ))}
+            </div>
+
+            {/* Help */}
+            <div>
+              <h4 style={{fontSize:"12px",fontWeight:700,color:"#fff",marginBottom:".875rem",textTransform:"uppercase",letterSpacing:".06em"}}>Help</h4>
+              {[["FAQ","/blog"],["Contact Us","/about"],["Privacy Policy","/privacy"],["Terms of Use","/terms"],["About Us","/about"]].map(([item,href])=>(
+                <a key={item} href={href} style={{display:"block",fontSize:"12px",color:"rgba(255,255,255,.6)",textDecoration:"none",marginBottom:".4rem"}}>{item}</a>
+              ))}
+            </div>
+
+            {/* Newsletter */}
+            <div>
+              <h4 style={{fontSize:"12px",fontWeight:700,color:"#fff",marginBottom:".875rem",textTransform:"uppercase",letterSpacing:".06em"}}>Newsletter</h4>
+              <p style={{fontSize:"12px",color:"rgba(255,255,255,.6)",lineHeight:1.6,marginBottom:".875rem"}}>Stay updated with the latest scholarships and opportunities.</p>
+              <input type="email" placeholder="Enter your email" style={{width:"100%",background:"rgba(255,255,255,.1)",border:"1px solid rgba(255,255,255,.2)",borderRadius:"6px",padding:"7px 10px",fontSize:"11px",color:"#fff",outline:"none",marginBottom:".5rem"}} />
+              <button style={{width:"100%",background:"#F5A623",color:"#0A2A2A",border:"none",borderRadius:"6px",padding:"7px",fontSize:"11px",fontWeight:700,cursor:"pointer"}}>Subscribe</button>
+            </div>
           </div>
-          <div>
-            <h4 style={{fontSize:"11px",fontWeight:700,color:"#0D6E6E",textTransform:"uppercase",letterSpacing:".08em",marginBottom:".625rem"}}>Scholarships</h4>
-            {[["Fully Funded","/blog"],["Partially Funded","/blog"],["Undergraduate","/blog"],["Master's","/blog"],["PhD","/blog"],["Latest","/blog"]].map(([label,href])=>(
-              <Link key={label} href={href} style={{display:"block",fontSize:"12px",color:"#64748b",textDecoration:"none",marginBottom:".35rem"}}>{label}</Link>
-            ))}
-          </div>
-          <div>
-            <h4 style={{fontSize:"11px",fontWeight:700,color:"#0D6E6E",textTransform:"uppercase",letterSpacing:".08em",marginBottom:".625rem"}}>Countries</h4>
-            {[["🇬🇧 UK","UK"],["🇩🇪 Germany","Germany"],["🇨🇦 Canada","Canada"],["🇦🇺 Australia","Australia"],["🇺🇸 USA","USA"],["🇹🇷 Turkey","Turkey"]].map(([label,country])=>(
-              <Link key={country} href={`/countries/${country}`} style={{display:"block",fontSize:"12px",color:"#64748b",textDecoration:"none",marginBottom:".35rem"}}>{label}</Link>
-            ))}
-          </div>
-          <div>
-            <h4 style={{fontSize:"11px",fontWeight:700,color:"#0D6E6E",textTransform:"uppercase",letterSpacing:".08em",marginBottom:".625rem"}}>Company</h4>
-            {[["About","/about"],["Guides","/blog"],["Contact","/about"],["Privacy Policy","/privacy"],["Terms","/terms"],["Sitemap","/sitemap.xml"]].map(([label,href])=>(
-              <Link key={label} href={href} style={{display:"block",fontSize:"12px",color:"#64748b",textDecoration:"none",marginBottom:".35rem"}}>{label}</Link>
-            ))}
+
+          {/* Bottom bar */}
+          <div style={{borderTop:"1px solid rgba(255,255,255,.1)",paddingTop:"1.25rem",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:"1rem"}}>
+            <span style={{fontSize:"11px",color:"rgba(255,255,255,.5)"}}>© 2026 Scholarship for Migrants. All rights reserved.</span>
+            <div style={{display:"flex",gap:"1rem"}}>
+              {[["Privacy Policy","/privacy"],["Terms of Use","/terms"],["Sitemap","/sitemap.xml"]].map(([label,href])=>(
+                <a key={label} href={href} style={{fontSize:"11px",color:"rgba(255,255,255,.5)",textDecoration:"none"}}>{label}</a>
+              ))}
+            </div>
           </div>
         </div>
-
-        {/* Bottom */}
-        <div style={{borderTop:"0.5px solid #E6F4F1",paddingTop:"1rem",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:".5rem"}}>
-          <p style={{fontSize:"11px",color:"#A7D4CC"}}>© 2026 MigrantScholar.com — Free, independent scholarship resource</p>
-          <div style={{display:"flex",gap:"1rem"}}>
-            {[["Privacy","/privacy"],["Terms","/terms"],["Sitemap","/sitemap.xml"]].map(([label,href])=>(
-              <Link key={label} href={href} style={{fontSize:"11px",color:"#A7D4CC",textDecoration:"none"}}>{label}</Link>
-            ))}
-          </div>
-        </div>
-
       </div>
     </footer>
   );
 }
+
 
 export function AdBanner({label="Advertisement"}) {
   return (

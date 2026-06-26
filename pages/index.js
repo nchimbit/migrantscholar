@@ -280,6 +280,30 @@ export default function Home({ posts, totalCountries }) {
           </div>
         )}
 
+        {/* LATEST GUIDES & RESOURCES */}
+        <div style={{marginBottom:"2.5rem"}}>
+          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"1.25rem"}}>
+            <h2 style={{fontSize:"1.1rem",fontWeight:800,color:"#0A2A2A"}}>Latest Guides & Resources</h2>
+            <Link href="/blog" style={{fontSize:"12px",color:"#0D6E6E",fontWeight:600,textDecoration:"none"}}>View all guides →</Link>
+          </div>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:"1rem"}}>
+            {[
+              ["https://images.unsplash.com/photo-1455390582262-044cdead277a?w=200&q=70","How to Write a Winning Motivation Letter","A complete guide with examples and tips."],
+              ["https://images.unsplash.com/photo-1569982175971-d92b01cf8694?w=200&q=70","Student Visa Guide by Country","Step-by-step visa application guides for international students."],
+              ["https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=200&q=70","How to Apply for Fully Funded Scholarships","A complete application roadmap for success."],
+              ["https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=200&q=70","Top 100 Scholarships Without IELTS","Study abroad opportunities without IELTS requirement."],
+            ].map(([img,title,desc])=>(
+              <Link key={title} href="/blog" style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",overflow:"hidden",textDecoration:"none",display:"flex",gap:".75rem",padding:".875rem",alignItems:"flex-start",color:"inherit"}}>
+                <img src={img} alt={title} style={{width:"64px",height:"64px",borderRadius:"6px",objectFit:"cover",flexShrink:0}} />
+                <div>
+                  <h3 style={{fontSize:".8rem",fontWeight:700,color:"#0A2A2A",lineHeight:1.4,marginBottom:".25rem"}}>{title}</h3>
+                  <p style={{fontSize:"11px",color:"#6b7280",lineHeight:1.5}}>{desc}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
         {/* WHY CHOOSE US + SUCCESS STORIES */}
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"1.5rem",marginBottom:"2.5rem"}}>
           <div style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",padding:"1.5rem"}}>
