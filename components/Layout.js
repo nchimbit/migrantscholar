@@ -92,8 +92,9 @@ export function Footer() {
   return (
     <footer>
       {/* Alerts strip */}
-      <div style={{background:"#E6F4F1",padding:"1.25rem 2rem",borderTop:"1px solid #A7D4CC"}}>
-        <div style={{maxWidth:"1080px",margin:"0 auto",display:"flex",alignItems:"center",justifyContent:"space-between",gap:"1rem",flexWrap:"wrap"}}>
+      <div style={{background:"#F4F7F6",padding:"1.5rem 2rem 0"}}>
+        <div style={{maxWidth:"1080px",margin:"0 auto"}}>
+        <div style={{background:"#E6F4F1",borderRadius:"12px",padding:"1.25rem 2rem",border:"1px solid #A7D4CC",display:"flex",alignItems:"center",justifyContent:"space-between",gap:"1rem",flexWrap:"wrap"}}>
           <div>
             <strong style={{fontSize:"13px",color:"#0A2A2A",display:"block"}}>Never miss a scholarship deadline</strong>
             <span style={{fontSize:"12px",color:"#6b7280"}}>Free alerts when new awards open for migrants, refugees, and asylum seekers.</span>
@@ -102,6 +103,7 @@ export function Footer() {
             <input type="email" placeholder="your@email.com" style={{border:"1.5px solid #A7D4CC",borderRadius:"6px",padding:"7px 12px",fontSize:"12px",outline:"none",width:"200px"}} />
             <button style={{background:"#F5A623",color:"#0A2A2A",border:"none",borderRadius:"6px",padding:"7px 16px",fontSize:"12px",fontWeight:700,cursor:"pointer"}}>Get free alerts</button>
           </div>
+        </div>
         </div>
       </div>
 
