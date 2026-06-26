@@ -70,9 +70,11 @@ export default function Home({ posts, totalCountries }) {
       <Navbar />
 
       {/* HERO */}
-      <div style={{background:"linear-gradient(135deg,#0A2A2A 0%,#0D6E6E 100%)",padding:"3rem 2rem",position:"relative",overflow:"hidden"}}>
-        <div style={{position:"absolute",top:0,right:0,bottom:0,left:0,backgroundImage:"url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5ce?w=1200&q=40')",backgroundSize:"cover",backgroundPosition:"center",opacity:.08}}></div>
-        <div style={{maxWidth:"1080px",margin:"0 auto",position:"relative"}}>
+      <div style={{background:"#F4F7F6",padding:"1.5rem 2rem 0"}}>
+        <div style={{maxWidth:"1080px",margin:"0 auto"}}>
+        <div style={{background:"linear-gradient(135deg,#0A2A2A 0%,#0D6E6E 100%)",borderRadius:"14px",padding:"2.5rem 2rem",position:"relative",overflow:"hidden"}}>
+        <div style={{position:"absolute",top:0,right:0,bottom:0,left:0,backgroundImage:"url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5ce?w=1200&q=40')",backgroundSize:"cover",backgroundPosition:"center",opacity:.08,borderRadius:"14px"}}></div>
+        <div style={{position:"relative"}}>
           <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:"2rem",flexWrap:"wrap"}}>
             <div style={{flex:1,minWidth:"300px"}}>
               <div style={{display:"inline-block",background:"#F5A623",color:"#0A2A2A",fontSize:"11px",fontWeight:700,padding:"4px 12px",borderRadius:"4px",marginBottom:"1rem",textTransform:"uppercase",letterSpacing:".08em"}}>Updated Daily · 2026</div>
@@ -93,11 +95,14 @@ export default function Home({ posts, totalCountries }) {
             </div>
           </div>
         </div>
+        </div>
+        </div>
       </div>
 
       {/* SEARCH BAR */}
-      <div style={{background:"#fff",boxShadow:"0 4px 20px rgba(0,0,0,.08)",padding:"1.5rem 2rem"}}>
+      <div style={{background:"#F4F7F6",padding:"0 2rem"}}>
         <div style={{maxWidth:"1080px",margin:"0 auto"}}>
+        <div style={{background:"#fff",boxShadow:"0 4px 20px rgba(0,0,0,.08)",borderRadius:"0 0 14px 14px",padding:"1.5rem 2rem"}}>
           <h2 style={{fontSize:".9rem",fontWeight:700,color:"#0A2A2A",marginBottom:"1rem"}}>Find Scholarships</h2>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 1fr 1fr auto",gap:".75rem",alignItems:"end",flexWrap:"wrap"}}>
             <div>
@@ -140,6 +145,7 @@ export default function Home({ posts, totalCountries }) {
               <button key={tag} onClick={()=>setSearch(tag)} style={{fontSize:"11px",color:"#0D6E6E",background:"#E6F4F1",border:"none",borderRadius:"20px",padding:"3px 10px",cursor:"pointer"}}>{tag}</button>
             ))}
           </div>
+        </div>
         </div>
       </div>
 
