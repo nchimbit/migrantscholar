@@ -366,13 +366,15 @@ export default function Home({ posts, totalCountries }) {
       </div>
 
       {/* CTA BANNER */}
-      <div style={{background:"#F5A623",padding:"2rem"}}>
-        <div style={{maxWidth:"1080px",margin:"0 auto",display:"flex",alignItems:"center",justifyContent:"space-between",gap:"1.5rem",flexWrap:"wrap"}}>
-          <div>
-            <h2 style={{fontSize:"1.25rem",fontWeight:800,color:"#0A2A2A",marginBottom:".25rem"}}>NEVER MISS A DEADLINE AGAIN!</h2>
-            <p style={{fontSize:"13px",color:"rgba(10,42,42,.7)"}}>Free alerts when new scholarships open for migrants, refugees, and asylum seekers.</p>
+      <div style={{background:"#F4F7F6",padding:"0 2rem 1.5rem"}}>
+        <div style={{maxWidth:"1080px",margin:"0 auto"}}>
+          <div style={{background:"#F5A623",borderRadius:"12px",padding:"2rem",display:"flex",alignItems:"center",justifyContent:"space-between",gap:"1.5rem",flexWrap:"wrap"}}>
+            <div>
+              <h2 style={{fontSize:"1.25rem",fontWeight:800,color:"#0A2A2A",marginBottom:".25rem"}}>NEVER MISS A DEADLINE AGAIN!</h2>
+              <p style={{fontSize:"13px",color:"rgba(10,42,42,.7)"}}>Free alerts when new scholarships open for migrants, refugees, and asylum seekers.</p>
+            </div>
+            <Link href="/alerts" style={{background:"#0D6E6E",color:"#fff",padding:"10px 24px",borderRadius:"6px",fontSize:"13px",fontWeight:700,textDecoration:"none",whiteSpace:"nowrap"}}>GET FREE ALERTS</Link>
           </div>
-          <Link href="/alerts" style={{background:"#0D6E6E",color:"#fff",padding:"10px 24px",borderRadius:"6px",fontSize:"13px",fontWeight:700,textDecoration:"none",whiteSpace:"nowrap"}}>GET FREE ALERTS</Link>
         </div>
       </div>
 
