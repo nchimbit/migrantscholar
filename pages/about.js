@@ -26,10 +26,14 @@ export default function About({ totalGuides, totalCountries }) {
       <Navbar />
 
       {/* Hero */}
-      <div style={{background:"linear-gradient(135deg,#0D6E6E 0%,#0A5555 100%)",padding:"2.5rem 2rem",textAlign:"center"}}>
+      <div style={{background:"#E6F4F1",padding:"1.5rem 2rem 0"}}>
+        <div style={{maxWidth:"1080px",margin:"0 auto"}}>
+        <div style={{background:"linear-gradient(135deg,#0D6E6E 0%,#0A5555 100%)",borderRadius:"14px",padding:"2.5rem 2rem",textAlign:"center"}}>
         <div style={{display:"inline-block",background:"#F5A623",color:"#0A2A2A",fontSize:"11px",fontWeight:700,padding:"4px 12px",borderRadius:"4px",marginBottom:"1rem",textTransform:"uppercase",letterSpacing:".08em"}}>Our Mission</div>
         <h1 style={{fontSize:"1.85rem",fontWeight:900,color:"#fff",lineHeight:1.25,marginBottom:".75rem",letterSpacing:"-0.02em"}}>Helping migrants find the<br/>education funding they deserve</h1>
         <p style={{fontSize:"13px",color:"rgba(255,255,255,.8)",maxWidth:"540px",margin:"0 auto",lineHeight:1.7}}>MigrantScholar is a free, independent scholarship resource built specifically for migrants, refugees, and asylum seekers. We verify every award, track every deadline, and publish new guides every single day.</p>
+        </div>
+        </div>
       </div>
 
       <div style={{maxWidth:"1080px",margin:"0 auto",padding:"2rem"}}>
