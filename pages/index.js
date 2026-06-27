@@ -51,11 +51,40 @@ export default function Home({ posts, totalCountries }) {
   const [filterFunding, setFilterFunding] = useState("All Types");
   const [openFaq, setOpenFaq] = useState(null);
   const [visible, setVisible] = useState(6);
+  const [aiStatus, setAiStatus] = useState("");
+  const [aiLevel, setAiLevel] = useState("");
+  const [aiField, setAiField] = useState("");
+  const [aiNationality, setAiNationality] = useState("");
+  const [aiResults, setAiResults] = useState([]);
+  const [aiLoading, setAiLoading] = useState(false);
+
+  async function getAiSuggestions() {
+    if (!aiStatus) return;
+    setAiLoading(true);
+    setAiResults([]);
+    try {
+      const query = `${aiStatus} looking to study ${aiLevel || "any level"} in ${aiField || "any field"} from ${aiNationality || "any country"}`;
+      const matched = posts.filter(p => {
+        const text = (p.title + " " + p.excerpt).toLowerCase();
+        const levelMatch = !aiLevel || text.includes(aiLevel.toLowerCase().replace("'s","s"));
+        const fieldMatch = !aiField || text.includes(aiField.toLowerCase());
+        const statusMatch = text.includes(aiStatus.toLowerCase()) || text.includes("migrant") || text.includes("refugee") || text.includes("asylum");
+        return statusMatch || levelMatch;
+      }).slice(0, 3);
+      setAiResults(matched);
+    } catch(e) {
+      setAiResults([]);
+    } finally {
+      setAiLoading(false);
+    }
+  }
 
   const filtered = posts.filter(p => {
     const matchCountry = filterCountry === "All Countries" || p.country === filterCountry;
-    const matchSearch = !search || p.title.toLowerCase().includes(search.toLowerCase());
-    return matchCountry && matchSearch;
+    const matchLevel = filterLevel === "All Levels" || (p.type && p.type.toLowerCase().includes(filterLevel.toLowerCase())) || (p.title && p.title.toLowerCase().includes(filterLevel.toLowerCase()));
+    const matchFunding = filterFunding === "All Types" || (p.type && p.type.toLowerCase().includes(filterFunding.toLowerCase())) || (p.title && p.title.toLowerCase().includes(filterFunding.toLowerCase()));
+    const matchSearch = !search || p.title.toLowerCase().includes(search.toLowerCase()) || p.excerpt.toLowerCase().includes(search.toLowerCase()) || (p.country && p.country.toLowerCase().includes(search.toLowerCase()));
+    return matchCountry && matchLevel && matchFunding && matchSearch;
   });
 
   const showing = filtered.slice(0, visible);
@@ -175,8 +204,8 @@ export default function Home({ posts, totalCountries }) {
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 1fr auto",gap:".75rem",alignItems:"end",marginBottom:"1rem"}}>
             <div>
               <label style={{display:"block",fontSize:"10px",fontWeight:600,color:"#6b7280",marginBottom:".25rem"}}>I am a</label>
-              <select style={{width:"100%",border:"1.5px solid #e2f0f0",borderRadius:"6px",padding:"8px 10px",fontSize:"12px",color:"#0A2A2A",background:"#fff",outline:"none"}}>
-                <option>Select status</option>
+              <select value={aiStatus} onChange={e=>setAiStatus(e.target.value)} style={{width:"100%",border:"1.5px solid #e2f0f0",borderRadius:"6px",padding:"8px 10px",fontSize:"12px",color:"#0A2A2A",background:"#fff",outline:"none"}}>
+                <option value="">Select status</option>
                 <option>Refugee</option>
                 <option>Asylum Seeker</option>
                 <option>Migrant</option>
@@ -185,8 +214,8 @@ export default function Home({ posts, totalCountries }) {
             </div>
             <div>
               <label style={{display:"block",fontSize:"10px",fontWeight:600,color:"#6b7280",marginBottom:".25rem"}}>I want to study</label>
-              <select style={{width:"100%",border:"1.5px solid #e2f0f0",borderRadius:"6px",padding:"8px 10px",fontSize:"12px",color:"#0A2A2A",background:"#fff",outline:"none"}}>
-                <option>Select level</option>
+              <select value={aiLevel} onChange={e=>setAiLevel(e.target.value)} style={{width:"100%",border:"1.5px solid #e2f0f0",borderRadius:"6px",padding:"8px 10px",fontSize:"12px",color:"#0A2A2A",background:"#fff",outline:"none"}}>
+                <option value="">Select level</option>
                 <option>Bachelor's</option>
                 <option>Master's</option>
                 <option>PhD</option>
@@ -195,8 +224,8 @@ export default function Home({ posts, totalCountries }) {
             </div>
             <div>
               <label style={{display:"block",fontSize:"10px",fontWeight:600,color:"#6b7280",marginBottom:".25rem"}}>My field of interest</label>
-              <select style={{width:"100%",border:"1.5px solid #e2f0f0",borderRadius:"6px",padding:"8px 10px",fontSize:"12px",color:"#0A2A2A",background:"#fff",outline:"none"}}>
-                <option>Select field</option>
+              <select value={aiField} onChange={e=>setAiField(e.target.value)} style={{width:"100%",border:"1.5px solid #e2f0f0",borderRadius:"6px",padding:"8px 10px",fontSize:"12px",color:"#0A2A2A",background:"#fff",outline:"none"}}>
+                <option value="">Select field</option>
                 <option>Engineering</option>
                 <option>Medicine</option>
                 <option>Business</option>
@@ -207,8 +236,8 @@ export default function Home({ posts, totalCountries }) {
             </div>
             <div>
               <label style={{display:"block",fontSize:"10px",fontWeight:600,color:"#6b7280",marginBottom:".25rem"}}>My nationality</label>
-              <select style={{width:"100%",border:"1.5px solid #e2f0f0",borderRadius:"6px",padding:"8px 10px",fontSize:"12px",color:"#0A2A2A",background:"#fff",outline:"none"}}>
-                <option>Select nationality</option>
+              <select value={aiNationality} onChange={e=>setAiNationality(e.target.value)} style={{width:"100%",border:"1.5px solid #e2f0f0",borderRadius:"6px",padding:"8px 10px",fontSize:"12px",color:"#0A2A2A",background:"#fff",outline:"none"}}>
+                <option value="">Select nationality</option>
                 <option>Any country</option>
                 <option>African</option>
                 <option>Asian</option>
@@ -216,7 +245,7 @@ export default function Home({ posts, totalCountries }) {
                 <option>European</option>
               </select>
             </div>
-            <button style={{background:"#0D6E6E",color:"#fff",border:"none",borderRadius:"6px",padding:"9px 16px",fontSize:"12px",fontWeight:700,cursor:"pointer",whiteSpace:"nowrap"}}>✨ Get AI Suggestions</button>
+            <button onClick={getAiSuggestions} disabled={aiLoading} style={{background:"#0D6E6E",color:"#fff",border:"none",borderRadius:"6px",padding:"9px 16px",fontSize:"12px",fontWeight:700,cursor:"pointer",whiteSpace:"nowrap"}}>{aiLoading ? "Finding..." : "✨ Get AI Suggestions"}</button>
           </div>
           <div style={{display:"flex",gap:"1.5rem",flexWrap:"wrap"}}>
             {[["🎯","Personalized Matches"],["⚡","Saves Time"],["🔓","100% Free"],["🔒","Privacy Protected"]].map(([icon,label])=>(
@@ -225,6 +254,23 @@ export default function Home({ posts, totalCountries }) {
               </div>
             ))}
           </div>
+          {aiResults.length > 0 && (
+            <div style={{marginTop:"1rem",borderTop:"1px solid #e2f0f0",paddingTop:"1rem"}}>
+              <p style={{fontSize:"12px",fontWeight:600,color:"#0A2A2A",marginBottom:".75rem"}}>✨ AI found {aiResults.length} matching scholarships for you:</p>
+              <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:".75rem"}}>
+                {aiResults.map(post=>(
+                  <Link key={post.slug} href={`/blog/${post.slug}`} style={{background:"#E6F4F1",border:"1.5px solid #A7D4CC",borderRadius:"8px",padding:".875rem",textDecoration:"none",display:"block"}}>
+                    <span style={{fontSize:"10px",fontWeight:700,color:"#0D6E6E",textTransform:"uppercase"}}>{post.country}</span>
+                    <h4 style={{fontSize:".8rem",fontWeight:700,color:"#0A2A2A",lineHeight:1.4,margin:".3rem 0"}}>{post.title}</h4>
+                    <span style={{fontSize:"11px",color:"#0D6E6E",fontWeight:600}}>View details →</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+          {aiLoading && (
+            <div style={{marginTop:"1rem",textAlign:"center",fontSize:"13px",color:"#0D6E6E",fontWeight:600}}>✨ Finding best scholarships for your profile...</div>
+          )}
         </div>
 
         {/* COUNTRIES */}
