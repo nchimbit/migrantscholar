@@ -1,3 +1,4 @@
+import React from 'react';
 import Link from "next/link";
 import { useState } from "react";
 
@@ -89,6 +90,23 @@ export function Navbar() {
 }
 
 export function Footer() {
+  const [email1, setEmail1] = React.useState("");
+  const [email2, setEmail2] = React.useState("");
+  const [sent1, setSent1] = React.useState(false);
+  const [sent2, setSent2] = React.useState(false);
+
+  async function submitEmail(email, setSent) {
+    if (!email) return;
+    try {
+      const res = await fetch("https://formspree.io/f/xvznenzj", {
+        method: "POST",
+        headers: {"Content-Type":"application/json","Accept":"application/json"},
+        body: JSON.stringify({email, source:"Footer signup"})
+      });
+      if (res.ok) setSent(true);
+    } catch(e) {}
+  }
+
   return (
     <footer>
       {/* Alerts strip */}
@@ -100,8 +118,14 @@ export function Footer() {
             <span style={{fontSize:"12px",color:"#6b7280"}}>Free alerts when new awards open for migrants, refugees, and asylum seekers.</span>
           </div>
           <div style={{display:"flex",gap:".5rem"}}>
-            <input type="email" placeholder="your@email.com" style={{border:"1.5px solid #A7D4CC",borderRadius:"6px",padding:"7px 12px",fontSize:"12px",outline:"none",width:"200px"}} />
-            <button style={{background:"#F5A623",color:"#0A2A2A",border:"none",borderRadius:"6px",padding:"7px 16px",fontSize:"12px",fontWeight:700,cursor:"pointer"}}>Get free alerts</button>
+            {sent1 ? (
+              <span style={{fontSize:"12px",color:"#0D6E6E",fontWeight:600}}>✓ You're subscribed!</span>
+            ) : (
+              <>
+                <input type="email" placeholder="your@email.com" value={email1} onChange={e=>setEmail1(e.target.value)} onKeyDown={e=>e.key==="Enter"&&submitEmail(email1,setSent1)} style={{border:"1.5px solid #A7D4CC",borderRadius:"6px",padding:"7px 12px",fontSize:"12px",outline:"none",width:"200px"}} />
+                <button onClick={()=>submitEmail(email1,setSent1)} style={{background:"#F5A623",color:"#0A2A2A",border:"none",borderRadius:"6px",padding:"7px 16px",fontSize:"12px",fontWeight:700,cursor:"pointer"}}>Get free alerts</button>
+              </>
+            )}
           </div>
         </div>
         </div>
@@ -157,8 +181,14 @@ export function Footer() {
             <div>
               <h4 style={{fontSize:"12px",fontWeight:700,color:"#fff",marginBottom:".875rem",textTransform:"uppercase",letterSpacing:".06em"}}>Newsletter</h4>
               <p style={{fontSize:"12px",color:"rgba(255,255,255,.6)",lineHeight:1.6,marginBottom:".875rem"}}>Stay updated with the latest scholarships and opportunities.</p>
-              <input type="email" placeholder="Enter your email" style={{width:"100%",background:"rgba(255,255,255,.1)",border:"1px solid rgba(255,255,255,.2)",borderRadius:"6px",padding:"7px 10px",fontSize:"11px",color:"#fff",outline:"none",marginBottom:".5rem"}} />
-              <button style={{width:"100%",background:"#F5A623",color:"#0A2A2A",border:"none",borderRadius:"6px",padding:"7px",fontSize:"11px",fontWeight:700,cursor:"pointer"}}>Subscribe</button>
+              {sent2 ? (
+                <div style={{fontSize:"12px",color:"#F5A623",fontWeight:600,textAlign:"center",padding:".5rem 0"}}>✓ Subscribed! Thank you.</div>
+              ) : (
+                <>
+                  <input type="email" placeholder="Enter your email" value={email2} onChange={e=>setEmail2(e.target.value)} onKeyDown={e=>e.key==="Enter"&&submitEmail(email2,setSent2)} style={{width:"100%",background:"rgba(255,255,255,.1)",border:"1px solid rgba(255,255,255,.2)",borderRadius:"6px",padding:"7px 10px",fontSize:"11px",color:"#fff",outline:"none",marginBottom:".5rem"}} />
+                  <button onClick={()=>submitEmail(email2,setSent2)} style={{width:"100%",background:"#F5A623",color:"#0A2A2A",border:"none",borderRadius:"6px",padding:"7px",fontSize:"11px",fontWeight:700,cursor:"pointer"}}>Subscribe</button>
+                </>
+              )}
             </div>
           </div>
 
