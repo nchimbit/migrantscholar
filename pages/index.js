@@ -176,7 +176,7 @@ export default function Home({ posts, totalCountries }) {
                 <option>Any country</option>
               </select>
             </div>
-            <button onClick={()=>{setVisible(6);}} style={{background:"#0D6E6E",color:"#fff",border:"none",borderRadius:"6px",padding:"9px 20px",fontSize:"12px",fontWeight:700,cursor:"pointer",whiteSpace:"nowrap"}}>🔍 Search</button>
+            <button onClick={()=>{setVisible(6); document.getElementById("results").scrollIntoView({behavior:"smooth"});}} style={{background:"#0D6E6E",color:"#fff",border:"none",borderRadius:"6px",padding:"9px 20px",fontSize:"12px",fontWeight:700,cursor:"pointer",whiteSpace:"nowrap"}}>🔍 Search</button>
           </div>
           <div style={{marginTop:".75rem",display:"flex",gap:".5rem",flexWrap:"wrap",alignItems:"center"}}>
             <span style={{fontSize:"11px",color:"#9ca3af"}}>Popular:</span>
@@ -366,13 +366,19 @@ export default function Home({ posts, totalCountries }) {
         </div>
 
         {/* LATEST SCHOLARSHIPS */}
-        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"1.25rem"}}>
+        <div id="results" style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"1.25rem"}}>
           <div>
             <div style={{display:"inline-block",background:"#F5A623",color:"#0A2A2A",fontSize:"11px",fontWeight:700,padding:"3px 12px",borderRadius:"4px",marginBottom:".4rem",textTransform:"uppercase",letterSpacing:".08em"}}>Latest Scholarships</div>
             <h2 style={{fontSize:"1.4rem",fontWeight:800,color:"#0D6E6E"}}>Today's Scholarship Opportunities</h2>
           </div>
           <Link href="/blog" style={{fontSize:"12px",color:"#0D6E6E",fontWeight:600,textDecoration:"none"}}>View all scholarships →</Link>
         </div>
+        {(filterCountry !== "All Countries" || filterLevel !== "All Levels" || filterFunding !== "All Types" || search) && (
+          <div style={{background:"#E6F4F1",border:"1px solid #A7D4CC",borderRadius:"8px",padding:".75rem 1rem",marginBottom:"1rem",fontSize:"13px",color:"#0D6E6E",fontWeight:600}}>
+            ✓ Showing {filtered.length} scholarships matching your search
+            <button onClick={()=>{setSearch("");setFilterCountry("All Countries");setFilterLevel("All Levels");setFilterFunding("All Types");}} style={{marginLeft:"1rem",fontSize:"11px",color:"#6b7280",background:"none",border:"none",cursor:"pointer",textDecoration:"underline"}}>Clear filters</button>
+          </div>
+        )}
         <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"1rem",marginBottom:"1.5rem"}}>
           {showing.map(post=>{
             const c = countryColors[post.country]||{bg:"#0D6E6E"};
