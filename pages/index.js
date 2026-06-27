@@ -94,11 +94,12 @@ export default function Home({ posts, totalCountries }) {
                 <Link href="/alerts" style={{background:"rgba(255,255,255,.15)",color:"#fff",border:"1.5px solid rgba(255,255,255,.4)",padding:"10px 22px",borderRadius:"6px",fontSize:"13px",fontWeight:600,textDecoration:"none"}}>Get Free Alerts</Link>
               </div>
             </div>
-            <div style={{display:"flex",gap:"1rem",flexWrap:"wrap",flexShrink:0}}>
-              {[["70+","Universities"],[`${posts.length}+`,"Scholarships"],["£17k+","Top Award"],[`${totalCountries}+`,"Countries"],["Free","Always"]].map(([val,label])=>(
-                <div key={label} style={{textAlign:"center",background:"rgba(255,255,255,.1)",border:"1px solid rgba(255,255,255,.15)",borderRadius:"8px",padding:".75rem 1rem",minWidth:"80px"}}>
-                  <strong style={{display:"block",fontSize:"1.35rem",fontWeight:800,color:"#fff"}}>{val}</strong>
-                  <span style={{fontSize:"10px",color:"rgba(255,255,255,.7)",textTransform:"uppercase",letterSpacing:".06em"}}>{label}</span>
+            <div style={{display:"flex",gap:"0",flexShrink:0,borderLeft:"1px solid rgba(255,255,255,.2)",marginLeft:"1rem"}}>
+              {[["🏛","70+","Universities"],["🎓",`${posts.length}+`,"Scholarships"],["🏆","£17k+","Top Award"],["🌐",`${totalCountries}+`,"Countries"],["🎁","Free","Always"]].map(([icon,val,label],i)=>(
+                <div key={label} style={{textAlign:"center",padding:".75rem 1.25rem",borderRight:"1px solid rgba(255,255,255,.2)"}}>
+                  <div style={{fontSize:"1.25rem",marginBottom:".25rem"}}>{icon}</div>
+                  <strong style={{display:"block",fontSize:"1.25rem",fontWeight:800,color:"#fff"}}>{val}</strong>
+                  <span style={{fontSize:"10px",color:"rgba(255,255,255,.65)",textTransform:"uppercase",letterSpacing:".06em"}}>{label}</span>
                 </div>
               ))}
             </div>
