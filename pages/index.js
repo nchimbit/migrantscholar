@@ -161,6 +161,72 @@ export default function Home({ posts, totalCountries }) {
 
       <div style={{maxWidth:"1080px",margin:"0 auto",padding:"2rem"}}>
 
+        {/* AI SCHOLARSHIP SUGGESTIONS */}
+        <div style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"12px",padding:"1.5rem",marginBottom:"2rem"}}>
+          <div style={{display:"flex",alignItems:"center",gap:"1rem",marginBottom:"1rem",flexWrap:"wrap"}}>
+            <div style={{flex:1}}>
+              <div style={{display:"flex",alignItems:"center",gap:".5rem",marginBottom:".25rem"}}>
+                <h3 style={{fontSize:"1rem",fontWeight:800,color:"#0A2A2A"}}>AI Scholarship Suggestions</h3>
+                <span style={{fontSize:"10px",background:"#E6F4F1",color:"#0D6E6E",padding:"2px 8px",borderRadius:"4px",fontWeight:700}}>BETA</span>
+              </div>
+              <p style={{fontSize:"12px",color:"#6b7280"}}>Get personalized scholarship recommendations powered by AI based on your profile.</p>
+            </div>
+          </div>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 1fr auto",gap:".75rem",alignItems:"end",marginBottom:"1rem"}}>
+            <div>
+              <label style={{display:"block",fontSize:"10px",fontWeight:600,color:"#6b7280",marginBottom:".25rem"}}>I am a</label>
+              <select style={{width:"100%",border:"1.5px solid #e2f0f0",borderRadius:"6px",padding:"8px 10px",fontSize:"12px",color:"#0A2A2A",background:"#fff",outline:"none"}}>
+                <option>Select status</option>
+                <option>Refugee</option>
+                <option>Asylum Seeker</option>
+                <option>Migrant</option>
+                <option>International Student</option>
+              </select>
+            </div>
+            <div>
+              <label style={{display:"block",fontSize:"10px",fontWeight:600,color:"#6b7280",marginBottom:".25rem"}}>I want to study</label>
+              <select style={{width:"100%",border:"1.5px solid #e2f0f0",borderRadius:"6px",padding:"8px 10px",fontSize:"12px",color:"#0A2A2A",background:"#fff",outline:"none"}}>
+                <option>Select level</option>
+                <option>Bachelor's</option>
+                <option>Master's</option>
+                <option>PhD</option>
+                <option>Postdoctoral</option>
+              </select>
+            </div>
+            <div>
+              <label style={{display:"block",fontSize:"10px",fontWeight:600,color:"#6b7280",marginBottom:".25rem"}}>My field of interest</label>
+              <select style={{width:"100%",border:"1.5px solid #e2f0f0",borderRadius:"6px",padding:"8px 10px",fontSize:"12px",color:"#0A2A2A",background:"#fff",outline:"none"}}>
+                <option>Select field</option>
+                <option>Engineering</option>
+                <option>Medicine</option>
+                <option>Business</option>
+                <option>Arts & Humanities</option>
+                <option>Sciences</option>
+                <option>Law</option>
+              </select>
+            </div>
+            <div>
+              <label style={{display:"block",fontSize:"10px",fontWeight:600,color:"#6b7280",marginBottom:".25rem"}}>My nationality</label>
+              <select style={{width:"100%",border:"1.5px solid #e2f0f0",borderRadius:"6px",padding:"8px 10px",fontSize:"12px",color:"#0A2A2A",background:"#fff",outline:"none"}}>
+                <option>Select nationality</option>
+                <option>Any country</option>
+                <option>African</option>
+                <option>Asian</option>
+                <option>Middle Eastern</option>
+                <option>European</option>
+              </select>
+            </div>
+            <button style={{background:"#0D6E6E",color:"#fff",border:"none",borderRadius:"6px",padding:"9px 16px",fontSize:"12px",fontWeight:700,cursor:"pointer",whiteSpace:"nowrap"}}>✨ Get AI Suggestions</button>
+          </div>
+          <div style={{display:"flex",gap:"1.5rem",flexWrap:"wrap"}}>
+            {[["🎯","Personalized Matches"],["⚡","Saves Time"],["🔓","100% Free"],["🔒","Privacy Protected"]].map(([icon,label])=>(
+              <div key={label} style={{display:"flex",alignItems:"center",gap:".35rem",fontSize:"11px",color:"#6b7280"}}>
+                <span style={{color:"#0D6E6E"}}>{icon}</span>{label}
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* COUNTRIES */}
         <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"1.25rem"}}>
           <div>
