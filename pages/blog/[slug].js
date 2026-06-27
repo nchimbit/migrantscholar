@@ -97,8 +97,9 @@ export default function BlogPost({ post, related }) {
       <Navbar />
 
       {/* Hero strip */}
-      <div style={{background:c.bg,padding:"1.75rem 2rem"}}>
+      <div style={{background:"#E6F4F1",padding:"1.5rem 2rem 0"}}>
         <div style={{maxWidth:"1080px",margin:"0 auto"}}>
+        <div style={{background:c.bg,borderRadius:"14px",padding:"1.75rem 2rem"}}>
           <div style={{fontSize:"11px",color:"rgba(255,255,255,.7)",marginBottom:".75rem"}}>
             <Link href="/" style={{color:"rgba(255,255,255,.85)",textDecoration:"none"}}>Home</Link> ›{" "}
             <Link href="/blog" style={{color:"rgba(255,255,255,.85)",textDecoration:"none"}}>Scholarships</Link> › {post.country}
