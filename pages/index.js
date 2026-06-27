@@ -146,7 +146,7 @@ export default function Home({ posts, totalCountries }) {
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 1fr 1fr auto",gap:".75rem",alignItems:"end",flexWrap:"wrap"}}>
             <div>
               <label style={{display:"block",fontSize:"10px",fontWeight:600,color:"#6b7280",marginBottom:".25rem",textTransform:"uppercase"}}>Country</label>
-              <select value={filterCountry} onChange={e=>setFilterCountry(e.target.value)} style={{width:"100%",border:"1.5px solid #e2f0f0",borderRadius:"6px",padding:"8px 10px",fontSize:"12px",color:"#0A2A2A",background:"#fff",outline:"none"}}>
+              <select value={filterCountry} onChange={e=>{setFilterCountry(e.target.value);setVisible(6);}} style={{width:"100%",border:"1.5px solid #e2f0f0",borderRadius:"6px",padding:"8px 10px",fontSize:"12px",color:"#0A2A2A",background:"#fff",outline:"none"}}>
                 <option>All Countries</option>
                 {["UK","Germany","Canada","Australia","USA","Turkey"].map(c=><option key={c}>{c}</option>)}
               </select>
@@ -312,10 +312,10 @@ export default function Home({ posts, totalCountries }) {
               </div>
               <ul style={{listStyle:"none",padding:0,marginBottom:".75rem"}}>
                 {items.map(item=>(
-                  <li key={item} style={{fontSize:"12px",color:"#374151",padding:".3rem 0",borderBottom:"1px solid #f6f9f8",cursor:"pointer"}} onClick={()=>setSearch(item)}>• {item}</li>
+                  <li key={item} style={{fontSize:"12px",color:"#374151",padding:".3rem 0",borderBottom:"1px solid #f6f9f8",cursor:"pointer"}} onClick={()=>{setSearch(item);setVisible(6);document.getElementById("results").scrollIntoView({behavior:"smooth"});}}>• {item}</li>
                 ))}
               </ul>
-              <button onClick={()=>setSearch("")} style={{fontSize:"11px",color:"#0D6E6E",fontWeight:600,background:"none",border:"none",cursor:"pointer",padding:0}}>{cta} →</button>
+              <button onClick={()=>{setSearch("");setVisible(6);document.getElementById("results").scrollIntoView({behavior:"smooth"});}} style={{fontSize:"11px",color:"#0D6E6E",fontWeight:600,background:"none",border:"none",cursor:"pointer",padding:0}}>{cta} →</button>
             </div>
           ))}
         </div>
@@ -329,12 +329,12 @@ export default function Home({ posts, totalCountries }) {
             <div key={title} style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",padding:"1.25rem"}}>
               <h3 style={{fontSize:".85rem",fontWeight:700,color:"#0A2A2A",marginBottom:".875rem"}}>{title}</h3>
               {items.map(([name,meta])=>(
-                <div key={name} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:".4rem 0",borderBottom:"1px solid #f6f9f8",fontSize:"11px"}}>
-                  <span style={{color:"#374151"}}>{name}</span>
+                <div key={name} onClick={()=>{setSearch(name.replace(" 2026","").replace(" Scholarships","").replace(" Program",""));setVisible(6);document.getElementById("results").scrollIntoView({behavior:"smooth"});}} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:".4rem 0",borderBottom:"1px solid #f6f9f8",fontSize:"11px",cursor:"pointer"}}>
+                  <span style={{color:"#0D6E6E",textDecoration:"underline"}}>{name}</span>
                   <span style={{color:"#DC2626",fontWeight:600,flexShrink:0,marginLeft:".5rem"}}>{meta}</span>
                 </div>
               ))}
-              <button style={{fontSize:"11px",color:"#0D6E6E",fontWeight:600,background:"none",border:"none",cursor:"pointer",padding:"0.5rem 0 0",display:"block"}}>View all →</button>
+              <button onClick={()=>{document.getElementById("results").scrollIntoView({behavior:"smooth"});}} style={{fontSize:"11px",color:"#0D6E6E",fontWeight:600,background:"none",border:"none",cursor:"pointer",padding:"0.5rem 0 0",display:"block"}}>View all →</button>
             </div>
           ))}
 
