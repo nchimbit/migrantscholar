@@ -73,7 +73,16 @@ export default function Home({ posts, totalCountries }) {
       <div style={{background:"#F4F7F6",padding:"1.5rem 2rem 0"}}>
         <div style={{maxWidth:"1080px",margin:"0 auto"}}>
         <div style={{background:"linear-gradient(135deg,#0A2A2A 0%,#0D6E6E 100%)",borderRadius:"14px",padding:"2.5rem 2rem",position:"relative",overflow:"hidden"}}>
-        <div style={{position:"absolute",top:0,right:0,bottom:0,left:0,backgroundImage:"url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5ce?w=1200&q=40')",backgroundSize:"cover",backgroundPosition:"center",opacity:.08,borderRadius:"14px"}}></div>
+        <div style={{position:"absolute",top:0,right:0,bottom:0,left:0,opacity:.15,borderRadius:"14px",overflow:"hidden"}}>
+          <svg viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg" style={{width:"100%",height:"100%"}}>
+            {/* World map dots pattern */}
+            {[...Array(40)].map((_,i)=>[...Array(80)].map((_,j)=>(
+              <circle key={`${i}-${j}`} cx={j*15+7} cy={i*10+5} r="1.2" fill="#fff" opacity={Math.random()>0.65?"0.8":"0"} />
+            )))}
+          </svg>
+        </div>
+        {/* Airplane */}
+        <div style={{position:"absolute",top:"1.5rem",right:"2rem",fontSize:"2rem",opacity:.4,transform:"rotate(45deg)"}}>✈</div>
         <div style={{position:"relative"}}>
           <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:"2rem",flexWrap:"wrap"}}>
             <div style={{flex:1,minWidth:"300px"}}>
