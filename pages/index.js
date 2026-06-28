@@ -123,12 +123,12 @@ export default function Home({ posts, totalCountries }) {
                 <Link href="/alerts" style={{background:"rgba(255,255,255,.15)",color:"#fff",border:"1.5px solid rgba(255,255,255,.4)",padding:"10px 22px",borderRadius:"6px",fontSize:"13px",fontWeight:600,textDecoration:"none"}}>Get Free Alerts</Link>
               </div>
             </div>
-            <div style={{display:"flex",gap:"0",flexShrink:0,borderLeft:"1px solid rgba(255,255,255,.2)",marginLeft:"1rem"}}>
-              {[["🏛","70+","Universities"],["🎓",`${posts.length}+`,"Scholarships"],["🏆","£17k+","Top Award"],["🌐",`${totalCountries}+`,"Countries"],["🎁","Free","Always"]].map(([icon,val,label],i)=>(
-                <div key={label} style={{textAlign:"center",padding:".75rem 1.25rem",borderRight:"1px solid rgba(255,255,255,.2)"}}>
-                  <div style={{fontSize:"1.25rem",marginBottom:".25rem"}}>{icon}</div>
-                  <strong style={{display:"block",fontSize:"1.25rem",fontWeight:800,color:"#fff"}}>{val}</strong>
-                  <span style={{fontSize:"10px",color:"rgba(255,255,255,.65)",textTransform:"uppercase",letterSpacing:".06em"}}>{label}</span>
+            <div style={{display:"flex",flexWrap:"wrap",gap:".5rem",marginTop:"1rem"}}>
+              {[["🏛","70+","Universities"],["🎓",`${posts.length}+`,"Scholarships"],["🏆","£17k+","Top Award"],["🌐",`${totalCountries}+`,"Countries"],["🎁","Free","Always"]].map(([icon,val,label])=>(
+                <div key={label} style={{textAlign:"center",background:"rgba(255,255,255,.1)",border:"1px solid rgba(255,255,255,.2)",borderRadius:"8px",padding:".5rem .75rem",flex:"1 1 80px"}}>
+                  <div style={{fontSize:"1rem",marginBottom:".15rem"}}>{icon}</div>
+                  <strong style={{display:"block",fontSize:"1rem",fontWeight:800,color:"#fff"}}>{val}</strong>
+                  <span style={{fontSize:"9px",color:"rgba(255,255,255,.65)",textTransform:"uppercase",letterSpacing:".05em"}}>{label}</span>
                 </div>
               ))}
             </div>
@@ -143,7 +143,7 @@ export default function Home({ posts, totalCountries }) {
         <div style={{maxWidth:"1080px",margin:"0 auto"}}>
         <div style={{background:"#fff",boxShadow:"0 4px 20px rgba(0,0,0,.08)",borderRadius:"0 0 14px 14px",padding:"1.5rem 2rem"}}>
           <h2 style={{fontSize:".9rem",fontWeight:700,color:"#0A2A2A",marginBottom:"1rem"}}>Find Scholarships</h2>
-          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 1fr 1fr auto",gap:".75rem",alignItems:"end",flexWrap:"wrap"}}>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(140px,1fr))",gap:".75rem",alignItems:"end"}}>
             <div>
               <label style={{display:"block",fontSize:"10px",fontWeight:600,color:"#6b7280",marginBottom:".25rem",textTransform:"uppercase"}}>Country</label>
               <select value={filterCountry} onChange={e=>{setFilterCountry(e.target.value);setVisible(6);}} style={{width:"100%",border:"1.5px solid #e2f0f0",borderRadius:"6px",padding:"8px 10px",fontSize:"12px",color:"#0A2A2A",background:"#fff",outline:"none"}}>
@@ -281,7 +281,7 @@ export default function Home({ posts, totalCountries }) {
           </div>
           <Link href="/blog" style={{fontSize:"12px",color:"#0D6E6E",fontWeight:600,textDecoration:"none"}}>View all countries →</Link>
         </div>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(6,1fr)",gap:"1rem",marginBottom:"2.5rem"}}>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(140px,1fr))",gap:"1rem",marginBottom:"2.5rem"}}>
           {countries.map(([flag,name,desc,code])=>(
             <Link key={code} href={`/countries/${code}`} style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",overflow:"hidden",textDecoration:"none",display:"block"}}>
               <div style={{height:"80px",backgroundImage:`url(${countryPhotos[code]})`,backgroundSize:"cover",backgroundPosition:"center",position:"relative"}}>
@@ -298,7 +298,7 @@ export default function Home({ posts, totalCountries }) {
         </div>
 
         {/* BROWSE PANELS */}
-        <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:"1rem",marginBottom:"2.5rem"}}>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(200px,1fr))",gap:"1rem",marginBottom:"2.5rem"}}>
           {[
             ["🎓","Popular Scholarships",["DAAD Scholarships","Chevening Scholarships","Fulbright Scholarships","Vanier Canada Scholarships","Türkiye Scholarships"],"View all scholarships"],
             ["📚","Browse by Study Level",["Bachelor's","Master's","PhD","Postdoctoral","Diploma","Exchange Programs"],"View all levels"],
@@ -321,7 +321,7 @@ export default function Home({ posts, totalCountries }) {
         </div>
 
         {/* STATS ROW */}
-        <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:"1rem",marginBottom:"2.5rem"}}>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(200px,1fr))",gap:"1rem",marginBottom:"2.5rem"}}>
           {[
             ["Upcoming Deadlines", [["DAAD Scholarships","31 Aug 2026"],["Chevening Scholarships","05 Nov 2026"],["Fulbright Program","15 Oct 2026"],["Australia Awards","30 Apr 2026"],["Vanier Scholarships","01 Nov 2026"]]],
             ["Trending Scholarships", trending.map(([name,country])=>[name,country])],
@@ -379,7 +379,7 @@ export default function Home({ posts, totalCountries }) {
             <button onClick={()=>{setSearch("");setFilterCountry("All Countries");setFilterLevel("All Levels");setFilterFunding("All Types");}} style={{marginLeft:"1rem",fontSize:"11px",color:"#6b7280",background:"none",border:"none",cursor:"pointer",textDecoration:"underline"}}>Clear filters</button>
           </div>
         )}
-        <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"1rem",marginBottom:"1.5rem"}}>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:"1rem",marginBottom:"1.5rem"}}>
           {showing.map(post=>{
             const c = countryColors[post.country]||{bg:"#0D6E6E"};
             return (
@@ -433,7 +433,7 @@ export default function Home({ posts, totalCountries }) {
         </div>
 
         {/* WHY CHOOSE US + SUCCESS STORIES */}
-        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"1.5rem",marginBottom:"2.5rem"}}>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(260px,1fr))",gap:"1.5rem",marginBottom:"2.5rem"}}>
           <div style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",padding:"1.5rem"}}>
             <h3 style={{fontSize:".95rem",fontWeight:800,color:"#0A2A2A",marginBottom:"1rem"}}>Why Choose Us?</h3>
             {["100% Verified Opportunities","Updated Daily","Official Sources Only","No Registration Required","Free & Accessible for Everyone"].map(item=>(
@@ -476,7 +476,7 @@ export default function Home({ posts, totalCountries }) {
             <h2 style={{fontSize:"1.4rem",fontWeight:800,color:"#0D6E6E"}}>Frequently Asked Questions</h2>
             <Link href="/blog" style={{fontSize:"12px",color:"#0D6E6E",fontWeight:600,textDecoration:"none"}}>View all FAQs →</Link>
           </div>
-          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:".75rem"}}>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:".75rem"}}>
             {faqs.map(([q,a],i)=>(
               <div key={i} style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",overflow:"hidden"}}>
                 <button onClick={()=>setOpenFaq(openFaq===i?null:i)} style={{width:"100%",textAlign:"left",padding:"1rem 1.25rem",background:"none",border:"none",cursor:"pointer",display:"flex",justifyContent:"space-between",alignItems:"center",gap:"1rem"}}>

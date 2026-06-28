@@ -66,7 +66,7 @@ export default function BlogIndex({ posts, countries }) {
         {showing.length === 0 ? (
           <div style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",padding:"3rem",textAlign:"center",color:"#9ca3af",fontSize:"13px"}}>No posts found. Try a different keyword.</div>
         ) : (
-          <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"1rem",marginBottom:"1.5rem"}}>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:"1rem",marginBottom:"1.5rem"}}>
             {showing.map(post=>{
               const c = countryColors[post.country] || {bg:"#0D6E6E"};
               return (
