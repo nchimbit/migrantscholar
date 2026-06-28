@@ -51,7 +51,7 @@ export default function CountryPage({ country, posts }) {
           <h2 style={{fontSize:"1.4rem",fontWeight:800,color:"#0D6E6E"}}>All {country} Scholarship Guides</h2>
         </div>
 
-        <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"1rem",marginBottom:"2rem"}}>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(260px,1fr))",gap:"1rem",marginBottom:"2rem"}}>
           {posts.map(post=>(
             <Link key={post.slug} href={`/blog/${post.slug}`} style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",overflow:"hidden",textDecoration:"none",display:"block",color:"inherit"}}>
               <div style={{background:"#E6F4F1",padding:".75rem 1rem",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
