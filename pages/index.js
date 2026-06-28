@@ -201,7 +201,7 @@ export default function Home({ posts, totalCountries }) {
               <p style={{fontSize:"12px",color:"#6b7280"}}>Get personalized scholarship recommendations powered by AI based on your profile.</p>
             </div>
           </div>
-          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 1fr auto",gap:".75rem",alignItems:"end",marginBottom:"1rem"}}>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(130px,1fr))",gap:".75rem",alignItems:"end",marginBottom:"1rem"}}>
             <div>
               <label style={{display:"block",fontSize:"10px",fontWeight:600,color:"#6b7280",marginBottom:".25rem"}}>I am a</label>
               <select value={aiStatus} onChange={e=>setAiStatus(e.target.value)} style={{width:"100%",border:"1.5px solid #e2f0f0",borderRadius:"6px",padding:"8px 10px",fontSize:"12px",color:"#0A2A2A",background:"#fff",outline:"none"}}>
@@ -257,7 +257,7 @@ export default function Home({ posts, totalCountries }) {
           {aiResults.length > 0 && (
             <div style={{marginTop:"1rem",borderTop:"1px solid #e2f0f0",paddingTop:"1rem"}}>
               <p style={{fontSize:"12px",fontWeight:600,color:"#0A2A2A",marginBottom:".75rem"}}>✨ AI found {aiResults.length} matching scholarships for you:</p>
-              <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:".75rem"}}>
+              <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(200px,1fr))",gap:".75rem"}}>
                 {aiResults.map(post=>(
                   <Link key={post.slug} href={`/blog/${post.slug}`} style={{background:"#E6F4F1",border:"1.5px solid #A7D4CC",borderRadius:"8px",padding:".875rem",textDecoration:"none",display:"block"}}>
                     <span style={{fontSize:"10px",fontWeight:700,color:"#0D6E6E",textTransform:"uppercase"}}>{post.country}</span>
@@ -414,7 +414,7 @@ export default function Home({ posts, totalCountries }) {
             <h2 style={{fontSize:"1.1rem",fontWeight:800,color:"#0A2A2A"}}>Latest Guides & Resources</h2>
             <Link href="/blog" style={{fontSize:"12px",color:"#0D6E6E",fontWeight:600,textDecoration:"none"}}>View all guides →</Link>
           </div>
-          <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:"1rem"}}>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(200px,1fr))",gap:"1rem"}}>
             {[
               ["https://images.unsplash.com/photo-1455390582262-044cdead277a?w=200&q=70","How to Write a Winning Motivation Letter","A complete guide with examples and tips."],
               ["https://images.unsplash.com/photo-1569982175971-d92b01cf8694?w=200&q=70","Student Visa Guide by Country","Step-by-step visa application guides for international students."],
