@@ -116,6 +116,7 @@ export default function BlogPost({ post, related }) {
             <span>✓ Verified {formatDate(post.date)}</span>
           </div>
         </div>
+        </div>
       </div>
 
       <div style={{maxWidth:"1080px",margin:"0 auto",padding:"2rem"}}>
