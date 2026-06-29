@@ -118,9 +118,9 @@ export default function Home({ posts, totalCountries }) {
               <div style={{display:"inline-block",background:"#F5A623",color:"#0A2A2A",fontSize:"11px",fontWeight:700,padding:"4px 12px",borderRadius:"4px",marginBottom:"1rem",textTransform:"uppercase",letterSpacing:".08em"}}>Updated Daily · 2026</div>
               <h1 style={{fontSize:"2.5rem",fontWeight:900,color:"#fff",lineHeight:1.15,marginBottom:".75rem",letterSpacing:"-0.02em"}}>Find Your <em style={{fontStyle:"normal",color:"#F5A623"}}>Scholarship</em><br/>As A Migrant!</h1>
               <p style={{fontSize:"14px",color:"rgba(255,255,255,.8)",marginBottom:"1.5rem",lineHeight:1.65,maxWidth:"420px"}}>Verified fully funded awards open to refugees, asylum seekers, and forced migrants. Free to use, updated every single day.</p>
-              <div style={{display:"flex",gap:".75rem",flexWrap:"wrap"}}>
-                <Link href="/blog" style={{background:"#F5A623",color:"#0A2A2A",padding:"10px 22px",borderRadius:"6px",fontSize:"13px",fontWeight:700,textDecoration:"none"}}>Browse Scholarships</Link>
-                <Link href="/alerts" style={{background:"rgba(255,255,255,.15)",color:"#fff",border:"1.5px solid rgba(255,255,255,.4)",padding:"10px 22px",borderRadius:"6px",fontSize:"13px",fontWeight:600,textDecoration:"none"}}>Get Free Alerts</Link>
+              <div style={{display:"flex",gap:".5rem",flexWrap:"wrap"}}>
+                <Link href="/blog" style={{background:"#F5A623",color:"#0A2A2A",padding:"8px 14px",borderRadius:"6px",fontSize:"12px",fontWeight:700,textDecoration:"none",flex:"1",textAlign:"center"}}>Browse Scholarships</Link>
+                <Link href="/alerts" style={{background:"rgba(255,255,255,.15)",color:"#fff",border:"1.5px solid rgba(255,255,255,.4)",padding:"8px 14px",borderRadius:"6px",fontSize:"12px",fontWeight:600,textDecoration:"none",flex:"1",textAlign:"center"}}>Get Free Alerts</Link>
               </div>
             </div>
             <div style={{display:"flex",flexWrap:"wrap",gap:".5rem",marginTop:"1rem"}}>
@@ -284,9 +284,8 @@ export default function Home({ posts, totalCountries }) {
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(140px,1fr))",gap:"1rem",marginBottom:"2.5rem"}}>
           {countries.map(([flag,name,desc,code])=>(
             <Link key={code} href={`/countries/${code}`} style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",overflow:"hidden",textDecoration:"none",display:"block"}}>
-              <div style={{height:"90px",background:countryColors[code]?.bg || "#0D6E6E",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",position:"relative"}}>
-                <span style={{fontSize:"2.5rem"}}>{flag}</span>
-                <div style={{position:"absolute",bottom:0,left:0,right:0,height:"30px",background:"linear-gradient(transparent,rgba(0,0,0,.3))"}}></div>
+              <div style={{height:"90px",background:`linear-gradient(135deg,${countryColors[code]?.bg || "#0D6E6E"} 0%,#0A2A2A 100%)`,display:"flex",alignItems:"center",justifyContent:"center",position:"relative"}}>
+                <span style={{fontSize:"3rem",filter:"drop-shadow(0 2px 4px rgba(0,0,0,.3))"}}>{flag}</span>
               </div>
               <div style={{padding:".75rem"}}>
                 <strong style={{display:"block",fontSize:".75rem",fontWeight:700,color:"#0A2A2A",marginBottom:".2rem"}}>{name}</strong>
