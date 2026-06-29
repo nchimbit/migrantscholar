@@ -10,12 +10,12 @@ const countryColors = {
 };
 
 const countryPhotos = {
-  UK:"https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=400&q=80",
-  Germany:"https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=400&q=80",
-  Canada:"https://images.unsplash.com/photo-1560814304-4f05b62af116?w=400&q=80",
-  Australia:"https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=400&q=80",
-  USA:"https://images.unsplash.com/photo-1485738422979-f5c462d49f74?w=400&q=80",
-  Turkey:"https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=400&q=80",
+  UK:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Big_Ben_-_March_2008.jpg/320px-Big_Ben_-_March_2008.jpg",
+  Germany:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Brandenburger_Tor_abends.jpg/320px-Brandenburger_Tor_abends.jpg",
+  Canada:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Toronto_-_ON_-_Toronto_Skyline2.jpg/320px-Toronto_-_ON_-_Toronto_Skyline2.jpg",
+  Australia:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Sydney_Australia._(21339175489).jpg/320px-Sydney_Australia._(21339175489).jpg",
+  USA:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/24701-nature-natural-beauty.jpg/320px-24701-nature-natural-beauty.jpg",
+  Turkey:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Blue_Mosque_2.jpg/320px-Blue_Mosque_2.jpg",
 };
 
 const countries = [
