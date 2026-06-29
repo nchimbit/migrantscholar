@@ -284,9 +284,9 @@ export default function Home({ posts, totalCountries }) {
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(140px,1fr))",gap:"1rem",marginBottom:"2.5rem"}}>
           {countries.map(([flag,name,desc,code])=>(
             <Link key={code} href={`/countries/${code}`} style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",overflow:"hidden",textDecoration:"none",display:"block"}}>
-              <div style={{height:"80px",backgroundImage:`url(${countryPhotos[code]})`,backgroundSize:"cover",backgroundPosition:"center",position:"relative"}}>
-                <div style={{position:"absolute",inset:0,background:"rgba(0,0,0,.3)"}}></div>
-                <span style={{position:"absolute",bottom:"6px",left:"8px",fontSize:"1.25rem"}}>{flag}</span>
+              <div style={{height:"90px",background:countryColors[code]?.bg || "#0D6E6E",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",position:"relative"}}>
+                <span style={{fontSize:"2.5rem"}}>{flag}</span>
+                <div style={{position:"absolute",bottom:0,left:0,right:0,height:"30px",background:"linear-gradient(transparent,rgba(0,0,0,.3))"}}></div>
               </div>
               <div style={{padding:".75rem"}}>
                 <strong style={{display:"block",fontSize:".75rem",fontWeight:700,color:"#0A2A2A",marginBottom:".2rem"}}>{name}</strong>
