@@ -139,9 +139,9 @@ export default function Home({ posts, totalCountries }) {
       </div>
 
       {/* SEARCH BAR */}
-      <div style={{background:"#F4F7F6",padding:"0 2rem"}}>
+      <div style={{background:"#E6F4F1",padding:"0 1rem 1rem"}}>
         <div style={{maxWidth:"1080px",margin:"0 auto"}}>
-        <div style={{background:"#fff",boxShadow:"0 4px 20px rgba(0,0,0,.08)",borderRadius:"0 0 14px 14px",padding:"1.5rem 2rem"}}>
+        <div style={{background:"#fff",boxShadow:"0 4px 20px rgba(0,0,0,.08)",borderRadius:"12px",padding:"1.25rem"}}>
           <h2 style={{fontSize:".9rem",fontWeight:700,color:"#0A2A2A",marginBottom:"1rem"}}>Find Scholarships</h2>
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(140px,1fr))",gap:".75rem",alignItems:"end"}}>
             <div>
