@@ -4,6 +4,11 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <style>{`
+          html, body { overflow-x: hidden; width: 100%; max-width: 100vw; }
+          * { box-sizing: border-box; }
+        `}</style>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-0HNFZG2T3C"></script>
         <script dangerouslySetInnerHTML={{__html:`
           window.dataLayer = window.dataLayer || [];
