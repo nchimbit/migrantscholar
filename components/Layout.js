@@ -15,76 +15,110 @@ const LogoMark = ({size=36}) => (
 );
 
 export function Navbar() {
-  const [scholOpen, setScholOpen] = useState(false);
-  const [countryOpen, setCountryOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [scholOpen, setScholOpen] = React.useState(false);
+  const [countryOpen, setCountryOpen] = React.useState(false);
 
-  const dropStyle = {position:"absolute",top:"calc(100% + 4px)",left:0,background:"#fff",border:"0.5px solid #A7D4CC",borderRadius:"10px",minWidth:"200px",padding:".4rem",boxShadow:"0 8px 24px rgba(13,110,110,.1)",zIndex:200};
-  const dropItem = {display:"block",padding:".5rem .75rem",borderRadius:"6px",fontSize:"12px",color:"#374151",textDecoration:"none",cursor:"pointer"};
+  const countries = [["🇬🇧 UK","UK"],["🇩🇪 Germany","Germany"],["🇨🇦 Canada","Canada"],["🇦🇺 Australia","Australia"],["🇺🇸 USA","USA"],["🇹🇷 Turkey","Turkey"]];
+  const schols = [["Fully Funded",""],["Partially Funded",""],["Undergraduate",""],["Master's",""],["PhD",""],["Latest",""]];
+
+  const navStyle = {position:"sticky",top:0,zIndex:1000,background:"#fff",borderBottom:"1px solid #e2f0f0",boxShadow:"0 1px 4px rgba(0,0,0,.06)"};
+  const linkStyle = {color:"#374151",textDecoration:"none",fontSize:"13px",fontWeight:500};
+  const dropItem = {display:"block",padding:".5rem 1rem",fontSize:"12px",color:"#374151",textDecoration:"none",borderBottom:"1px solid #f6f9f8"};
 
   return (
-    <nav style={{background:"#fff",borderBottom:"0.5px solid #A7D4CC",padding:"0 2rem",display:"flex",alignItems:"center",justifyContent:"space-between",height:"56px",position:"sticky",top:0,zIndex:100}}>
-      <Link href="/" style={{display:"flex",alignItems:"center",gap:"8px",textDecoration:"none"}}>
-        <LogoMark size={36}/>
-        <div style={{display:"flex",flexDirection:"column",lineHeight:1.1}}>
-          <div style={{fontSize:".95rem",fontWeight:800,color:"#0A2A2A",letterSpacing:"-0.02em"}}>Migrant<span style={{color:"#0D6E6E"}}>Scholar</span></div>
-          <div style={{fontSize:"9px",color:"#A7D4CC",fontWeight:500,letterSpacing:".04em",textTransform:"uppercase"}}>Find Your Scholarship</div>
-        </div>
-      </Link>
-
-      <div style={{display:"flex",alignItems:"center",gap:".25rem"}}>
-        <Link href="/" style={{padding:".5rem .75rem",fontSize:"13px",color:"#374151",textDecoration:"none",fontWeight:500}}>Home</Link>
-
-        {/* Scholarships */}
-        <div style={{position:"relative"}} onMouseEnter={()=>setScholOpen(true)} onMouseLeave={()=>setScholOpen(false)}>
-          <div style={{display:"flex",alignItems:"center",gap:"4px",padding:".5rem .75rem",fontSize:"13px",color:"#374151",cursor:"pointer",fontWeight:500}}>
-            Scholarships
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#A7D4CC" strokeWidth="2" strokeLinecap="round" style={{transform:scholOpen?"rotate(180deg)":"none",transition:"transform .2s"}}><polyline points="6 9 12 15 18 9"/></svg>
+    <nav style={navStyle}>
+      {/* Main bar */}
+      <div style={{maxWidth:"1080px",margin:"0 auto",padding:"0 1rem",display:"flex",alignItems:"center",justifyContent:"space-between",height:"56px"}}>
+        
+        {/* Logo */}
+        <Link href="/" style={{display:"flex",alignItems:"center",gap:"8px",textDecoration:"none"}}>
+          <div style={{width:"36px",height:"36px",background:"#0D6E6E",borderRadius:"8px",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"18px",flexShrink:0}}>🌐</div>
+          <div style={{display:"flex",flexDirection:"column"}}>
+            <span style={{fontSize:".9rem",fontWeight:700,color:"#0A2A2A",lineHeight:1}}>MigrantScholar</span>
+            <span style={{fontSize:"8px",color:"#0D6E6E",textTransform:"uppercase",letterSpacing:".05em"}}>Find Your Scholarship</span>
           </div>
-          {scholOpen && (
-            <div style={dropStyle}>
-              {[["⭐ Fully Funded","/blog"],["💰 Partially Funded","/blog"],["🎓 Undergraduate","/blog"],["📚 Master's","/blog"],["🔬 PhD","/blog"]].map(([label,href])=>(
-                <Link key={label} href={href} style={dropItem}
-                  onMouseEnter={e=>{e.currentTarget.style.background="#E6F4F1";e.currentTarget.style.color="#0D6E6E"}}
-                  onMouseLeave={e=>{e.currentTarget.style.background="transparent";e.currentTarget.style.color="#374151"}}
-                >{label}</Link>
-              ))}
-              <div style={{height:"0.5px",background:"#E6F4F1",margin:".3rem .75rem"}}></div>
-              <Link href="/blog" style={{...dropItem,color:"#F5A623",fontWeight:700,fontSize:"11px"}}
-                onMouseEnter={e=>e.currentTarget.style.background="#E6F4F1"}
-                onMouseLeave={e=>e.currentTarget.style.background="transparent"}
-              >Latest Scholarships →</Link>
-            </div>
-          )}
-        </div>
+        </Link>
 
-        {/* Countries */}
-        <div style={{position:"relative"}} onMouseEnter={()=>setCountryOpen(true)} onMouseLeave={()=>setCountryOpen(false)}>
-          <div style={{display:"flex",alignItems:"center",gap:"4px",padding:".5rem .75rem",fontSize:"13px",color:"#374151",cursor:"pointer",fontWeight:500}}>
-            Countries
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#A7D4CC" strokeWidth="2" strokeLinecap="round" style={{transform:countryOpen?"rotate(180deg)":"none",transition:"transform .2s"}}><polyline points="6 9 12 15 18 9"/></svg>
+        {/* Desktop nav */}
+        <div style={{display:"flex",alignItems:"center",gap:"1.5rem",display:"none"}} className="desktop-nav">
+          <Link href="/" style={linkStyle}>Home</Link>
+          <div style={{position:"relative"}}>
+            <button onClick={()=>setScholOpen(!scholOpen)} style={{...linkStyle,background:"none",border:"none",cursor:"pointer",display:"flex",alignItems:"center",gap:"4px"}}>
+              Scholarships <span style={{fontSize:"10px"}}>▾</span>
+            </button>
+            {scholOpen && (
+              <div style={{position:"absolute",top:"100%",left:0,background:"#fff",border:"1px solid #e2f0f0",borderRadius:"8px",boxShadow:"0 4px 20px rgba(0,0,0,.1)",minWidth:"160px",zIndex:100}}>
+                {schols.map(([label])=>(
+                  <Link key={label} href="/blog" style={dropItem}>{label}</Link>
+                ))}
+              </div>
+            )}
           </div>
-          {countryOpen && (
-            <div style={dropStyle}>
-              {[["🇬🇧 UK","UK"],["🇩🇪 Germany","Germany"],["🇨🇦 Canada","Canada"],["🇦🇺 Australia","Australia"],["🇺🇸 USA","USA"],["🇹🇷 Turkey","Turkey"]].map(([label,country])=>(
-                <Link key={country} href={`/countries/${country}`} style={dropItem}
-                  onMouseEnter={e=>{e.currentTarget.style.background="#E6F4F1";e.currentTarget.style.color="#0D6E6E"}}
-                  onMouseLeave={e=>{e.currentTarget.style.background="transparent";e.currentTarget.style.color="#374151"}}
-                >{label}</Link>
-              ))}
-              <div style={{height:"0.5px",background:"#E6F4F1",margin:".3rem .75rem"}}></div>
-              <Link href="/blog" style={{...dropItem,color:"#F5A623",fontWeight:700,fontSize:"11px"}}
-                onMouseEnter={e=>e.currentTarget.style.background="#E6F4F1"}
-                onMouseLeave={e=>e.currentTarget.style.background="transparent"}
-              >View All Countries →</Link>
-            </div>
-          )}
+          <div style={{position:"relative"}}>
+            <button onClick={()=>setCountryOpen(!countryOpen)} style={{...linkStyle,background:"none",border:"none",cursor:"pointer",display:"flex",alignItems:"center",gap:"4px"}}>
+              Countries <span style={{fontSize:"10px"}}>▾</span>
+            </button>
+            {countryOpen && (
+              <div style={{position:"absolute",top:"100%",left:0,background:"#fff",border:"1px solid #e2f0f0",borderRadius:"8px",boxShadow:"0 4px 20px rgba(0,0,0,.1)",minWidth:"160px",zIndex:100}}>
+                {countries.map(([label,code])=>(
+                  <Link key={code} href={`/countries/${code}`} style={dropItem}>{label}</Link>
+                ))}
+              </div>
+            )}
+          </div>
+          <Link href="/blog" style={linkStyle}>Guides</Link>
+          <Link href="/about" style={linkStyle}>About</Link>
         </div>
 
-        <Link href="/blog" style={{padding:".5rem .75rem",fontSize:"13px",color:"#374151",textDecoration:"none",fontWeight:500}}>Guides</Link>
-        <Link href="/about" style={{padding:".5rem .75rem",fontSize:"13px",color:"#374151",textDecoration:"none",fontWeight:500}}>About</Link>
+        {/* Right side */}
+        <div style={{display:"flex",alignItems:"center",gap:".75rem"}}>
+          <Link href="/alerts" style={{background:"#F5A623",color:"#0A2A2A",padding:"8px 16px",borderRadius:"6px",fontSize:"12px",fontWeight:700,textDecoration:"none",whiteSpace:"nowrap"}}>Get Alerts</Link>
+          {/* Hamburger */}
+          <button onClick={()=>setOpen(!open)} style={{background:"none",border:"1px solid #e2f0f0",borderRadius:"6px",padding:"6px 8px",cursor:"pointer",display:"flex",flexDirection:"column",gap:"4px"}}>
+            <span style={{display:"block",width:"18px",height:"2px",background:"#374151",transition:"all .2s",transform:open?"rotate(45deg) translate(4px,4px)":"none"}}></span>
+            <span style={{display:"block",width:"18px",height:"2px",background:"#374151",opacity:open?0:1,transition:"all .2s"}}></span>
+            <span style={{display:"block",width:"18px",height:"2px",background:"#374151",transition:"all .2s",transform:open?"rotate(-45deg) translate(4px,-4px)":"none"}}></span>
+          </button>
+        </div>
       </div>
 
-      <Link href="/#alerts" style={{background:"#F5A623",color:"#0A2A2A",border:"none",padding:"6px 16px",borderRadius:"6px",fontSize:"12px",fontWeight:700,textDecoration:"none"}}>Get Alerts</Link>
+      {/* Mobile menu */}
+      {open && (
+        <div style={{background:"#fff",borderTop:"1px solid #e2f0f0",padding:"1rem",maxHeight:"80vh",overflowY:"auto"}}>
+          <Link href="/" onClick={()=>setOpen(false)} style={{display:"block",padding:".75rem 0",borderBottom:"1px solid #f6f9f8",fontSize:"14px",fontWeight:600,color:"#0A2A2A",textDecoration:"none"}}>Home</Link>
+          
+          <div>
+            <button onClick={()=>setScholOpen(!scholOpen)} style={{width:"100%",textAlign:"left",padding:".75rem 0",borderBottom:"1px solid #f6f9f8",fontSize:"14px",fontWeight:600,color:"#0A2A2A",background:"none",border:"none",borderBottom:"1px solid #f6f9f8",cursor:"pointer",display:"flex",justifyContent:"space-between"}}>
+              Scholarships <span>{scholOpen?"▲":"▼"}</span>
+            </button>
+            {scholOpen && (
+              <div style={{paddingLeft:"1rem",background:"#f9fafb"}}>
+                {schols.map(([label])=>(
+                  <Link key={label} href="/blog" onClick={()=>setOpen(false)} style={{display:"block",padding:".5rem 0",fontSize:"13px",color:"#374151",textDecoration:"none",borderBottom:"1px solid #f0f4f3"}}>{label}</Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div>
+            <button onClick={()=>setCountryOpen(!countryOpen)} style={{width:"100%",textAlign:"left",padding:".75rem 0",fontSize:"14px",fontWeight:600,color:"#0A2A2A",background:"none",border:"none",borderBottom:"1px solid #f6f9f8",cursor:"pointer",display:"flex",justifyContent:"space-between"}}>
+              Countries <span>{countryOpen?"▲":"▼"}</span>
+            </button>
+            {countryOpen && (
+              <div style={{paddingLeft:"1rem",background:"#f9fafb"}}>
+                {countries.map(([label,code])=>(
+                  <Link key={code} href={`/countries/${code}`} onClick={()=>setOpen(false)} style={{display:"block",padding:".5rem 0",fontSize:"13px",color:"#374151",textDecoration:"none",borderBottom:"1px solid #f0f4f3"}}>{label}</Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <Link href="/blog" onClick={()=>setOpen(false)} style={{display:"block",padding:".75rem 0",borderBottom:"1px solid #f6f9f8",fontSize:"14px",fontWeight:600,color:"#0A2A2A",textDecoration:"none"}}>Guides</Link>
+          <Link href="/about" onClick={()=>setOpen(false)} style={{display:"block",padding:".75rem 0",borderBottom:"1px solid #f6f9f8",fontSize:"14px",fontWeight:600,color:"#0A2A2A",textDecoration:"none"}}>About</Link>
+          <Link href="/alerts" onClick={()=>setOpen(false)} style={{display:"block",marginTop:"1rem",background:"#F5A623",color:"#0A2A2A",padding:"10px",borderRadius:"6px",fontSize:"13px",fontWeight:700,textDecoration:"none",textAlign:"center"}}>Get Free Alerts →</Link>
+        </div>
+      )}
     </nav>
   );
 }
