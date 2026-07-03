@@ -313,41 +313,22 @@ export default function Home({ posts, totalCountries, trending }) {
         </div>
 
         {/* STATS ROW */}
-        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(200px,1fr))",gap:"1rem",marginBottom:"2.5rem"}}>
-          {[
-            ["Upcoming Deadlines", [["DAAD Scholarships","31 Aug 2026"],["Chevening Scholarships","05 Nov 2026"],["Fulbright Program","15 Oct 2026"],["Australia Awards","30 Apr 2026"],["Vanier Scholarships","01 Nov 2026"]]],
-            ["Trending Scholarships", trending.map(([name,country])=>[name,country])],
-          ].map(([title, items])=>(
-            <div key={title} style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",padding:"1.25rem"}}>
-              <h3 style={{fontSize:".85rem",fontWeight:700,color:"#0A2A2A",marginBottom:".875rem"}}>{title}</h3>
-              {items.map(([name,meta])=>(
-                <div key={name} onClick={()=>{setSearch(name.replace(" 2026","").replace(" Scholarships","").replace(" Program",""));setVisible(6);document.getElementById("results").scrollIntoView({behavior:"smooth"});}} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:".4rem 0",borderBottom:"1px solid #f6f9f8",fontSize:"11px",cursor:"pointer"}}>
-                  <span style={{color:"#0D6E6E",textDecoration:"underline"}}>{name}</span>
-                  <span style={{color:"#DC2626",fontWeight:600,flexShrink:0,marginLeft:".5rem"}}>{meta}</span>
-                </div>
-              ))}
-              <button onClick={()=>{document.getElementById("results").scrollIntoView({behavior:"smooth"});}} style={{fontSize:"11px",color:"#0D6E6E",fontWeight:600,background:"none",border:"none",cursor:"pointer",padding:"0.5rem 0 0",display:"block"}}>View all →</button>
-            </div>
-          ))}
-
-          {/* Applications Calendar */}
+        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))",gap:"1rem",marginBottom:"2.5rem"}}>
+          {/* Trending - real data */}
           <div style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",padding:"1.25rem"}}>
-            <h3 style={{fontSize:".85rem",fontWeight:700,color:"#0A2A2A",marginBottom:".875rem"}}>Applications Open Calendar</h3>
-            <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:".4rem",marginBottom:".75rem"}}>
-              {[["Jan","32"],["Feb","28"],["Mar","45"],["Apr","61"],["May","38"],["Jun","27"]].map(([m,n])=>(
-                <div key={m} style={{textAlign:"center",background:"#E6F4F1",borderRadius:"6px",padding:".4rem"}}>
-                  <strong style={{display:"block",fontSize:".85rem",color:"#0D6E6E"}}>{n}</strong>
-                  <span style={{fontSize:"9px",color:"#6b7280"}}>{m}</span>
-                </div>
-              ))}
-            </div>
-            <button style={{fontSize:"11px",color:"#0D6E6E",fontWeight:600,background:"none",border:"none",cursor:"pointer",padding:0}}>View full calendar →</button>
+            <h3 style={{fontSize:".85rem",fontWeight:700,color:"#0A2A2A",marginBottom:".875rem"}}>Trending Scholarships</h3>
+            {trending && trending.map(post=>(
+              <Link key={post.slug} href={`/blog/${post.slug}`} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:".4rem 0",borderBottom:"1px solid #f6f9f8",fontSize:"11px",textDecoration:"none"}}>
+                <span style={{color:"#374151",flex:1,marginRight:".5rem"}}>{post.title.slice(0,45)}...</span>
+                <span style={{color:"#0D6E6E",fontWeight:700,flexShrink:0}}>{post.country}</span>
+              </Link>
+            ))}
+            <Link href="/blog" style={{fontSize:"11px",color:"#0D6E6E",fontWeight:600,textDecoration:"none",display:"block",marginTop:".5rem"}}>View all →</Link>
           </div>
-
-          {/* Funding Overview */}
+          {/* Funding Overview - real data */}
           <div style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",padding:"1.25rem"}}>
             <h3 style={{fontSize:".85rem",fontWeight:700,color:"#0A2A2A",marginBottom:".875rem"}}>Funding Overview</h3>
-            {[["£17M+","Total Funding"],["101+","Scholarships"],[`${totalCountries}+`,"Countries"],["400+","Deadlines"]].map(([val,label])=>(
+            {[[`${posts.length}+`,"Scholarships"],[`${totalCountries}+`,"Countries"],["6","Study Levels"],["Daily","New Posts"]].map(([val,label])=>(
               <div key={label} style={{display:"flex",justifyContent:"space-between",padding:".35rem 0",borderBottom:"1px solid #f6f9f8",fontSize:"12px"}}>
                 <span style={{color:"#6b7280"}}>{label}</span>
                 <strong style={{color:"#0D6E6E"}}>{val}</strong>
