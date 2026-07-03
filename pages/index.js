@@ -36,15 +36,7 @@ const faqs = [
   ["Are these scholarships really free?","Yes — MigrantScholar is completely free to use. We never charge for access to scholarship information, and all scholarships listed are free to apply for through the official application pages."],
 ];
 
-const trending = [
-  ["DAAD Scholarships 2026","Germany","↑"],
-  ["Chevening Scholarships 2026","UK","↑"],
-  ["Fulbright Program 2026","USA","↑"],
-  ["Vanier Canada Scholarships 2026","Canada","↑"],
-  ["Türkiye Bursları 2026","Turkey","↑"],
-];
-
-export default function Home({ posts, totalCountries }) {
+export default function Home({ posts, totalCountries, trending }) {
   const [search, setSearch] = useState("");
   const [filterCountry, setFilterCountry] = useState("All Countries");
   const [filterLevel, setFilterLevel] = useState("All Levels");
@@ -514,5 +506,11 @@ export default function Home({ posts, totalCountries }) {
 export async function getStaticProps() {
   const posts = getAllPosts();
   const countries = getAllCountries();
-  return { props: { posts, totalCountries: countries.length }, revalidate: 3600 };
+  // Get trending = most recent post per country
+  const seen = {};
+  const trending = posts.filter(p => {
+    if (!seen[p.country]) { seen[p.country] = true; return true; }
+    return false;
+  }).slice(0, 5);
+  return { props: { posts, totalCountries: countries.length, trending }, revalidate: 3600 };
 }
