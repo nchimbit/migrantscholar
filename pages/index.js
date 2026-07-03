@@ -101,7 +101,7 @@ export default function Home({ posts, totalCountries }) {
       {/* HERO */}
       <div style={{background:"#F4F7F6",padding:"1.5rem 2rem 0"}}>
         <div style={{maxWidth:"1080px",margin:"0 auto"}}>
-        <div style={{background:"linear-gradient(135deg,#0A2A2A 0%,#0D6E6E 100%)",borderRadius:"14px",padding:"2.5rem 2rem",position:"relative",overflow:"hidden"}}>
+        <div style={{background:"linear-gradient(135deg,#0A2A2A 0%,#0D6E6E 100%)",borderRadius:"14px",padding:"1.25rem 1.5rem",position:"relative",overflow:"hidden"}}>
         <div style={{position:"absolute",top:0,right:0,bottom:0,left:0,opacity:.15,borderRadius:"14px",overflow:"hidden"}}>
           <svg viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg" style={{width:"100%",height:"100%"}}>
             {/* World map dots pattern */}
@@ -123,7 +123,7 @@ export default function Home({ posts, totalCountries }) {
                 <Link href="/alerts" style={{background:"rgba(255,255,255,.15)",color:"#fff",border:"1.5px solid rgba(255,255,255,.4)",padding:"8px 14px",borderRadius:"6px",fontSize:"12px",fontWeight:600,textDecoration:"none",flex:"1",textAlign:"center"}}>Get Free Alerts</Link>
               </div>
             </div>
-            <div style={{display:"flex",flexWrap:"wrap",gap:".5rem",marginTop:"1rem"}}>
+            <div style={{display:"flex",flexWrap:"nowrap",gap:".4rem",marginTop:".75rem",overflowX:"auto"}}>
               {[["🏛","70+","Universities"],["🎓",`${posts.length}+`,"Scholarships"],["🏆","£17k+","Top Award"],["🌐",`${totalCountries}+`,"Countries"],["🎁","Free","Always"]].map(([icon,val,label])=>(
                 <div key={label} style={{textAlign:"center",background:"rgba(255,255,255,.1)",border:"1px solid rgba(255,255,255,.2)",borderRadius:"8px",padding:".5rem .75rem",flex:"1 1 80px"}}>
                   <div style={{fontSize:"1rem",marginBottom:".15rem"}}>{icon}</div>
