@@ -101,7 +101,7 @@ export default function Home({ posts, totalCountries }) {
       {/* HERO */}
       <div style={{background:"#F4F7F6",padding:"1.5rem 2rem 0"}}>
         <div style={{maxWidth:"1080px",margin:"0 auto"}}>
-        <div style={{background:"linear-gradient(135deg,#0A2A2A 0%,#0D6E6E 100%)",borderRadius:"14px",padding:".5rem 1rem",position:"relative",overflow:"hidden"}}>
+        <div style={{background:"linear-gradient(135deg,#0A2A2A 0%,#0D6E6E 100%)",borderRadius:"14px",padding:".4rem .75rem",position:"relative",overflow:"hidden"}}>
         <div style={{position:"absolute",top:0,right:0,bottom:0,left:0,opacity:.15,borderRadius:"14px",overflow:"hidden"}}>
           <svg viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg" style={{width:"100%",height:"100%"}}>
             {/* World map dots pattern */}
@@ -116,14 +116,14 @@ export default function Home({ posts, totalCountries }) {
           <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:"2rem",flexWrap:"wrap"}}>
             <div style={{flex:1,minWidth:"300px"}}>
               <div style={{display:"inline-block",background:"#F5A623",color:"#0A2A2A",fontSize:"11px",fontWeight:700,padding:"4px 12px",borderRadius:"4px",marginBottom:"1rem",textTransform:"uppercase",letterSpacing:".08em"}}>Updated Daily · 2026</div>
-              <h1 style={{fontSize:"1.75rem",fontWeight:900,color:"#fff",lineHeight:1.15,marginBottom:".5rem",letterSpacing:"-0.02em"}}>Find Your <em style={{fontStyle:"normal",color:"#F5A623"}}>Scholarship</em><br/>As A Migrant!</h1>
-              <p style={{fontSize:"13px",color:"rgba(255,255,255,.8)",marginBottom:".75rem",lineHeight:1.5,maxWidth:"420px"}}>Verified fully funded awards open to refugees, asylum seekers, and forced migrants. Free to use, updated every single day.</p>
+              <h1 style={{fontSize:"1.4rem",fontWeight:900,color:"#fff",lineHeight:1.1,marginBottom:".35rem",letterSpacing:"-0.02em"}}>Find Your <em style={{fontStyle:"normal",color:"#F5A623"}}>Scholarship</em><br/>As A Migrant!</h1>
+              <p style={{fontSize:"12px",color:"rgba(255,255,255,.8)",marginBottom:".5rem",lineHeight:1.4,maxWidth:"420px"}}>Verified fully funded awards open to refugees, asylum seekers, and forced migrants. Free to use, updated every single day.</p>
               <div style={{display:"flex",gap:".5rem",flexWrap:"wrap"}}>
                 <Link href="/blog" style={{background:"#F5A623",color:"#0A2A2A",padding:"8px 14px",borderRadius:"6px",fontSize:"12px",fontWeight:700,textDecoration:"none",flex:"1",textAlign:"center"}}>Browse Scholarships</Link>
                 <Link href="/alerts" style={{background:"rgba(255,255,255,.15)",color:"#fff",border:"1.5px solid rgba(255,255,255,.4)",padding:"8px 14px",borderRadius:"6px",fontSize:"12px",fontWeight:600,textDecoration:"none",flex:"1",textAlign:"center"}}>Get Free Alerts</Link>
               </div>
             </div>
-            <div style={{display:"flex",flexWrap:"nowrap",gap:".4rem",marginTop:".75rem",overflowX:"auto"}}>
+            <div style={{display:"flex",flexWrap:"nowrap",gap:".3rem",marginTop:".4rem",overflowX:"auto"}}>
               {[["🏛","70+","Universities"],["🎓",`${posts.length}+`,"Scholarships"],["🏆","£17k+","Top Award"],["🌐",`${totalCountries}+`,"Countries"],["🎁","Free","Always"]].map(([icon,val,label])=>(
                 <div key={label} style={{textAlign:"center",background:"rgba(255,255,255,.1)",border:"1px solid rgba(255,255,255,.2)",borderRadius:"8px",padding:".5rem .75rem",flex:"1 1 80px"}}>
                   <div style={{fontSize:"1rem",marginBottom:".15rem"}}>{icon}</div>
