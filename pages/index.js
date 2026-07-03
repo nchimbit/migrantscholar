@@ -101,7 +101,7 @@ export default function Home({ posts, totalCountries }) {
       {/* HERO */}
       <div style={{background:"#F4F7F6",padding:"1.5rem 2rem 0"}}>
         <div style={{maxWidth:"1080px",margin:"0 auto"}}>
-        <div style={{background:"linear-gradient(135deg,#0A2A2A 0%,#0D6E6E 100%)",borderRadius:"14px",padding:"1.25rem 1.5rem",position:"relative",overflow:"hidden"}}>
+        <div style={{background:"linear-gradient(135deg,#0A2A2A 0%,#0D6E6E 100%)",borderRadius:"14px",padding:".75rem 1.25rem",position:"relative",overflow:"hidden"}}>
         <div style={{position:"absolute",top:0,right:0,bottom:0,left:0,opacity:.15,borderRadius:"14px",overflow:"hidden"}}>
           <svg viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg" style={{width:"100%",height:"100%"}}>
             {/* World map dots pattern */}
