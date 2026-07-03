@@ -28,6 +28,16 @@ export function Navbar() {
 
   return (
     <nav style={navStyle}>
+      <style>{`
+        @media (min-width: 768px) {
+          .hamburger-btn { display: none !important; }
+          .desktop-links { display: flex !important; }
+        }
+        @media (max-width: 767px) {
+          .desktop-links { display: none !important; }
+          .hamburger-btn { display: flex !important; }
+        }
+      `}</style>
       {/* Main bar */}
       <div style={{maxWidth:"1080px",margin:"0 auto",padding:"0 1rem",display:"flex",alignItems:"center",justifyContent:"space-between",height:"56px"}}>
         
@@ -41,7 +51,7 @@ export function Navbar() {
         </Link>
 
         {/* Desktop nav */}
-        <div style={{display:"flex",alignItems:"center",gap:"1.5rem",display:"none"}} className="desktop-nav">
+        <div className="desktop-links" style={{alignItems:"center",gap:"1.5rem",display:"none"}}>
           <Link href="/" style={linkStyle}>Home</Link>
           <div style={{position:"relative"}}>
             <button onClick={()=>setScholOpen(!scholOpen)} style={{...linkStyle,background:"none",border:"none",cursor:"pointer",display:"flex",alignItems:"center",gap:"4px"}}>
@@ -75,7 +85,7 @@ export function Navbar() {
         <div style={{display:"flex",alignItems:"center",gap:".75rem"}}>
           <Link href="/alerts" style={{background:"#F5A623",color:"#0A2A2A",padding:"8px 16px",borderRadius:"6px",fontSize:"12px",fontWeight:700,textDecoration:"none",whiteSpace:"nowrap"}}>Get Alerts</Link>
           {/* Hamburger */}
-          <button onClick={()=>setOpen(!open)} style={{background:"none",border:"1px solid #e2f0f0",borderRadius:"6px",padding:"6px 8px",cursor:"pointer",display:"flex",flexDirection:"column",gap:"4px"}}>
+          <button className="hamburger-btn" onClick={()=>setOpen(!open)} style={{background:"none",border:"1px solid #e2f0f0",borderRadius:"6px",padding:"6px 8px",cursor:"pointer",flexDirection:"column",gap:"4px",display:"flex"}}>
             <span style={{display:"block",width:"18px",height:"2px",background:"#374151",transition:"all .2s",transform:open?"rotate(45deg) translate(4px,4px)":"none"}}></span>
             <span style={{display:"block",width:"18px",height:"2px",background:"#374151",opacity:open?0:1,transition:"all .2s"}}></span>
             <span style={{display:"block",width:"18px",height:"2px",background:"#374151",transition:"all .2s",transform:open?"rotate(-45deg) translate(4px,-4px)":"none"}}></span>
