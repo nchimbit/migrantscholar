@@ -10,12 +10,12 @@ const countryColors = {
 };
 
 const countryPhotos = {
-  UK:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Big_Ben_-_March_2008.jpg/320px-Big_Ben_-_March_2008.jpg",
-  Germany:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Brandenburger_Tor_abends.jpg/320px-Brandenburger_Tor_abends.jpg",
-  Canada:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Toronto_-_ON_-_Toronto_Skyline2.jpg/320px-Toronto_-_ON_-_Toronto_Skyline2.jpg",
-  Australia:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Sydney_Australia._(21339175489).jpg/320px-Sydney_Australia._(21339175489).jpg",
-  USA:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/24701-nature-natural-beauty.jpg/320px-24701-nature-natural-beauty.jpg",
-  Turkey:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Blue_Mosque_2.jpg/320px-Blue_Mosque_2.jpg",
+  UK:"https://images.pexels.com/photos/460672/pexels-photo-460672.jpeg?w=400&h=200&fit=crop",
+  Germany:"https://images.pexels.com/photos/109629/pexels-photo-109629.jpeg?w=400&h=200&fit=crop",
+  Canada:"https://images.pexels.com/photos/1519088/pexels-photo-1519088.jpeg?w=400&h=200&fit=crop",
+  Australia:"https://images.pexels.com/photos/995764/pexels-photo-995764.jpeg?w=400&h=200&fit=crop",
+  USA:"https://images.pexels.com/photos/290386/pexels-photo-290386.jpeg?w=400&h=200&fit=crop",
+  Turkey:"https://images.pexels.com/photos/2042106/pexels-photo-2042106.jpeg?w=400&h=200&fit=crop",
 };
 
 const countries = [
@@ -284,8 +284,9 @@ export default function Home({ posts, totalCountries }) {
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(140px,1fr))",gap:"1rem",marginBottom:"2.5rem"}}>
           {countries.map(([flag,name,desc,code])=>(
             <Link key={code} href={`/countries/${code}`} style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",overflow:"hidden",textDecoration:"none",display:"block"}}>
-              <div style={{height:"90px",background:`linear-gradient(135deg,${countryColors[code]?.bg || "#0D6E6E"} 0%,#0A2A2A 100%)`,display:"flex",alignItems:"center",justifyContent:"center",position:"relative"}}>
-                <span style={{fontSize:"3rem",filter:"drop-shadow(0 2px 4px rgba(0,0,0,.3))"}}>{flag}</span>
+              <div style={{height:"90px",backgroundImage:`url(${countryPhotos[code]})`,backgroundSize:"cover",backgroundPosition:"center",position:"relative"}}>
+                <div style={{position:"absolute",inset:0,background:"rgba(0,0,0,.35)"}}></div>
+                <span style={{position:"absolute",bottom:"6px",left:"8px",fontSize:"1.5rem"}}>{flag}</span>
               </div>
               <div style={{padding:".75rem"}}>
                 <strong style={{display:"block",fontSize:".75rem",fontWeight:700,color:"#0A2A2A",marginBottom:".2rem"}}>{name}</strong>
