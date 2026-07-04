@@ -149,7 +149,16 @@ export default function BlogPost({ post, related }) {
               <div style={{background:"#0D6E6E",borderRadius:"10px",padding:"1.25rem",marginTop:"1.5rem",textAlign:"center"}}>
                 <h3 style={{fontSize:"1rem",fontWeight:700,color:"#fff",marginBottom:".4rem"}}>Ready to Apply?</h3>
                 <p style={{fontSize:"12px",color:"rgba(255,255,255,.8)",marginBottom:".875rem"}}>Visit the official scholarship page to start your application.</p>
-                <a href="#" target="_blank" rel="noopener noreferrer" style={{display:"inline-block",background:"#F5A623",color:"#0A2A2A",padding:"10px 28px",borderRadius:"6px",fontSize:"13px",fontWeight:700,textDecoration:"none"}}>Apply Now →</a>
+                {(() => {
+                  // Extract first external URL from post content
+                  const urlMatch = post.content.match(/https?:\/\/(?!migrantscholar)[^\s\)"]+/);
+                  const applyUrl = urlMatch ? urlMatch[0] : null;
+                  return applyUrl ? (
+                    <a href={applyUrl} target="_blank" rel="noopener noreferrer" style={{display:"inline-block",background:"#F5A623",color:"#0A2A2A",padding:"10px 28px",borderRadius:"6px",fontSize:"13px",fontWeight:700,textDecoration:"none"}}>Apply Now →</a>
+                  ) : (
+                    <Link href="/alerts" style={{display:"inline-block",background:"#F5A623",color:"#0A2A2A",padding:"10px 28px",borderRadius:"6px",fontSize:"13px",fontWeight:700,textDecoration:"none"}}>Get Scholarship Alerts →</Link>
+                  );
+                })()}
               </div>
               {/* Inline Alert Signup */}
               <div style={{background:"#FFF7ED",border:"1.5px solid #F5A623",borderRadius:"10px",padding:"1.25rem",marginTop:"1rem",display:"flex",alignItems:"center",justifyContent:"space-between",gap:"1rem",flexWrap:"wrap"}}>
