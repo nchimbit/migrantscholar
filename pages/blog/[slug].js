@@ -87,6 +87,7 @@ export default function BlogPost({ post, related }) {
         <meta name="description" content={post.metaDescription || post.excerpt} />
         <link rel="canonical" href={`https://migrantscholar.vercel.app/blog/${post.slug}`} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({"@context":"https://schema.org","@type":"Article",headline:post.title,datePublished:post.date,publisher:{"@type":"Organization",name:"MigrantScholar",url:"https://migrantscholar.vercel.app"}})}} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://migrantscholar.vercel.app"},{"@type":"ListItem","position":2,"name":"Scholarships","item":"https://migrantscholar.vercel.app/blog"},{"@type":"ListItem","position":3,"name":post.country,"item":`https://migrantscholar.vercel.app/countries/${post.country}`},{"@type":"ListItem","position":4,"name":post.title,"item":`https://migrantscholar.vercel.app/blog/${post.slug}`}]})}} />
         {extractFAQSchema(post.content) && (
           <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(extractFAQSchema(post.content))}} />
         )}
@@ -126,7 +127,38 @@ export default function BlogPost({ post, related }) {
           <div>
             <div style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",padding:"1.75rem",marginBottom:"1rem"}}>
               <div style={{background:"#E6F4F1",border:"1px dashed #A7D4CC",borderRadius:"8px",padding:".75rem",marginBottom:"1.5rem",fontSize:"11px",color:"#6b7280",textAlign:"center"}}>Advertisement</div>
+              {/* Quick Facts Box */}
+              <div style={{background:"#E6F4F1",border:"1.5px solid #A7D4CC",borderRadius:"10px",padding:"1.25rem",marginBottom:"1.5rem"}}>
+                <h3 style={{fontSize:".9rem",fontWeight:700,color:"#0D6E6E",marginBottom:".75rem"}}>⚡ Quick Facts</h3>
+                <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:".5rem"}}>
+                  {[
+                    ["🌍 Country", post.country],
+                    ["💰 Funding", post.funding || "See guide below"],
+                    ["📅 Deadline", post.deadline && post.deadline !== "Unknown" ? post.deadline : "See guide below"],
+                    ["✅ Verified", "By MigrantScholar Team"],
+                  ].map(([label,val])=>(
+                    <div key={label} style={{background:"#fff",borderRadius:"6px",padding:".5rem .75rem"}}>
+                      <span style={{fontSize:"10px",color:"#6b7280",display:"block"}}>{label}</span>
+                      <strong style={{fontSize:"12px",color:"#0A2A2A"}}>{val}</strong>
+                    </div>
+                  ))}
+                </div>
+              </div>
               <article dangerouslySetInnerHTML={{__html:mdToHtml(post.content)}} />
+              {/* Apply Now Button */}
+              <div style={{background:"#0D6E6E",borderRadius:"10px",padding:"1.25rem",marginTop:"1.5rem",textAlign:"center"}}>
+                <h3 style={{fontSize:"1rem",fontWeight:700,color:"#fff",marginBottom:".4rem"}}>Ready to Apply?</h3>
+                <p style={{fontSize:"12px",color:"rgba(255,255,255,.8)",marginBottom:".875rem"}}>Visit the official scholarship page to start your application.</p>
+                <a href="#" target="_blank" rel="noopener noreferrer" style={{display:"inline-block",background:"#F5A623",color:"#0A2A2A",padding:"10px 28px",borderRadius:"6px",fontSize:"13px",fontWeight:700,textDecoration:"none"}}>Apply Now →</a>
+              </div>
+              {/* Inline Alert Signup */}
+              <div style={{background:"#FFF7ED",border:"1.5px solid #F5A623",borderRadius:"10px",padding:"1.25rem",marginTop:"1rem",display:"flex",alignItems:"center",justifyContent:"space-between",gap:"1rem",flexWrap:"wrap"}}>
+                <div>
+                  <strong style={{fontSize:"13px",color:"#0A2A2A",display:"block"}}>🔔 Never miss a deadline</strong>
+                  <span style={{fontSize:"12px",color:"#6b7280"}}>Get free alerts when new scholarships open for migrants.</span>
+                </div>
+                <Link href="/alerts" style={{background:"#0D6E6E",color:"#fff",padding:"8px 18px",borderRadius:"6px",fontSize:"12px",fontWeight:700,textDecoration:"none",whiteSpace:"nowrap"}}>Get Free Alerts →</Link>
+              </div>
               <div style={{background:"#E6F4F1",border:"1px dashed #A7D4CC",borderRadius:"8px",padding:".75rem",marginTop:"1.5rem",fontSize:"11px",color:"#6b7280",textAlign:"center"}}>Advertisement</div>
             </div>
             {/* Comments */}
