@@ -121,25 +121,25 @@ export default function BlogPost({ post, related }) {
       </div>
 
       <div style={{maxWidth:"1080px",margin:"0 auto",padding:"2rem"}}>
-        <div style={{display:"grid",gridTemplateColumns:"1fr 280px",gap:"1.5rem",alignItems:"start"}}>
+        <div style={{display:"grid",gridTemplateColumns:"minmax(0,1fr)",gap:"1.5rem",alignItems:"start"}}>
 
           {/* Main content */}
           <div>
             <div style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",padding:"1.75rem",marginBottom:"1rem"}}>
               <div style={{background:"#E6F4F1",border:"1px dashed #A7D4CC",borderRadius:"8px",padding:".75rem",marginBottom:"1.5rem",fontSize:"11px",color:"#6b7280",textAlign:"center"}}>Advertisement</div>
               {/* Quick Facts Box */}
-              <div style={{background:"#E6F4F1",border:"1.5px solid #A7D4CC",borderRadius:"10px",padding:"1.25rem",marginBottom:"1.5rem"}}>
-                <h3 style={{fontSize:".9rem",fontWeight:700,color:"#0D6E6E",marginBottom:".75rem"}}>⚡ Quick Facts</h3>
-                <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:".5rem"}}>
+              <div style={{background:"#E6F4F1",border:"1.5px solid #A7D4CC",borderRadius:"10px",padding:"1rem",marginBottom:"1.25rem"}}>
+                <h3 style={{fontSize:".85rem",fontWeight:700,color:"#0D6E6E",marginBottom:".625rem"}}>⚡ Quick Facts</h3>
+                <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:".4rem"}}>
                   {[
                     ["🌍 Country", post.country],
-                    ["💰 Funding", post.funding || "See guide below"],
-                    ["📅 Deadline", post.deadline && post.deadline !== "Unknown" ? post.deadline : "See guide below"],
-                    ["✅ Verified", "By MigrantScholar Team"],
+                    ["💰 Funding", post.funding ? post.funding.slice(0,40)+"..." : "See guide below"],
+                    ["📅 Deadline", post.deadline && post.deadline !== "Unknown" ? post.deadline : "See guide"],
+                    ["✅ Verified", "MigrantScholar Team"],
                   ].map(([label,val])=>(
-                    <div key={label} style={{background:"#fff",borderRadius:"6px",padding:".5rem .75rem"}}>
-                      <span style={{fontSize:"10px",color:"#6b7280",display:"block"}}>{label}</span>
-                      <strong style={{fontSize:"12px",color:"#0A2A2A"}}>{val}</strong>
+                    <div key={label} style={{background:"#fff",borderRadius:"6px",padding:".4rem .625rem"}}>
+                      <span style={{fontSize:"9px",color:"#6b7280",display:"block"}}>{label}</span>
+                      <strong style={{fontSize:"11px",color:"#0A2A2A",lineHeight:1.3,display:"block"}}>{val}</strong>
                     </div>
                   ))}
                 </div>
