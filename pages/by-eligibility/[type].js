@@ -147,5 +147,6 @@ export async function getStaticProps({ params }) {
   const info = eligibilityInfo[params.type];
   if (!info) return { notFound: true };
   const posts = allPosts.filter(info.filter).slice(0, 30);
-  return { props: { type: params.type, posts, info: { ...info, filter: undefined } }, revalidate: 3600 };
+  const { filter, ...safeInfo } = info;
+  return { props: { type: params.type, posts, info: safeInfo }, revalidate: 3600 };
 }
