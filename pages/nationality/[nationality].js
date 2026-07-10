@@ -12,6 +12,13 @@ const nationalityData = {
   "venezuelan": { name:"Venezuelan", adjective:"Venezuelan", region:"Latin America", population:"7.7M+ displaced", note:"Venezuelan migrants and refugees can access Fulbright scholarships in the USA, Canada scholarships and other awards for Latin American displaced students." },
   "ukrainian": { name:"Ukrainian", adjective:"Ukrainian", region:"Eastern Europe", population:"6.0M+ displaced", note:"Ukrainian refugees can access emergency scholarships at UK, German, Canadian and Australian universities. Many institutions created specific Ukrainian refugee scholarship programmes." },
   "rohingya": { name:"Rohingya", adjective:"Rohingya", region:"Southeast Asia", population:"1.1M+ displaced", note:"Rohingya refugees can access scholarships through UNHCR-partnered programmes, Australian Awards and UK Sanctuary Scholarships for stateless and refugee students." },
+  "iraqi": { name:"Iraqi", adjective:"Iraqi", region:"Middle East", population:"3.9M+ displaced", note:"Iraqi refugees and asylum seekers can access DAAD scholarships in Germany, UK Sanctuary Scholarships, and Australia Awards. Many programmes have specific provisions for Iraqi displaced students." },
+  "eritrean": { name:"Eritrean", adjective:"Eritrean", region:"East Africa", population:"570,000+ displaced", note:"Eritrean refugees are among the most supported in Europe. UK, Germany and Canada offer specific scholarships for Eritrean asylum seekers and refugees." },
+  "south-sudanese": { name:"South Sudanese", adjective:"South Sudanese", region:"East Africa", population:"2.3M+ displaced", note:"South Sudanese refugees can access Australia Awards, DAAD scholarships and UK Sanctuary Scholarships. Several East African displacement programmes specifically welcome South Sudanese applicants." },
+  "myanmar": { name:"Myanmar", adjective:"Myanmar", region:"Southeast Asia", population:"1.5M+ displaced", note:"Myanmar refugees and displaced students can access Australia Awards, DAAD scholarships and several UK university Sanctuary Scholarships specifically for Southeast Asian displaced students." },
+  "ethiopian": { name:"Ethiopian", adjective:"Ethiopian", region:"East Africa", population:"1.2M+ displaced", note:"Ethiopian refugees and migrants can access Australia Awards covering full tuition and living costs, DAAD scholarships in Germany, and UK Sanctuary Scholarships at over 70 universities." },
+  "nigerian": { name:"Nigerian", adjective:"Nigerian", region:"West Africa", population:"1.8M+ displaced", note:"Nigerian students and refugees can access Commonwealth Scholarships, Chevening, DAAD and Australia Awards. Nigeria has one of the largest scholarship-eligible student populations globally." },
+  "pakistani": { name:"Pakistani", adjective:"Pakistani", region:"South Asia", population:"3.3M+ displaced", note:"Pakistani students and refugees can access Commonwealth Scholarships, Chevening, DAAD and Fulbright scholarships. Many programmes are open to Pakistani nationals and displaced persons." },
 };
 
 export default function NationalityPage({ nationality, posts, info }) {
@@ -104,7 +111,7 @@ export default function NationalityPage({ nationality, posts, info }) {
 
 export async function getStaticPaths() {
   return {
-    paths: ["syrian","afghan","sudanese","somali","congolese","venezuelan","ukrainian","rohingya"].map(nationality=>({params:{nationality}})),
+    paths: ["syrian","afghan","sudanese","somali","congolese","venezuelan","ukrainian","rohingya","iraqi","eritrean","south-sudanese","myanmar","ethiopian","nigerian","pakistani"].map(nationality=>({params:{nationality}})),
     fallback: false
   };
 }

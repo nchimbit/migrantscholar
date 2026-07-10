@@ -59,6 +59,62 @@ const comparisons = {
       link: "/countries/Germany"
     }
   },
+  "canada-vs-australia": {
+    title: "Canada vs Australia Scholarships for Migrants & Refugees",
+    description: "Compare Canada and Australia scholarship options for migrants and refugees. Vanier vs Australia Awards — which is right for you?",
+    a: {
+      name: "Canada Scholarships",
+      country: "Canada 🇨🇦",
+      funding: "$50,000 CAD/year (Vanier)",
+      deadline: "November each year",
+      duration: "3 years (PhD)",
+      ielts: "Required (IELTS 6.5+)",
+      eligibility: ["International PhD students","Migrants","Refugees in Canada"],
+      pros: ["Highest PhD stipend globally","Multicultural society","Post-study work permit","French/English bilingual","Strong refugee support system"],
+      cons: ["Mainly PhD level","Competitive application","Cold climate","IELTS required"],
+      link: "/countries/Canada"
+    },
+    b: {
+      name: "Australia Awards",
+      country: "Australia 🇦🇺",
+      funding: "Full tuition + living costs",
+      deadline: "April–June each year",
+      duration: "2–4 years",
+      ielts: "Required (IELTS 6.5+)",
+      eligibility: ["Students from developing countries","Migrants","Refugees"],
+      pros: ["All levels covered (Bachelor to PhD)","Return airfare included","Health insurance covered","Warm climate","Strong economy"],
+      cons: ["Must return home after study","Specific eligible countries","Competitive"],
+      link: "/countries/Australia"
+    }
+  },
+  "fully-funded-vs-partial": {
+    title: "Fully Funded vs Partial Scholarships — What is the Difference?",
+    description: "Understand the difference between fully funded and partial scholarships for migrants and refugees. Which type should you apply for?",
+    a: {
+      name: "Fully Funded Scholarships",
+      country: "All Countries 🌍",
+      funding: "Tuition + living + travel + health",
+      deadline: "Varies",
+      duration: "1–5 years",
+      ielts: "Sometimes waived",
+      eligibility: ["Refugees","Asylum seekers","Migrants","International students"],
+      pros: ["Zero out-of-pocket costs","Monthly stipend for living","Travel costs covered","Health insurance included","Most life-changing option"],
+      cons: ["Very competitive","Long application process","Limited spots","High academic requirements"],
+      link: "/by-funding/fully-funded"
+    },
+    b: {
+      name: "Partial Scholarships",
+      country: "All Countries 🌍",
+      funding: "Tuition waiver or stipend only",
+      deadline: "Varies",
+      duration: "1–4 years",
+      ielts: "Usually required",
+      eligibility: ["International students","Migrants","Refugees"],
+      pros: ["Less competitive","More available","Good starting point","Can combine with other funding","Faster application"],
+      cons: ["Still need living cost funding","Partial coverage only","May need part-time work","Financial stress possible"],
+      link: "/by-funding/partial"
+    }
+  },
   "masters-vs-phd": {
     title: "Master's vs PhD Scholarships for Migrants — Which Should You Apply For?",
     description: "Compare Master's and PhD scholarship options for migrants and refugees. Funding differences, eligibility requirements and career outcomes.",
@@ -180,7 +236,7 @@ export default function ComparePage({ slug, data }) {
 
 export async function getStaticPaths() {
   return {
-    paths: ["daad-vs-chevening","uk-vs-germany","masters-vs-phd"].map(slug=>({params:{slug}})),
+    paths: ["daad-vs-chevening","uk-vs-germany","masters-vs-phd","canada-vs-australia","fully-funded-vs-partial"].map(slug=>({params:{slug}})),
     fallback: false
   };
 }
