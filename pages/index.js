@@ -86,6 +86,16 @@ export default function Home({ posts, totalCountries, trending }) {
       <Head>
         <title>MigrantScholar — Free Scholarships for Migrants and Refugees</title>
         <meta name="description" content="Find verified fully funded scholarships for migrants, refugees, and asylum seekers. Updated daily across UK, Germany, Canada, Australia, USA and Turkey." />
+        <meta property="og:title" content="MigrantScholar — Free Scholarships for Migrants and Refugees" />
+        <meta property="og:description" content="Find verified fully funded scholarships for migrants, refugees, and asylum seekers. Updated daily." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://migrantscholar.vercel.app" />
+        <meta property="og:image" content="https://migrantscholar.vercel.app/og-image.png" />
+        <meta property="og:site_name" content="MigrantScholar" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="MigrantScholar — Free Scholarships for Migrants and Refugees" />
+        <meta name="twitter:description" content="Find verified fully funded scholarships for migrants, refugees, and asylum seekers. Updated daily." />
+        <meta name="twitter:image" content="https://migrantscholar.vercel.app/og-image.png" />
         <link rel="canonical" href="https://migrantscholar.vercel.app" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
           "@context":"https://schema.org",
