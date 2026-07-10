@@ -124,7 +124,7 @@ export function Navbar() {
             )}
           </div>
 
-          <Link href="/blog" onClick={()=>setOpen(false)} style={{display:"block",padding:".75rem 0",borderBottom:"1px solid #f6f9f8",fontSize:"14px",fontWeight:600,color:"#0A2A2A",textDecoration:"none"}}>Guides</Link>
+          <Link href="/guides" onClick={()=>setOpen(false)} style={{display:"block",padding:".75rem 0",borderBottom:"1px solid #f6f9f8",fontSize:"14px",fontWeight:600,color:"#0A2A2A",textDecoration:"none"}}>Guides</Link>
           <Link href="/about" onClick={()=>setOpen(false)} style={{display:"block",padding:".75rem 0",borderBottom:"1px solid #f6f9f8",fontSize:"14px",fontWeight:600,color:"#0A2A2A",textDecoration:"none"}}>About</Link>
           <Link href="/alerts" onClick={()=>setOpen(false)} style={{display:"block",marginTop:"1rem",background:"#F5A623",color:"#0A2A2A",padding:"10px",borderRadius:"6px",fontSize:"13px",fontWeight:700,textDecoration:"none",textAlign:"center"}}>Get Free Alerts →</Link>
         </div>
@@ -200,7 +200,7 @@ export function Footer() {
             {/* Explore */}
             <div>
               <h4 style={{fontSize:"12px",fontWeight:700,color:"#fff",marginBottom:".875rem",textTransform:"uppercase",letterSpacing:".06em"}}>Explore</h4>
-              {["Latest Scholarships","Countries","Universities","Study Levels","Guides & Resources"].map(item=>(
+              {["Latest Scholarships","Countries","Universities","Study Levels","Guides & Resources","Glossary"].map(item=>(
                 <a key={item} href={item==="Latest Scholarships"?"/blog":item==="Countries"?"/blog":item==="Universities"?"/blog":item==="Study Levels"?"/by-level/masters":"/blog"} style={{display:"block",fontSize:"12px",color:"rgba(255,255,255,.6)",textDecoration:"none",marginBottom:".4rem"}}>{item}</a>
               ))}
             </div>
