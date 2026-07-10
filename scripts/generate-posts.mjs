@@ -29,6 +29,18 @@ async function getTrendingTopics() {
 }
 
 async function generatePost(topic) {
+  // Skip if similar post already exists
+  const postsDir = path.join(__dirname, "../content/posts");
+  const existing = fs.existsSync(postsDir) ? fs.readdirSync(postsDir) : [];
+  const titleWords = topic.title.toLowerCase().split(" ").slice(0,4).join(" ");
+  const isDupe = existing.some(f => {
+    try {
+      const lines = fs.readFileSync(path.join(postsDir, f), 'utf8').split("\n");
+      const titleLine = lines.find(l => l.startsWith('title:')) || '';
+      return titleLine.toLowerCase().includes(titleWords);
+    } catch { return false; }
+  });
+  if (isDupe) { console.log("SKIP duplicate:", topic.title); return null; }
   console.log("Writing: " + topic.title);
   const today = new Date().toISOString().split("T")[0];
   const response = await client.chat.completions.create({
