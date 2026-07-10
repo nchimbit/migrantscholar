@@ -4,6 +4,21 @@ import { Navbar, Footer } from "../../components/Layout";
 import { getAllPosts, getPostBySlug, formatDate } from "../../lib/posts";
 import { useEffect, useRef } from "react";
 
+function extractHowToSchema(content, title) {
+  try {
+    const steps = [];
+    const lines = content.split("\n");
+    let inSteps = false;
+    for (const line of lines) {
+      if (line.match(/step|application|how to|apply/i)) inSteps = true;
+      const stepMatch = line.match(/^\d+\.\s+(.+)/);
+      if (stepMatch && inSteps) steps.push({"@type":"HowToStep","text":stepMatch[1].trim()});
+    }
+    if (steps.length < 3) return null;
+    return {"@context":"https://schema.org","@type":"HowTo","name":"How to Apply for "+title,"step":steps.slice(0,8)};
+  } catch(e) { return null; }
+}
+
 function GiscusComments() {
   const ref = useRef(null);
   useEffect(() => {
@@ -87,7 +102,6 @@ export default function BlogPost({ post, related }) {
         <meta name="description" content={post.metaDescription || post.excerpt} />
         <link rel="canonical" href={`https://migrantscholar.vercel.app/blog/${post.slug}`} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({"@context":"https://schema.org","@type":"Article",headline:post.title,datePublished:post.date,publisher:{"@type":"Organization",name:"MigrantScholar",url:"https://migrantscholar.vercel.app"}})}} />
-        {(() => { const howTo = extractHowToSchema(post.content, post.title); return howTo ? <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(howTo)}} /> : null; })()}
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
           "@context":"https://schema.org",
           "@type":"Article",
