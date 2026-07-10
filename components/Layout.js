@@ -59,8 +59,8 @@ export function Navbar() {
             </button>
             {scholOpen && (
               <div style={{position:"absolute",top:"100%",left:0,background:"#fff",border:"1px solid #e2f0f0",borderRadius:"8px",boxShadow:"0 4px 20px rgba(0,0,0,.1)",minWidth:"160px",zIndex:100}}>
-                {schols.map(([label])=>(
-                  <Link key={label} href="/blog" style={dropItem}>{label}</Link>
+                {[["Fully Funded","/by-funding/fully-funded"],["For Refugees","/by-eligibility/refugees"],["For Asylum Seekers","/by-eligibility/asylum-seekers"],["Without IELTS","/by-eligibility/without-ielts"],["Master's","/by-level/masters"],["PhD","/by-level/phd"],["Undergraduate","/by-level/undergraduate"],["All Scholarships","/blog"]].map(([label,href])=>(
+                  <Link key={label} href={href} style={dropItem}>{label}</Link>
                 ))}
               </div>
             )}
@@ -104,8 +104,8 @@ export function Navbar() {
             </button>
             {scholOpen && (
               <div style={{paddingLeft:"1rem",background:"#f9fafb"}}>
-                {schols.map(([label])=>(
-                  <Link key={label} href="/blog" onClick={()=>setOpen(false)} style={{display:"block",padding:".5rem 0",fontSize:"13px",color:"#374151",textDecoration:"none",borderBottom:"1px solid #f0f4f3"}}>{label}</Link>
+                {[["Fully Funded","/by-funding/fully-funded"],["For Refugees","/by-eligibility/refugees"],["For Asylum Seekers","/by-eligibility/asylum-seekers"],["Without IELTS","/by-eligibility/without-ielts"],["Master's","/by-level/masters"],["PhD","/by-level/phd"],["Undergraduate","/by-level/undergraduate"],["All Scholarships","/blog"]].map(([label,href])=>(
+                  <Link key={label} href={href} onClick={()=>setOpen(false)} style={{display:"block",padding:".5rem 0",fontSize:"13px",color:"#374151",textDecoration:"none",borderBottom:"1px solid #f0f4f3"}}>{label}</Link>
                 ))}
               </div>
             )}
