@@ -87,6 +87,15 @@ export default function Home({ posts, totalCountries, trending }) {
         <title>MigrantScholar — Free Scholarships for Migrants and Refugees</title>
         <meta name="description" content="Find verified fully funded scholarships for migrants, refugees, and asylum seekers. Updated daily across UK, Germany, Canada, Australia, USA and Turkey." />
         <link rel="canonical" href="https://migrantscholar.vercel.app" />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
+          "@context":"https://schema.org",
+          "@type":"WebSite",
+          "name":"MigrantScholar",
+          "url":"https://migrantscholar.vercel.app",
+          "description":"Free verified scholarships for migrants, refugees, asylum seekers and international students. Updated daily.",
+          "potentialAction":{"@type":"SearchAction","target":"https://migrantscholar.vercel.app/blog?search={search_term_string}","query-input":"required name=search_term_string"},
+          "speakable":{"@type":"SpeakableSpecification","cssSelector":["h1","h2",".hero-description"]}
+        })}} />
       </Head>
       <Navbar />
 

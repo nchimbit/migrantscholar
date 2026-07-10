@@ -87,6 +87,16 @@ export default function BlogPost({ post, related }) {
         <meta name="description" content={post.metaDescription || post.excerpt} />
         <link rel="canonical" href={`https://migrantscholar.vercel.app/blog/${post.slug}`} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({"@context":"https://schema.org","@type":"Article",headline:post.title,datePublished:post.date,publisher:{"@type":"Organization",name:"MigrantScholar",url:"https://migrantscholar.vercel.app"}})}} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
+          "@context":"https://schema.org",
+          "@type":"Article",
+          "headline":post.title,
+          "datePublished":post.date,
+          "dateModified":post.date,
+          "author":{"@type":"Organization","name":"MigrantScholar"},
+          "publisher":{"@type":"Organization","name":"MigrantScholar","url":"https://migrantscholar.vercel.app"},
+          "speakable":{"@type":"SpeakableSpecification","cssSelector":["h1",".quick-facts","article p:first-child"]}
+        })}} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://migrantscholar.vercel.app"},{"@type":"ListItem","position":2,"name":"Scholarships","item":"https://migrantscholar.vercel.app/blog"},{"@type":"ListItem","position":3,"name":post.country,"item":`https://migrantscholar.vercel.app/countries/${post.country}`},{"@type":"ListItem","position":4,"name":post.title,"item":`https://migrantscholar.vercel.app/blog/${post.slug}`}]})}} />
         {extractFAQSchema(post.content) && (
           <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(extractFAQSchema(post.content))}} />
