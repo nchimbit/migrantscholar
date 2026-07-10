@@ -87,6 +87,7 @@ export default function BlogPost({ post, related }) {
         <meta name="description" content={post.metaDescription || post.excerpt} />
         <link rel="canonical" href={`https://migrantscholar.vercel.app/blog/${post.slug}`} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({"@context":"https://schema.org","@type":"Article",headline:post.title,datePublished:post.date,publisher:{"@type":"Organization",name:"MigrantScholar",url:"https://migrantscholar.vercel.app"}})}} />
+        {(() => { const howTo = extractHowToSchema(post.content, post.title); return howTo ? <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(howTo)}} /> : null; })()}
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
           "@context":"https://schema.org",
           "@type":"Article",
