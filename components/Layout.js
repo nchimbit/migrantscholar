@@ -200,8 +200,8 @@ export function Footer() {
             {/* Explore */}
             <div>
               <h4 style={{fontSize:"12px",fontWeight:700,color:"#fff",marginBottom:".875rem",textTransform:"uppercase",letterSpacing:".06em"}}>Explore</h4>
-              {["Latest Scholarships","Countries","Universities","Study Levels","Guides & Resources","Glossary"].map(item=>(
-                <a key={item} href={item==="Latest Scholarships"?"/blog":item==="Countries"?"/blog":item==="Universities"?"/blog":item==="Study Levels"?"/by-level/masters":"/blog"} style={{display:"block",fontSize:"12px",color:"rgba(255,255,255,.6)",textDecoration:"none",marginBottom:".4rem"}}>{item}</a>
+              {["Latest Scholarships","Countries","Universities","Study Levels","Guides & Resources","Glossary","Deadlines"].map(item=>(
+                <a key={item} href={item==="Latest Scholarships"?"/blog":item==="Countries"?"/countries/UK":item==="Universities"?"/universities":item==="Study Levels"?"/by-level/masters":item==="Guides & Resources"?"/guides":item==="Glossary"?"/glossary":item==="Deadlines"?"/deadlines":"/blog"} style={{display:"block",fontSize:"12px",color:"rgba(255,255,255,.6)",textDecoration:"none",marginBottom:".4rem"}}>{item}</a>
               ))}
             </div>
 
@@ -209,7 +209,7 @@ export function Footer() {
             <div>
               <h4 style={{fontSize:"12px",fontWeight:700,color:"#fff",marginBottom:".875rem",textTransform:"uppercase",letterSpacing:".06em"}}>Top Scholarships</h4>
               {["DAAD Scholarships","Chevening Scholarships","Fulbright Scholarships","Vanier Scholarships","Türkiye Scholarships"].map(item=>(
-                <a key={item} href={item==="Latest Scholarships"?"/blog":item==="Countries"?"/blog":item==="Universities"?"/blog":item==="Study Levels"?"/by-level/masters":"/blog"} style={{display:"block",fontSize:"12px",color:"rgba(255,255,255,.6)",textDecoration:"none",marginBottom:".4rem"}}>{item}</a>
+                <a key={item} href={item==="Latest Scholarships"?"/blog":item==="Countries"?"/countries/UK":item==="Universities"?"/universities":item==="Study Levels"?"/by-level/masters":item==="Guides & Resources"?"/guides":item==="Glossary"?"/glossary":item==="Deadlines"?"/deadlines":"/blog"} style={{display:"block",fontSize:"12px",color:"rgba(255,255,255,.6)",textDecoration:"none",marginBottom:".4rem"}}>{item}</a>
               ))}
             </div>
 
