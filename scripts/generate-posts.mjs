@@ -24,7 +24,7 @@ async function getTrendingTopics() {
       content: (() => {
         const postsDir = path.join(__dirname, "../content/posts");
         const existing = fs.existsSync(postsDir) ? fs.readdirSync(postsDir).slice(-50).map(f => f.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/.mdx$/, '').replace(/-/g, ' ')).join(', ') : '';
-        return "Today is " + today + ". Generate 5 UNIQUE blog post topics for MigrantScholar.com targeting migrants, refugees and asylum seekers. Mix countries: UK, USA, Germany, Canada, Turkey, Australia. At least 2 must be fully funded. Topics must NOT be similar to these existing ones: " + existing + ".\n\nFocus on specific angles like: specific universities, specific visa types, specific nationalities, specific fields of study, emergency funding, postdoc, women-only, STEM, arts, healthcare scholarships.\n\nRespond ONLY with valid JSON, no markdown, no backticks:\n{\"topics\":[{\"title\":\"...\",\"slug\":\"...\",\"focus\":\"...\",\"target\":\"...\",\"country\":\"...\",\"type\":\"...\"}]}";
+        return "Today is " + today + ". Generate 5 UNIQUE blog post topics for MigrantScholar.com. Mix countries: UK, USA, Germany, Canada, Turkey, Australia. At least 2 fully funded. Avoid topics similar to: " + existing.slice(0, 300) + ". Focus on specific angles: specific universities, visa types, nationalities, STEM, healthcare, women-only, emergency funding.\n\nRespond ONLY with valid JSON:\n{\"topics\":[{\"title\":\"...\",\"slug\":\"...\",\"focus\":\"...\",\"target\":\"...\",\"country\":\"...\",\"type\":\"...\"}]}";
       })()
     }]
   });
