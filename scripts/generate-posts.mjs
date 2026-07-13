@@ -74,7 +74,7 @@ function savePost(topic, content) {
   content = content.replace(/^DEADLINE:.*$/mg, '').replace(/^FUNDING:.*$/mg, '').trim();
   
   const readingTime = calculateReadingTime(content);
-  const plainText = content.replace(/[#*[\]`]/g, "").replace(/\n+/g, " ").trim();
+  const plainText = content.split("\n").filter(l => !l.startsWith("#") && l.trim().length > 20).join(" ").replace(/[#*[\]`]/g, "").trim();
   const excerpt = plainText.slice(0, 160);
   const metaDesc = plainText.slice(0, 155);
 
