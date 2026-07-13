@@ -59,17 +59,16 @@ function savePost(topic, content) {
   const postsDir = path.join(__dirname, "../content/posts");
   if (!fs.existsSync(postsDir)) fs.mkdirSync(postsDir, { recursive: true });
 
-  // Extract deadline and funding from top of AI response
-  const responseLines = content.split("\n");
+  // Extract deadline and funding from anywhere in response
   let deadline = "Unknown";
   let funding = "";
-  let skipLines = 0;
-  for (let i = 0; i < Math.min(5, responseLines.length); i++) {
-    if (responseLines[i].startsWith("DEADLINE:")) { deadline = responseLines[i].replace("DEADLINE:", "").trim(); skipLines = i + 1; }
-    if (responseLines[i].startsWith("FUNDING:")) { funding = responseLines[i].replace("FUNDING:", "").trim(); skipLines = Math.max(skipLines, i + 1); }
-  }
-  if (skipLines > 0) content = responseLines.slice(skipLines).join("\n").trim();
-
+  const dlMatch = content.match(/^DEADLINE:\s*(.+)$/m);
+  const fnMatch = content.match(/^FUNDING:\s*(.+)$/m);
+  if (dlMatch) deadline = dlMatch[1].trim();
+  if (fnMatch) funding = fnMatch[1].trim();
+  // Remove DEADLINE/FUNDING lines from content
+  content = content.replace(/^DEADLINE:.*$/mg, '').replace(/^FUNDING:.*$/mg, '').trim();
+  
   const readingTime = calculateReadingTime(content);
   const plainText = content.replace(/[#*[\]`]/g, "").replace(/\n+/g, " ").trim();
   const excerpt = plainText.slice(0, 160);
