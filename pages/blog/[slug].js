@@ -169,7 +169,13 @@ export default function BlogPost({ post, related }) {
                   ))}
                 </div>
               </div>
-              <article dangerouslySetInnerHTML={{__html:mdToHtml(post.content)}} />
+              <article dangerouslySetInnerHTML={{__html:mdToHtml(
+                post.content
+                  .replace(/^DEADLINE:.*$/mg, '')
+                  .replace(/^FUNDING:.*$/mg, '')
+                  .replace(/^#\s*([A-Z][a-z]+)([A-Z][a-z]+)/mg, '# $1 $2')
+                  .trim()
+              )}} />
               {/* Apply Now Button */}
               <div style={{background:"#0D6E6E",borderRadius:"10px",padding:"1.25rem",marginTop:"1.5rem",textAlign:"center"}}>
                 <h3 style={{fontSize:"1rem",fontWeight:700,color:"#fff",marginBottom:".4rem"}}>Ready to Apply?</h3>
