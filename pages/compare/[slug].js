@@ -87,6 +87,62 @@ const comparisons = {
       link: "/countries/Australia"
     }
   },
+  "turkey-vs-canada": {
+    title: "Turkey vs Canada Scholarships for Migrants — Which is Better?",
+    description: "Compare Turkey and Canada scholarship options for migrants and refugees. Türkiye Bursları vs Vanier — which should you apply for?",
+    a: {
+      name: "Türkiye Bursları",
+      country: "Turkey 🇹🇷",
+      funding: "Full tuition + accommodation + stipend + flights",
+      deadline: "February each year",
+      duration: "1–4 years",
+      ielts: "Not required",
+      eligibility: ["Students from 180+ countries","Migrants","Refugees","International students"],
+      pros: ["Open to 180+ nationalities","No IELTS required","Accommodation provided","Return flights covered","Health insurance included","Very accessible application"],
+      cons: ["Turkish language required for some programmes","Lower stipend than Canada","Less globally recognised degree"],
+      link: "/universities/turkiye-burslari"
+    },
+    b: {
+      name: "Vanier Canada Scholarship",
+      country: "Canada 🇨🇦",
+      funding: "$50,000 CAD/year for 3 years",
+      deadline: "November each year",
+      duration: "3 years (PhD only)",
+      ielts: "Required (IELTS 6.5+)",
+      eligibility: ["International PhD students","Migrants","Refugees in Canada"],
+      pros: ["Highest stipend globally ($50k/yr)","World-class universities","Post-study work permit","Multicultural society","PhD from Canadian university"],
+      cons: ["PhD only — no Masters","IELTS required","Very competitive","Cold climate"],
+      link: "/universities/vanier"
+    }
+  },
+  "masters-vs-undergraduate": {
+    title: "Master's vs Undergraduate Scholarships for Migrants",
+    description: "Compare Master's and undergraduate scholarship options for migrants and refugees. Which level has more funding available?",
+    a: {
+      name: "Master's Scholarships",
+      country: "All Countries 🌍",
+      funding: "Full tuition + £800–£1,500/month",
+      deadline: "Varies (Oct–March)",
+      duration: "1–2 years",
+      ielts: "Usually required",
+      eligibility: ["Bachelor's degree holders","Migrants","Refugees"],
+      pros: ["Most scholarships at this level","Chevening, DAAD, Vanier available","Shorter than PhD","Higher earning potential","International recognition"],
+      cons: ["Need Bachelor's degree first","IELTS usually required","Competitive application"],
+      link: "/by-level/masters"
+    },
+    b: {
+      name: "Undergraduate Scholarships",
+      country: "All Countries 🌍",
+      funding: "Full tuition + maintenance grant",
+      deadline: "Varies",
+      duration: "3–4 years",
+      ielts: "Sometimes waived for refugees",
+      eligibility: ["School leavers","Migrants","Refugees","Asylum seekers"],
+      pros: ["No degree required","UK Sanctuary Scholarships available","Türkiye Bursları covers undergrad","Longer period of support","Entry point to higher education"],
+      cons: ["Fewer scholarships than Masters","Longer commitment","Lower stipend"],
+      link: "/by-level/undergraduate"
+    }
+  },
   "fully-funded-vs-partial": {
     title: "Fully Funded vs Partial Scholarships — What is the Difference?",
     description: "Understand the difference between fully funded and partial scholarships for migrants and refugees. Which type should you apply for?",
@@ -236,7 +292,7 @@ export default function ComparePage({ slug, data }) {
 
 export async function getStaticPaths() {
   return {
-    paths: ["daad-vs-chevening","uk-vs-germany","masters-vs-phd","canada-vs-australia","fully-funded-vs-partial"].map(slug=>({params:{slug}})),
+    paths: ["daad-vs-chevening","uk-vs-germany","masters-vs-phd","canada-vs-australia","fully-funded-vs-partial","turkey-vs-canada","masters-vs-undergraduate"].map(slug=>({params:{slug}})),
     fallback: false
   };
 }

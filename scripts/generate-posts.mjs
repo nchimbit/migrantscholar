@@ -68,8 +68,10 @@ function savePost(topic, content) {
   let funding = "";
   const dlMatch = content.match(/^DEADLINE:\s*(.+)$/m);
   const fnMatch = content.match(/^FUNDING:\s*(.+)$/m);
+  const urlMatch = content.match(/https?:\/\/(?!migrantscholar)[^\s\)"]+/);
   if (dlMatch) deadline = dlMatch[1].trim();
   if (fnMatch) funding = fnMatch[1].trim();
+  const applicationUrl = urlMatch ? urlMatch[0] : "";
   // Remove DEADLINE/FUNDING lines from content
   content = content.replace(/^DEADLINE:.*$/mg, '').replace(/^FUNDING:.*$/mg, '').trim();
   
