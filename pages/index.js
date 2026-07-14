@@ -227,16 +227,26 @@ export default function Home({ posts, totalCountries, trending }) {
 
         {/* STATS ROW */}
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))",gap:"1rem",marginBottom:"2.5rem"}}>
-          {/* Trending - real data */}
+          {/* Top Scholarships - static well-known awards */}
           <div style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",padding:"1.25rem"}}>
-            <h3 style={{fontSize:".85rem",fontWeight:700,color:"#0A2A2A",marginBottom:".875rem"}}>Trending Scholarships</h3>
-            {trending && trending.map(post=>(
-              <Link key={post.slug} href={`/blog/${post.slug}`} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:".4rem 0",borderBottom:"1px solid #f6f9f8",fontSize:"11px",textDecoration:"none"}}>
-                <span style={{color:"#374151",flex:1,marginRight:".5rem"}}>{post.title.slice(0,45)}...</span>
-                <span style={{color:"#0D6E6E",fontWeight:700,flexShrink:0}}>{post.country}</span>
+            <h3 style={{fontSize:".85rem",fontWeight:700,color:"#0A2A2A",marginBottom:".875rem"}}>🏆 Top Scholarships</h3>
+            {[
+              ["Chevening Scholarship","UK","£18,000/yr","/universities/chevening"],
+              ["DAAD Scholarship","Germany","€934/month","/universities/daad"],
+              ["Vanier Scholarship","Canada","$50,000/yr","/universities/vanier"],
+              ["Australia Awards","Australia","Full funding","/universities/australia-awards"],
+              ["Türkiye Bursları","Turkey","Full funding","/universities/turkiye-burslari"],
+              ["Fulbright Program","USA","Full funding","/universities/fulbright"],
+            ].map(([name,country,amount,href])=>(
+              <Link key={name} href={href} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:".4rem 0",borderBottom:"1px solid #f6f9f8",fontSize:"11px",textDecoration:"none"}}>
+                <span style={{color:"#0A2A2A",fontWeight:600,flex:1}}>{name}</span>
+                <div style={{display:"flex",gap:".35rem",alignItems:"center",flexShrink:0}}>
+                  <span style={{fontSize:"9px",color:"#166534",background:"#F0FDF4",padding:"1px 6px",borderRadius:"10px",fontWeight:600}}>{amount}</span>
+                  <span style={{fontSize:"9px",color:"#0D6E6E",fontWeight:700}}>{country}</span>
+                </div>
               </Link>
             ))}
-            <Link href="/blog" style={{fontSize:"11px",color:"#0D6E6E",fontWeight:600,textDecoration:"none",display:"block",marginTop:".5rem"}}>View all →</Link>
+            <Link href="/universities" style={{fontSize:"11px",color:"#0D6E6E",fontWeight:600,textDecoration:"none",display:"block",marginTop:".5rem"}}>View all universities →</Link>
           </div>
           {/* Funding Overview - real data */}
           <div style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",padding:"1.25rem"}}>
