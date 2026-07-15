@@ -78,7 +78,7 @@ export function Navbar() {
             )}
           </div>
           <Link href="/guides" style={linkStyle}>Guides</Link>
-          <Link href="/deadlines" style={{...linkStyle,color:"#0D6E6E",fontWeight:700}}>📅 Deadlines</Link>
+          <Link href="/by-deadline" style={{...linkStyle,color:"#0D6E6E",fontWeight:700}}>📅 Deadlines</Link>
           <Link href="/universities" style={linkStyle}>Universities</Link>
           <Link href="/about" style={linkStyle}>About</Link>
         </div>
@@ -127,7 +127,7 @@ export function Navbar() {
           </div>
 
           <Link href="/guides" onClick={()=>setOpen(false)} style={{display:"block",padding:".75rem 0",borderBottom:"1px solid #f6f9f8",fontSize:"14px",fontWeight:600,color:"#0A2A2A",textDecoration:"none"}}>Guides</Link>
-          <Link href="/deadlines" onClick={()=>setOpen(false)} style={{display:"block",padding:".75rem 0",borderBottom:"1px solid #f6f9f8",fontSize:"14px",fontWeight:700,color:"#0D6E6E",textDecoration:"none"}}>📅 Deadlines</Link>
+          <Link href="/by-deadline" onClick={()=>setOpen(false)} style={{display:"block",padding:".75rem 0",borderBottom:"1px solid #f6f9f8",fontSize:"14px",fontWeight:700,color:"#0D6E6E",textDecoration:"none"}}>📅 Deadlines</Link>
           <Link href="/universities" onClick={()=>setOpen(false)} style={{display:"block",padding:".75rem 0",borderBottom:"1px solid #f6f9f8",fontSize:"14px",fontWeight:600,color:"#0A2A2A",textDecoration:"none"}}>Universities</Link>
           <Link href="/glossary" onClick={()=>setOpen(false)} style={{display:"block",padding:".75rem 0",borderBottom:"1px solid #f6f9f8",fontSize:"14px",fontWeight:600,color:"#0A2A2A",textDecoration:"none"}}>Glossary</Link>
           <Link href="/about" onClick={()=>setOpen(false)} style={{display:"block",padding:".75rem 0",borderBottom:"1px solid #f6f9f8",fontSize:"14px",fontWeight:600,color:"#0A2A2A",textDecoration:"none"}}>About</Link>
