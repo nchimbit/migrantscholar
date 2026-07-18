@@ -36,8 +36,8 @@ async function generatePost(topic) {
   // Skip if similar post already exists
   const postsDir = path.join(__dirname, "../content/posts");
   const existing = fs.existsSync(postsDir) ? fs.readdirSync(postsDir) : [];
-  const titleWords = topic.title.toLowerCase().split(" ").filter(w => w.length > 6).slice(0,2).join(" ");
-const isDupe = titleWords.length > 10 && existing.some(f => {
+  const titleWords = topic.title.toLowerCase().split(" ").filter(w => w.length > 7).slice(0,1).join(" ");
+const isDupe = titleWords.length > 5 && existing.some(f => {
     try {
       const lines = fs.readFileSync(path.join(postsDir, f), 'utf8').split("\n");
       const titleLine = lines.find(l => l.startsWith('title:')) || '';
@@ -55,7 +55,9 @@ const isDupe = titleWords.length > 10 && existing.some(f => {
       content: "CRITICAL: Only write about REAL scholarships. Never invent fake joint programmes. Never start with Introduction to. First sentence must name a real scholarship and who qualifies.\n\nWrite a fully SEO-optimised blog post in MARKDOWN for MigrantScholar.com.\n\nTopic: " + topic.title + "\nFocus: " + topic.focus + "\nAudience: " + topic.target + "\nCountry: " + topic.country + "\nDate: " + today + "\n\nRules:\n- Title under 60 characters\n- First sentence states what real scholarship exists and who qualifies\n- Only list REAL scholarships with real official URLs\n- Never invent fake scholarship programmes\n\nInclude:\n1. Opening sentence stating real scholarship name, who qualifies, funding amount\n2. Who qualifies section with visa categories\n3. Five REAL scholarships with name, amount, eligibility, deadline, official URL\n4. Eight numbered application steps\n5. Documents checklist\n6. Eight FAQ entries specific to migrants\n7. Two external authority links\n8. Closing sentence linking to https://migrantscholar.vercel.app/blog\n\nMinimum 1000 words. Use ## for headings, ### for scholarship names.\n\nReturn markdown only. No backticks. No code fences. Add 5-10 natural internal links using descriptive anchor text like [Canada scholarships](https://migrantscholar.vercel.app/countries/Canada), [fully funded scholarships](https://migrantscholar.vercel.app/by-funding/fully-funded), [PhD scholarships](https://migrantscholar.vercel.app/by-level/phd), [scholarships for refugees](https://migrantscholar.vercel.app/by-eligibility/refugees), [DAAD scholarships](https://migrantscholar.vercel.app/universities/daad), [scholarship deadlines](https://migrantscholar.vercel.app/deadlines). End with ## Related Guides section with 4 relevant internal links."
     }]
   });
-  return response.choices[0].message.content.trim();
+  const result = response.choices[0]?.message?.content;
+if (!result) return null;
+return result.trim();
 }
 
 function savePost(topic, content) {
