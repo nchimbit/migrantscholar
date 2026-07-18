@@ -36,8 +36,8 @@ async function generatePost(topic) {
   // Skip if similar post already exists
   const postsDir = path.join(__dirname, "../content/posts");
   const existing = fs.existsSync(postsDir) ? fs.readdirSync(postsDir) : [];
-  const titleWords = topic.title.toLowerCase().split(" ").filter(w => w.length > 5).slice(0,2).join(" ");
-const isDupe = titleWords.length > 8 && existing.some(f => {
+  const titleWords = topic.title.toLowerCase().split(" ").filter(w => w.length > 6).slice(0,2).join(" ");
+const isDupe = titleWords.length > 10 && existing.some(f => {
     try {
       const lines = fs.readFileSync(path.join(postsDir, f), 'utf8').split("\n");
       const titleLine = lines.find(l => l.startsWith('title:')) || '';
@@ -66,11 +66,11 @@ function savePost(topic, content) {
   // Extract deadline and funding from anywhere in response
   let deadline = "Unknown";
   let funding = "";
-  const dlMatch = content.match(/^DEADLINE:\s*(.+)$/m);
-  const fnMatch = content.match(/^FUNDING:\s*(.+)$/m);
-  const urlMatch = content.match(/https?:\/\/(?!migrantscholar)[^\s\)"]+/);
-  if (dlMatch) deadline = dlMatch[1].trim();
-  if (fnMatch) funding = fnMatch[1].trim();
+ const dlMatch = content ? content.match(/^DEADLINE:\s*(.+)$/m) : null;
+const fnMatch = content ? content.match(/^FUNDING:\s*(.+)$/m) : null;
+const urlMatch = content ? content.match(/https?:\/\/(?!migrantscholar)[^\s\)\"]+/) : null;
+if (dlMatch) deadline = dlMatch[1].trim();
+if (fnMatch) funding = fnMatch[1].trim();
   const applicationUrl = urlMatch ? urlMatch[0] : "";
   // Remove DEADLINE/FUNDING lines from content
   content = content.replace(/^DEADLINE:.*$/mg, '').replace(/^FUNDING:.*$/mg, '').trim();
