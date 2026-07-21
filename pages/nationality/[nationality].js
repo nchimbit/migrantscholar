@@ -24,8 +24,22 @@ const nationalityData = {
   "zimbabwean": { name:"Zimbabwean", adjective:"Zimbabwean", region:"Southern Africa", population:"580,000+ displaced", note:"Zimbabwean refugees and students can access Australia Awards, DAAD scholarships and UK Sanctuary Scholarships. Several Southern African displacement programmes welcome Zimbabwean applicants." },
   "yemeni": { name:"Yemeni", adjective:"Yemeni", region:"Middle East", population:"4.5M+ displaced", note:"Yemeni refugees are among the most supported globally. DAAD, UK Sanctuary Scholarships and many emergency funding programmes specifically welcome Yemeni displaced students." },
   "libyan": { name:"Libyan", adjective:"Libyan", region:"North Africa", population:"200,000+ displaced", note:"Libyan students and refugees can access DAAD scholarships in Germany, UK Sanctuary Scholarships and several North African displacement programmes." },
-  "burundian": { name:"Burundian", adjective:"Burundian", region:"East Africa", population:"400,000+ displaced", note:"Burundian refugees can access Australia Awards, DAAD scholarships and UK Sanctuary Scholarships. Several East African refugee programmes specifically welcome Burundian applicants." },
+"burundian": { name:"Burundian", adjective:"Burundian", region:"East Africa", population:"400,000+ displaced", note:"Burundian refugees can access Australia Awards, DAAD scholarships and UK Sanctuary Scholarships. Several East African refugee programmes specifically welcome Burundian applicants." },
+  "libyan": { name:"Libyan", adjective:"Libyan", region:"North Africa", population:"200,000+ displaced", note:"Libyan students and refugees can access DAAD scholarships in Germany, UK Sanctuary Scholarships and several North African displacement programmes." },
+  "malian": { name:"Malian", adjective:"Malian", region:"West Africa", population:"350,000+ displaced", note:"Malian refugees and students can access Australia Awards, DAAD scholarships and UK Sanctuary Scholarships. Several West African displacement programmes welcome Malian applicants." },
+  "cameroonian": { name:"Cameroonian", adjective:"Cameroonian", region:"Central Africa", population:"700,000+ displaced", note:"Cameroonian refugees and students can access DAAD scholarships, Commonwealth Scholarships and UK Sanctuary Scholarships at over 70 universities." },
+  "ghanaian": { name:"Ghanaian", adjective:"Ghanaian", region:"West Africa", population:"120,000+ displaced", note:"Ghanaian students can access Commonwealth Scholarships, Chevening, DAAD and Australia Awards. Ghana has one of the strongest scholarship ecosystems in West Africa." },
+  "tanzanian": { name:"Tanzanian", adjective:"Tanzanian", region:"East Africa", population:"180,000+ displaced", note:"Tanzanian students and refugees can access Commonwealth Scholarships, DAAD, Chevening and Australia Awards. Several East African programmes specifically welcome Tanzanian applicants." },
+  "ugandan": { name:"Ugandan", adjective:"Ugandan", region:"East Africa", population:"1.5M+ displaced", note:"Uganda hosts one of the largest refugee populations in Africa. Ugandan refugees and students can access Australia Awards, DAAD scholarships and UK Sanctuary Scholarships." },
+  "rwandan": { name:"Rwandan", adjective:"Rwandan", region:"East Africa", population:"100,000+ displaced", note:"Rwandan students can access Commonwealth Scholarships, DAAD, Chevening and Australia Awards. Rwanda has a growing scholarship ecosystem with strong government support." },
+  "iranian": { name:"Iranian", adjective:"Iranian", region:"Middle East", population:"800,000+ displaced", note:"Iranian refugees and students can access DAAD scholarships in Germany, UK Sanctuary Scholarships and several Middle Eastern displacement programmes." },
+  "turkish": { name:"Turkish", adjective:"Turkish", region:"Middle East", population:"500,000+ displaced", note:"Turkish students and migrants can access Chevening, DAAD, Fulbright and Commonwealth Scholarships. Turkey also offers Türkiye Bursları for returning students." },
 };
+
+
+
+
+
 
 export default function NationalityPage({ nationality, posts, info }) {
   if (!info) return null;
