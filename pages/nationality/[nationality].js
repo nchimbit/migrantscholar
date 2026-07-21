@@ -129,12 +129,14 @@ export default function NationalityPage({ nationality, posts, info }) {
   );
 }
 
-export async function getStaticPaths() {
-  return {
-    paths: ["syrian","afghan","sudanese","somali","congolese","venezuelan","ukrainian","rohingya","iraqi","eritrean","south-sudanese","myanmar","ethiopian","nigerian","pakistani","kenyan","bangladeshi","zimbabwean","yemeni","libyan","burundian"].map(nationality=>({params:{nationality}})),
+
+}
+return {
+    paths: ["syrian","afghan","sudanese","somali","congolese","venezuelan","ukrainian","rohingya","iraqi","eritrean","south-sudanese","myanmar","ethiopian","nigerian","pakistani","kenyan","bangladeshi","zimbabwean","yemeni","libyan","burundian","malian","cameroonian","ghanaian","tanzanian","ugandan","rwandan","iranian","turkish"].map(nationality=>({params:{nationality}})),
     fallback: false
   };
-}
+
+
 
 export async function getStaticProps({ params }) {
   const allPosts = getAllPosts();
