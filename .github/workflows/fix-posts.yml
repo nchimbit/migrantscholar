@@ -1,0 +1,48 @@
+name: Fix old posts
+on:
+  workflow_dispatch:
+jobs:
+  fix-posts:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Fix Introduction to in posts
+        run: |
+          node << 'EOF'
+          const fs = require('fs');
+          const path = require('path');
+          const postsDir = path.join(__dirname, 'content/posts');
+          const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.mdx'));
+          let fixed = 0;
+          for (const file of files) {
+            const fpath = path.join(postsDir, file);
+            let content = fs.readFileSync(fpath, 'utf8');
+            const parts = content.split('---');
+            if (parts.length < 3) continue;
+            const frontmatter = parts[1];
+            let body = parts.slice(2).join('---').trim();
+            const original = body;
+            body = body.replace(/^Introduction to [^\n]+\n+/m, '');
+            body = body.replace(/^# [^\n]+\n+/, '');
+            body = body.replace(/^DEADLINE:.*$/mg, '');
+            body = body.replace(/^FUNDING:.*$/mg, '');
+            body = body.trim();
+            if (body !== original) {
+              fs.writeFileSync(fpath, '---' + frontmatter + '---\n' + body + '\n');
+              fixed++;
+            }
+          }
+          console.log('Fixed ' + fixed + ' posts');
+          EOF
+      - name: Commit fixes
+        run: |
+          git config --global user.name "MigrantScholar Bot"
+          git config --global user.email "bot@migrantscholar.com"
+          git add content/posts/
+          git diff --staged --quiet || git commit -m "fix: remove Introduction to from old posts"
+          git push
