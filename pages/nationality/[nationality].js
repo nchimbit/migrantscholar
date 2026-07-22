@@ -24,8 +24,7 @@ const nationalityData = {
   "zimbabwean": { name:"Zimbabwean", adjective:"Zimbabwean", region:"Southern Africa", population:"580,000+ displaced", note:"Zimbabwean refugees and students can access Australia Awards, DAAD scholarships and UK Sanctuary Scholarships. Several Southern African displacement programmes welcome Zimbabwean applicants." },
   "yemeni": { name:"Yemeni", adjective:"Yemeni", region:"Middle East", population:"4.5M+ displaced", note:"Yemeni refugees are among the most supported globally. DAAD, UK Sanctuary Scholarships and many emergency funding programmes specifically welcome Yemeni displaced students." },
   "libyan": { name:"Libyan", adjective:"Libyan", region:"North Africa", population:"200,000+ displaced", note:"Libyan students and refugees can access DAAD scholarships in Germany, UK Sanctuary Scholarships and several North African displacement programmes." },
-"burundian": { name:"Burundian", adjective:"Burundian", region:"East Africa", population:"400,000+ displaced", note:"Burundian refugees can access Australia Awards, DAAD scholarships and UK Sanctuary Scholarships. Several East African refugee programmes specifically welcome Burundian applicants." },
-  "libyan": { name:"Libyan", adjective:"Libyan", region:"North Africa", population:"200,000+ displaced", note:"Libyan students and refugees can access DAAD scholarships in Germany, UK Sanctuary Scholarships and several North African displacement programmes." },
+  "burundian": { name:"Burundian", adjective:"Burundian", region:"East Africa", population:"400,000+ displaced", note:"Burundian refugees can access Australia Awards, DAAD scholarships and UK Sanctuary Scholarships. Several East African refugee programmes specifically welcome Burundian applicants." },
   "malian": { name:"Malian", adjective:"Malian", region:"West Africa", population:"350,000+ displaced", note:"Malian refugees and students can access Australia Awards, DAAD scholarships and UK Sanctuary Scholarships. Several West African displacement programmes welcome Malian applicants." },
   "cameroonian": { name:"Cameroonian", adjective:"Cameroonian", region:"Central Africa", population:"700,000+ displaced", note:"Cameroonian refugees and students can access DAAD scholarships, Commonwealth Scholarships and UK Sanctuary Scholarships at over 70 universities." },
   "ghanaian": { name:"Ghanaian", adjective:"Ghanaian", region:"West Africa", population:"120,000+ displaced", note:"Ghanaian students can access Commonwealth Scholarships, Chevening, DAAD and Australia Awards. Ghana has one of the strongest scholarship ecosystems in West Africa." },
@@ -36,19 +35,21 @@ const nationalityData = {
   "turkish": { name:"Turkish", adjective:"Turkish", region:"Middle East", population:"500,000+ displaced", note:"Turkish students and migrants can access Chevening, DAAD, Fulbright and Commonwealth Scholarships. Turkey also offers Türkiye Bursları for returning students." },
 };
 
-
-
-
-
-
 export default function NationalityPage({ nationality, posts, info }) {
   if (!info) return null;
   return (
     <>
       <Head>
-        <title>Scholarships for {info.adjective} Students & Refugees — MigrantScholar</title>
+        <title>Scholarships for {info.adjective} Students & Refugees 2026 — MigrantScholar</title>
         <meta name="description" content={`Verified scholarships for ${info.adjective} students, refugees and migrants. Find fully funded awards in UK, Germany, Canada, Australia and USA.`} />
         <link rel="canonical" href={`https://migrantscholar.vercel.app/nationality/${nationality}`} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
+          "@context":"https://schema.org",
+          "@type":"CollectionPage",
+          "name":`Scholarships for ${info.adjective} Students and Refugees`,
+          "description":`Verified scholarships for ${info.adjective} students, refugees and migrants.`,
+          "url":`https://migrantscholar.vercel.app/nationality/${nationality}`
+        })}} />
       </Head>
       <Navbar />
 
@@ -58,7 +59,7 @@ export default function NationalityPage({ nationality, posts, info }) {
             <div style={{display:"inline-block",background:"#F5A623",color:"#0A2A2A",fontSize:"11px",fontWeight:700,padding:"4px 12px",borderRadius:"4px",marginBottom:"1rem",textTransform:"uppercase",letterSpacing:".08em"}}>
               {info.region} · {info.population}
             </div>
-            <h1 style={{fontSize:"1.75rem",fontWeight:900,color:"#fff",marginBottom:".75rem"}}>Scholarships for {info.adjective} Students & Refugees</h1>
+            <h1 style={{fontSize:"1.75rem",fontWeight:900,color:"#fff",marginBottom:".75rem"}}>Scholarships for {info.adjective} Students & Refugees 2026</h1>
             <p style={{fontSize:"13px",color:"rgba(255,255,255,.8)",maxWidth:"560px",margin:"0 auto"}}>{info.note}</p>
           </div>
         </div>
@@ -66,11 +67,10 @@ export default function NationalityPage({ nationality, posts, info }) {
 
       <div style={{maxWidth:"1080px",margin:"0 auto",padding:"2rem"}}>
         <div style={{fontSize:"12px",color:"#6b7280",marginBottom:"1.5rem"}}>
-          <Link href="/" style={{color:"#0D6E6E",textDecoration:"none"}}>Home</Link> ›{" "}
-          Scholarships for {info.adjective} Students
+          <Link href="/" style={{color:"#0D6E6E",textDecoration:"none"}}>Home</Link> › Scholarships for {info.adjective} Students
         </div>
 
-        {/* Best scholarships for this nationality */}
+        {/* Best scholarships */}
         <div style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"10px",padding:"1.25rem",marginBottom:"1.5rem"}}>
           <h2 style={{fontSize:".95rem",fontWeight:700,color:"#0A2A2A",marginBottom:".875rem"}}>Best Scholarships for {info.adjective} Refugees & Migrants</h2>
           {[
@@ -79,6 +79,7 @@ export default function NationalityPage({ nationality, posts, info }) {
             ["🇨🇦 Vanier Canada","$50,000/year for 3 years","PhD scholarships for international students","/countries/Canada"],
             ["🇦🇺 Australia Awards","Full tuition + living costs","For students from developing countries","/countries/Australia"],
             ["🇺🇸 Fulbright USA","Full tuition + living costs","For graduate students worldwide","/countries/USA"],
+            ["🇹🇷 Türkiye Bursları","Full tuition + accommodation","Open to 180+ nationalities","/countries/Turkey"],
           ].map(([name,funding,elig,href])=>(
             <div key={name} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:".625rem 0",borderBottom:"1px solid #f6f9f8",gap:"1rem",flexWrap:"wrap"}}>
               <div>
@@ -129,14 +130,12 @@ export default function NationalityPage({ nationality, posts, info }) {
   );
 }
 
-
-}
-return {
+export async function getStaticPaths() {
+  return {
     paths: ["syrian","afghan","sudanese","somali","congolese","venezuelan","ukrainian","rohingya","iraqi","eritrean","south-sudanese","myanmar","ethiopian","nigerian","pakistani","kenyan","bangladeshi","zimbabwean","yemeni","libyan","burundian","malian","cameroonian","ghanaian","tanzanian","ugandan","rwandan","iranian","turkish"].map(nationality=>({params:{nationality}})),
     fallback: false
   };
-
-
+}
 
 export async function getStaticProps({ params }) {
   const allPosts = getAllPosts();
