@@ -78,6 +78,7 @@ export function Navbar() {
           <Link href="/guides" style={linkStyle}>Guides</Link>
           <Link href="/deadlines" style={{...linkStyle,color:"#0D6E6E",fontWeight:700}}>📅 Deadlines</Link>
           <Link href="/universities" style={linkStyle}>Universities</Link>
+          <Link href="/faq" style={linkStyle}>FAQ</Link>
           <Link href="/about" style={linkStyle}>About</Link>
         </div>
 
@@ -127,6 +128,7 @@ export function Navbar() {
           <Link href="/deadlines" onClick={()=>setOpen(false)} style={{display:"block",padding:".75rem 0",borderBottom:"1px solid #f6f9f8",fontSize:"14px",fontWeight:700,color:"#0D6E6E",textDecoration:"none"}}>📅 Deadlines</Link>
           <Link href="/universities" onClick={()=>setOpen(false)} style={{display:"block",padding:".75rem 0",borderBottom:"1px solid #f6f9f8",fontSize:"14px",fontWeight:600,color:"#0A2A2A",textDecoration:"none"}}>Universities</Link>
           <Link href="/glossary" onClick={()=>setOpen(false)} style={{display:"block",padding:".75rem 0",borderBottom:"1px solid #f6f9f8",fontSize:"14px",fontWeight:600,color:"#0A2A2A",textDecoration:"none"}}>Glossary</Link>
+          <Link href="/faq" onClick={()=>setOpen(false)} style={{display:"block",padding:".75rem 0",borderBottom:"1px solid #f6f9f8",fontSize:"14px",fontWeight:600,color:"#0A2A2A",textDecoration:"none"}}>FAQ</Link>
           <Link href="/about" onClick={()=>setOpen(false)} style={{display:"block",padding:".75rem 0",borderBottom:"1px solid #f6f9f8",fontSize:"14px",fontWeight:600,color:"#0A2A2A",textDecoration:"none"}}>About</Link>
           <Link href="/alerts" onClick={()=>setOpen(false)} style={{display:"block",marginTop:"1rem",background:"#F5A623",color:"#0A2A2A",padding:"10px",borderRadius:"6px",fontSize:"13px",fontWeight:700,textDecoration:"none",textAlign:"center"}}>Get Free Alerts →</Link>
         </div>
@@ -180,7 +182,7 @@ export function Footer() {
       {/* Main footer */}
       <div style={{background:"#0A2A2A",padding:"2.5rem 2rem 1.5rem"}}>
         <div style={{maxWidth:"1080px",margin:"0 auto"}}>
-          <div style={{display:"grid",gridTemplateColumns:"1.5fr 1fr 1fr 1fr 1fr",gap:"2rem",marginBottom:"2rem"}}>
+          <div style={{display:"grid",gridTemplateColumns:"1.5fr 1fr 1fr 1fr 1fr",gap:"2rem",marginBottom:"2rem",flexWrap:"wrap"}}>
             
             {/* Brand */}
             <div>
@@ -192,7 +194,7 @@ export function Footer() {
                 </div>
               </div>
               <p style={{fontSize:"12px",color:"rgba(255,255,255,.6)",lineHeight:1.65,marginBottom:"1rem"}}>Find verified scholarships for migrants, refugees, asylum seekers, and international students.</p>
-              <div style={{display:"flex",gap:".5rem"}}>
+              <div style={{display:"flex",gap:".5rem",flexWrap:"wrap"}}>
                 {[
                   ["f","https://facebook.com","Facebook"],
                   ["𝕏","https://twitter.com","Twitter"],
@@ -215,6 +217,7 @@ export function Footer() {
                 ["Guides & Resources","/guides"],
                 ["Glossary","/glossary"],
                 ["Deadlines","/deadlines"],
+                ["Compare","/compare/daad-vs-chevening"],
               ].map(([item,href])=>(
                 <a key={item} href={href} style={{display:"block",fontSize:"12px",color:"rgba(255,255,255,.6)",textDecoration:"none",marginBottom:".4rem"}}>{item}</a>
               ))}
@@ -230,6 +233,7 @@ export function Footer() {
                 ["Vanier Scholarships","/universities/vanier"],
                 ["Türkiye Scholarships","/universities/turkiye-burslari"],
                 ["Australia Awards","/universities/australia-awards"],
+                ["Oxford Sanctuary","/universities/oxford"],
               ].map(([item,href])=>(
                 <a key={item} href={href} style={{display:"block",fontSize:"12px",color:"rgba(255,255,255,.6)",textDecoration:"none",marginBottom:".4rem"}}>{item}</a>
               ))}
@@ -240,11 +244,12 @@ export function Footer() {
               <h4 style={{fontSize:"12px",fontWeight:700,color:"#fff",marginBottom:".875rem",textTransform:"uppercase",letterSpacing:".06em"}}>Help</h4>
               {[
                 ["FAQ","/faq"],
+                ["Glossary","/glossary"],
                 ["Contact Us","/about"],
                 ["Privacy Policy","/privacy"],
                 ["Terms of Use","/terms"],
                 ["About Us","/about"],
-                ["Glossary","/glossary"],
+                ["Sitemap","/sitemap.xml"],
               ].map(([item,href])=>(
                 <a key={item} href={href} style={{display:"block",fontSize:"12px",color:"rgba(255,255,255,.6)",textDecoration:"none",marginBottom:".4rem"}}>{item}</a>
               ))}
@@ -268,8 +273,8 @@ export function Footer() {
           {/* Bottom bar */}
           <div style={{borderTop:"1px solid rgba(255,255,255,.1)",paddingTop:"1.25rem",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:"1rem"}}>
             <span style={{fontSize:"11px",color:"rgba(255,255,255,.5)"}}>© 2026 Scholarship for Migrants. All rights reserved.</span>
-            <div style={{display:"flex",gap:"1rem"}}>
-              {[["Privacy Policy","/privacy"],["Terms of Use","/terms"],["Sitemap","/sitemap.xml"]].map(([label,href])=>(
+            <div style={{display:"flex",gap:"1rem",flexWrap:"wrap"}}>
+              {[["FAQ","/faq"],["Privacy Policy","/privacy"],["Terms of Use","/terms"],["Sitemap","/sitemap.xml"]].map(([label,href])=>(
                 <a key={label} href={href} style={{fontSize:"11px",color:"rgba(255,255,255,.5)",textDecoration:"none"}}>{label}</a>
               ))}
             </div>
