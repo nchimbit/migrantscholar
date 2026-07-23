@@ -4,11 +4,13 @@ const SITE = "https://migrantscholar.vercel.app";
 function generateSitemap(posts) {
   const countries = ["uk","germany","canada","australia","usa","turkey"];
   const filters = ["masters","phd","undergraduate","postdoctoral","refugees","asylum-seekers","without-ielts","migrants","fully-funded","partial"];
-  const programmaticPages = countries.flatMap(c=>filters.map(f=>`<url><loc>${SITE}/scholarships/${c}/${f}</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>`)).join("");
+  const nationalities = ["syrian","afghan","sudanese","somali","congolese","venezuelan","ukrainian","rohingya","iraqi","eritrean","south-sudanese","myanmar","ethiopian","nigerian","pakistani","kenyan","bangladeshi","zimbabwean","yemeni","libyan","burundian","malian","cameroonian","ghanaian","tanzanian","ugandan","rwandan","iranian","turkish"];
+  const compareSlugs = ["daad-vs-chevening","uk-vs-germany","masters-vs-phd","canada-vs-australia","fully-funded-vs-partial","turkey-vs-canada","masters-vs-undergraduate","uk-vs-canada","germany-vs-turkey","phd-vs-postdoc"];
 
   return `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url><loc>${SITE}/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
 <url><loc>${SITE}/blog</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
+<url><loc>${SITE}/faq</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>${SITE}/deadlines</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 <url><loc>${SITE}/by-deadline</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>${SITE}/guides</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
@@ -41,33 +43,9 @@ function generateSitemap(posts) {
 <url><loc>${SITE}/universities/fulbright</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>${SITE}/universities/australia-awards</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>${SITE}/universities/turkiye-burslari</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/nationality/syrian</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/nationality/afghan</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/nationality/sudanese</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/nationality/somali</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/nationality/congolese</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/nationality/venezuelan</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/nationality/ukrainian</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/nationality/rohingya</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/nationality/iraqi</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/nationality/eritrean</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/nationality/south-sudanese</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/nationality/myanmar</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/nationality/ethiopian</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/nationality/nigerian</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/nationality/pakistani</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/nationality/kenyan</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/nationality/bangladeshi</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/nationality/zimbabwean</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/nationality/yemeni</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/compare/daad-vs-chevening</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/compare/uk-vs-germany</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/compare/masters-vs-phd</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/compare/canada-vs-australia</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/compare/fully-funded-vs-partial</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/compare/turkey-vs-canada</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/compare/masters-vs-undergraduate</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-${programmaticPages}
+${nationalities.map(n=>`<url><loc>${SITE}/nationality/${n}</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>`).join("")}
+${compareSlugs.map(s=>`<url><loc>${SITE}/compare/${s}</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>`).join("")}
+${countries.flatMap(c=>filters.map(f=>`<url><loc>${SITE}/scholarships/${c}/${f}</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>`)).join("")}
 ${posts.map(({slug,date})=>`<url><loc>${SITE}/blog/${slug}</loc><lastmod>${date}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`).join("")}
 </urlset>`;
 }
