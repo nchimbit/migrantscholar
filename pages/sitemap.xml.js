@@ -1,5 +1,5 @@
 import { getAllPosts } from "../lib/posts";
-const SITE = "https://migrantscholar.vercel.app";
+const SITE = "https://migrantscholar.com";
 
 function generateSitemap(posts) {
   const countries = ["uk","germany","canada","australia","usa","turkey"];
