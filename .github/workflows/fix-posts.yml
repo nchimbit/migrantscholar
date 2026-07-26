@@ -13,36 +13,84 @@ jobs:
           node-version: "22"
       - name: Fix Introduction to in posts
         run: |
-          node << 'EOF'
+          node << 'FIXEOF'
           const fs = require('fs');
           const path = require('path');
+
+          const TODAY = new Date().toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
+          const SITE = "https://migrantscholar.com";
+
           const postsDir = path.join(__dirname, 'content/posts');
           const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.mdx'));
           let fixed = 0;
+
           for (const file of files) {
             const fpath = path.join(postsDir, file);
             let content = fs.readFileSync(fpath, 'utf8');
             const parts = content.split('---');
             if (parts.length < 3) continue;
-            const frontmatter = parts[1];
+            let frontmatter = parts[1];
             let body = parts.slice(2).join('---').trim();
-            const original = body;
+            const originalBody = body;
+            const originalFm = frontmatter;
+
+            // 1. Remove "Introduction to X" at start
             body = body.replace(/^Introduction to [^\n]+\n+/m, '');
-            body = body.replace(/^# [^\n]+\n+/, '');
+
+            // 2. Remove standalone first heading if it duplicates title
+            body = body.replace(/^#{1,2} [^\n]+\n+/, '');
+
+            // 3. Remove DEADLINE/FUNDING metadata lines
             body = body.replace(/^DEADLINE:.*$/mg, '');
             body = body.replace(/^FUNDING:.*$/mg, '');
+
+            // 4. Update internal links from vercel to .com
+            body = body.replace(/migrantscholar\.vercel\.app/g, 'migrantscholar.com');
+
+            // 5. Add Last Reviewed if missing
+            if (!body.includes('Last Reviewed:')) {
+              body = body.trimEnd() + '\n\n---\n*Last Reviewed: ' + TODAY + '*\n';
+            }
+
+            // 6. Add Related Guides if missing
+            if (!body.includes('## Related Guides') && !body.includes('Related Guides')) {
+              // Determine country from frontmatter
+              const countryMatch = frontmatter.match(/country: "([^"]+)"/);
+              const country = countryMatch ? countryMatch[1] : '';
+              const countryLink = country ? `[${country} scholarships for migrants](${SITE}/countries/${country})` : `[All scholarships](${SITE}/blog)`;
+              
+              body = body.trimEnd() + `\n\n## Related Guides\n- ${countryLink}\n- [Fully funded scholarships](${SITE}/by-funding/fully-funded)\n- [Scholarships for refugees](${SITE}/by-eligibility/refugees)\n- [Scholarship deadlines 2026](${SITE}/deadlines)\n`;
+            } else {
+              // Update existing related guides links
+              body = body.replace(/migrantscholar\.vercel\.app/g, 'migrantscholar.com');
+            }
+
+            // 7. Update domain in frontmatter too
+            frontmatter = frontmatter.replace(/migrantscholar\.vercel\.app/g, 'migrantscholar.com');
+
+            // 8. Add lastReviewed to frontmatter if missing
+            if (!frontmatter.includes('lastReviewed:')) {
+              frontmatter = frontmatter.trimEnd() + '\nlastReviewed: "' + TODAY + '"\n';
+            }
+
             body = body.trim();
-            if (body !== original) {
+
+            if (body !== originalBody || frontmatter !== originalFm) {
               fs.writeFileSync(fpath, '---' + frontmatter + '---\n' + body + '\n');
               fixed++;
             }
           }
+
           console.log('Fixed ' + fixed + ' posts');
-          EOF
+          console.log('Updated domain from vercel.app to migrantscholar.com');
+          console.log('Added Last Reviewed dates');
+          console.log('Added Related Guides sections');
+          FIXEOF
+
       - name: Commit fixes
         run: |
           git config --global user.name "MigrantScholar Bot"
           git config --global user.email "bot@migrantscholar.com"
           git add content/posts/
-          git diff --staged --quiet || git commit -m "fix: remove Introduction to from old posts"
+          git diff --staged --quiet || git commit -m "fix: update all posts - domain, Last Reviewed, Related Guides, remove Introduction to"
           git push
