@@ -1,14 +1,32 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  async rewrites() {
+
+  async redirects() {
     return [
       {
-        source: '/googledf0cd3d970dff8cd.html',
-        destination: '/googledf0cd3d970dff8cd',
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "migrantscholar.vercel.app",
+          },
+        ],
+        destination: "https://migrantscholar.com/:path*",
+        permanent: true,
       },
     ];
   },
+
+  async rewrites() {
+    return [
+      {
+        source: "/googledf0cd3d970dff8cd.html",
+        destination: "/googledf0cd3d970dff8cd",
+      },
+    ];
+  },
+
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.fallback = {
@@ -20,4 +38,5 @@ const nextConfig = {
     return config;
   },
 };
+
 module.exports = nextConfig;
