@@ -5,26 +5,23 @@ import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const client = new Groq({ apiKey: process.env.GROQ_API_KEY });
-const TODAY = new Date().toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
-const SITE = "https://migrantscholar.com";
 
 async function getTrendingTopics() {
   console.log("Finding trending topics...");
   const today = new Date().toISOString().split("T")[0];
   const postsDir = path.join(__dirname, "../content/posts");
-  const existing = fs.existsSync(postsDir) ? fs.readdirSync(postsDir).slice(-30).map(f => f.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/.mdx$/, '').replace(/-/g, ' ')).join(', ') : '';
+  const existing = fs.existsSync(postsDir) ? fs.readdirSync(postsDir).slice(-50).map(f => f.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/.mdx$/, '').replace(/-/g, ' ')).join(', ') : '';
   const response = await client.chat.completions.create({
     model: "llama-3.3-70b-versatile",
     max_tokens: 1000,
     messages: [{
       role: "user",
-      content: "Today is " + today + ". Generate 5 UNIQUE blog post topics for MigrantScholar.com targeting migrants, refugees and asylum seekers. Mix countries: UK, USA, Germany, Canada, Turkey, Australia. At least 2 fully funded. Focus on specific angles: specific universities, visa types, nationalities, STEM, healthcare, women-only, emergency funding. Avoid repeating: " + existing.slice(0, 200) + "\n\nRespond ONLY with valid JSON:\n{\"topics\":[{\"title\":\"...\",\"slug\":\"...\",\"focus\":\"...\",\"target\":\"...\",\"country\":\"...\",\"type\":\"...\"}]}"
+      content: "Today is " + today + ". Generate 5 UNIQUE blog post topics for MigrantScholar.com. Mix countries: UK, USA, Germany, Canada, Turkey, Australia. At least 2 fully funded. Avoid topics similar to: " + existing.slice(0, 300) + ". Focus on specific angles: specific universities, visa types, nationalities, STEM, healthcare, women-only, emergency funding.\n\nRespond ONLY with valid JSON:\n{\"topics\":[{\"title\":\"...\",\"slug\":\"...\",\"focus\":\"...\",\"target\":\"...\",\"country\":\"...\",\"type\":\"...\"}]}"
     }]
   });
   const raw = response.choices[0]?.message?.content || "{}";
   try {
-    const cleaned = raw.replace(/```json|```/g, '').trim();
-    return JSON.parse(cleaned).topics || [];
+    return JSON.parse(raw).topics || [];
   } catch(e) {
     console.log("JSON parse error:", e.message);
     return [];
@@ -32,70 +29,26 @@ async function getTrendingTopics() {
 }
 
 async function generatePost(topic) {
+  // Skip if similar post already exists
+  const postsDir = path.join(__dirname, "../content/posts");
+  const existing = fs.existsSync(postsDir) ? fs.readdirSync(postsDir) : [];
+  const titleWords = topic.title.toLowerCase().split(" ").filter(w => w.length > 7).slice(0,1).join(" ");
+  const isDupe = titleWords.length > 5 && existing.some(f => {
+    try {
+      const lines = fs.readFileSync(path.join(postsDir, f), 'utf8').split("\n");
+      const titleLine = lines.find(l => l.startsWith('title:')) || '';
+      return titleLine.toLowerCase().includes(titleWords);
+    } catch { return false; }
+  });
+  if (isDupe) { console.log("SKIP duplicate:", topic.title); return null; }
   console.log("Writing: " + topic.title);
   const today = new Date().toISOString().split("T")[0];
   const response = await client.chat.completions.create({
     model: "llama-3.3-70b-versatile",
-    max_tokens: 4000,
+    max_tokens: 3000,
     messages: [{
       role: "user",
-      content: `You are writing for MigrantScholar.com, a trusted scholarship platform for migrants, refugees, asylum seekers, and international students.
-
-CRITICAL RULES:
-1. ACCURACY FIRST — Never invent scholarship names, eligibility, funding amounts, deadlines, visa requirements, or target groups
-2. Only write about REAL scholarships with verifiable official sources
-3. If information is unavailable write: "Please check the official scholarship website for the latest information."
-4. Never start with "Introduction to" — first sentence must directly state what scholarship exists and who qualifies
-5. Title must be under 65 characters
-
-TOPIC: ${topic.title}
-FOCUS: ${topic.focus}
-AUDIENCE: ${topic.target}
-COUNTRY: ${topic.country}
-DATE: ${today}
-
-CONTENT REQUIREMENTS:
-- Write 1,500-2,000 words minimum
-- Use clear ## H2 and ### H3 headings
-- Write naturally for humans while optimizing for SEO
-- Include all sections below
-
-REQUIRED SECTIONS:
-1. Opening paragraph (2-3 sentences) — directly state what scholarship exists, who qualifies, and funding amount
-2. ## Quick Facts (table with: Award Name, Funding Amount, Deadline, Eligibility, Study Level, IELTS Required, Official Website)
-3. ## Who Qualifies — bullet list of exact visa categories and eligibility criteria
-4. ## What the Scholarship Covers — detailed funding breakdown
-5. ## How to Apply — 8 numbered steps
-6. ## Required Documents — bullet checklist
-7. ## Frequently Asked Questions — 6 Q&As that migrants actually search for
-8. ## Official Sources — 2-3 links to official government or university pages
-9. ## Related Guides — 4 internal links using descriptive anchor text from these URLs:
-   - [Canada scholarships for migrants](${SITE}/countries/Canada)
-   - [Germany scholarships](${SITE}/countries/Germany)
-   - [UK scholarships](${SITE}/countries/UK)
-   - [Australia scholarships](${SITE}/countries/Australia)
-   - [USA scholarships](${SITE}/countries/USA)
-   - [Turkey scholarships](${SITE}/countries/Turkey)
-   - [Fully funded scholarships](${SITE}/by-funding/fully-funded)
-   - [PhD scholarships](${SITE}/by-level/phd)
-   - [Masters scholarships](${SITE}/by-level/masters)
-   - [Scholarships for refugees](${SITE}/by-eligibility/refugees)
-   - [Scholarships for asylum seekers](${SITE}/by-eligibility/asylum-seekers)
-   - [Without IELTS scholarships](${SITE}/by-eligibility/without-ielts)
-   - [DAAD scholarships](${SITE}/universities/daad)
-   - [Chevening scholarships](${SITE}/universities/chevening)
-   - [Scholarship deadlines](${SITE}/deadlines)
-
-FINAL LINE: "Last Reviewed: ${TODAY}"
-
-FINAL CHECK BEFORE WRITING:
-✓ No invented facts
-✓ No fake eligibility or visa rules  
-✓ No fake funding amounts or deadlines
-✓ Official sources included
-✓ Helpful, trustworthy, SEO-friendly content
-
-Return markdown only. No backticks. No code fences.`
+      content: "CRITICAL: Only write about REAL scholarships. Never invent fake joint programmes. Never start with Introduction to. First sentence must name a real scholarship and who qualifies.\n\nWrite a fully SEO-optimised blog post in MARKDOWN for MigrantScholar.com.\n\nTopic: " + topic.title + "\nFocus: " + topic.focus + "\nAudience: " + topic.target + "\nCountry: " + topic.country + "\nDate: " + today + "\n\nRules:\n- Title under 60 characters\n- First sentence states what real scholarship exists and who qualifies\n- Only list REAL scholarships with real official URLs\n- Never invent fake scholarship programmes\n\nInclude:\n1. Opening sentence stating real scholarship name, who qualifies, funding amount\n2. Who qualifies section with visa categories\n3. Five REAL scholarships with name, amount, eligibility, deadline, official URL\n4. Eight numbered application steps\n5. Documents checklist\n6. Eight FAQ entries specific to migrants\n7. Two external authority links\n8. Closing sentence linking to https://migrantscholar.vercel.app/blog\n\nINTERNAL LINKS: Add 5-10 natural internal links using descriptive anchor text like [Canada scholarships](https://migrantscholar.vercel.app/countries/Canada), [fully funded scholarships](https://migrantscholar.vercel.app/by-funding/fully-funded), [PhD scholarships](https://migrantscholar.vercel.app/by-level/phd), [scholarships for refugees](https://migrantscholar.vercel.app/by-eligibility/refugees), [DAAD scholarships](https://migrantscholar.vercel.app/universities/daad), [scholarship deadlines](https://migrantscholar.vercel.app/deadlines). End with ## Related Guides section with 4 relevant internal links.\n\nMinimum 1000 words. Use ## for headings, ### for scholarship names.\n\nReturn markdown only. No backticks. No code fences."
     }]
   });
   const result = response.choices[0]?.message?.content;
@@ -110,21 +63,19 @@ function savePost(topic, content) {
   if (!fs.existsSync(postsDir)) fs.mkdirSync(postsDir, { recursive: true });
   let deadline = "Unknown";
   let funding = "";
-  const dlMatch = content.match(/^DEADLINE:\s*(.+)$/m);
-  const fnMatch = content.match(/^FUNDING:\s*(.+)$/m);
-  const urlMatch = content.match(/https?:\/\/(?!migrantscholar)[^\s\)\"]+/);
+  const dlMatch = content ? content.match(/^DEADLINE:\s*(.+)$/m) : null;
+  const fnMatch = content ? content.match(/^FUNDING:\s*(.+)$/m) : null;
+  const urlMatch = content ? content.match(/https?:\/\/(?!migrantscholar)[^\s\)\"]+/) : null;
   if (dlMatch) deadline = dlMatch[1].trim();
   if (fnMatch) funding = fnMatch[1].trim();
   const applicationUrl = urlMatch ? urlMatch[0] : "";
   content = content.replace(/^DEADLINE:.*$/mg, '').replace(/^FUNDING:.*$/mg, '').trim();
-  const plainText = content.split("\n").filter(l => !l.startsWith("#") && !l.startsWith("|") && l.trim().length > 20).join(" ").replace(/[#*\[\]`|]/g, "").replace(/\(https?:\/\/[^\)]+\)/g, "").trim();
+  const plainText = content.split("\n").filter(l => !l.startsWith("#") && l.trim().length > 20).join(" ").replace(/[#*\[\]`]/g, "").replace(/\(https?:\/\/[^\)]+\)/g, "").trim();
   const excerpt = plainText.slice(0, 160);
   const metaDescription = plainText.slice(0, 155);
-  const readingTime = Math.max(5, Math.ceil(content.split(" ").length / 200));
+  const readingTime = Math.max(3, Math.ceil(content.split(" ").length / 200));
   const slug = topic.slug || topic.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "").slice(0, 60);
   const filename = today + "-" + slug + ".mdx";
-  const filepath = path.join(postsDir, filename);
-  if (fs.existsSync(filepath)) { console.log("File exists, skipping: " + filename); return; }
   const frontmatter = `---
 title: "${topic.title.replace(/"/g, '\\"')}"
 date: "${new Date().toISOString()}"
@@ -138,16 +89,14 @@ applicationUrl: "${applicationUrl}"
 excerpt: "${excerpt.replace(/"/g, '\\"')}"
 metaDescription: "${metaDescription.replace(/"/g, '\\"')}"
 readingTime: ${readingTime}
-lastReviewed: "${TODAY}"
 ---
 `;
-  fs.writeFileSync(filepath, frontmatter + content);
+  fs.writeFileSync(path.join(postsDir, filename), frontmatter + content);
   console.log("Saved: " + filename + " (" + readingTime + " min read)");
 }
 
 async function main() {
-  console.log("Starting post generation for MigrantScholar.com...");
-  console.log("Date: " + TODAY);
+  console.log("Starting post generation...");
   try {
     const topics = await getTrendingTopics();
     console.log("Found " + topics.length + " topics\n");
