@@ -10,18 +10,19 @@ async function getTrendingTopics() {
   console.log("Finding trending topics...");
   const today = new Date().toISOString().split("T")[0];
   const postsDir = path.join(__dirname, "../content/posts");
-  const existing = fs.existsSync(postsDir) ? fs.readdirSync(postsDir).slice(-50).map(f => f.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/.mdx$/, '').replace(/-/g, ' ')).join(', ') : '';
+  const existing = fs.existsSync(postsDir) ? fs.readdirSync(postsDir).slice(-30).map(f => f.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/.mdx$/, '').replace(/-/g, ' ')).join(', ') : '';
   const response = await client.chat.completions.create({
     model: "llama-3.3-70b-versatile",
     max_tokens: 1000,
     messages: [{
       role: "user",
-      content: "Today is " + today + ". Generate 5 UNIQUE blog post topics for MigrantScholar.com. Mix countries: UK, USA, Germany, Canada, Turkey, Australia. At least 2 fully funded. Avoid topics similar to: " + existing.slice(0, 300) + ". Focus on specific angles: specific universities, visa types, nationalities, STEM, healthcare, women-only, emergency funding.\n\nRespond ONLY with valid JSON:\n{\"topics\":[{\"title\":\"...\",\"slug\":\"...\",\"focus\":\"...\",\"target\":\"...\",\"country\":\"...\",\"type\":\"...\"}]}"
+      content: "Today is " + today + ". Generate 5 UNIQUE blog post topics for MigrantScholar.com targeting migrants, refugees and asylum seekers. Mix countries: UK, USA, Germany, Canada, Turkey, Australia. At least 2 fully funded. Focus on specific angles like specific universities, visa types, nationalities, STEM, healthcare, women-only, emergency funding. Recent topics to avoid repeating: " + existing.slice(0, 200) + "\n\nRespond ONLY with valid JSON, no markdown:\n{\"topics\":[{\"title\":\"...\",\"slug\":\"...\",\"focus\":\"...\",\"target\":\"...\",\"country\":\"...\",\"type\":\"...\"}]}"
     }]
   });
   const raw = response.choices[0]?.message?.content || "{}";
   try {
-    return JSON.parse(raw).topics || [];
+    const cleaned = raw.replace(/```json|```/g, '').trim();
+    return JSON.parse(cleaned).topics || [];
   } catch(e) {
     console.log("JSON parse error:", e.message);
     return [];
@@ -29,18 +30,6 @@ async function getTrendingTopics() {
 }
 
 async function generatePost(topic) {
-  // Skip if similar post already exists
-  const postsDir = path.join(__dirname, "../content/posts");
-  const existing = fs.existsSync(postsDir) ? fs.readdirSync(postsDir) : [];
-  const titleWords = topic.title.toLowerCase().split(" ").filter(w => w.length > 7).slice(0,1).join(" ");
-  const isDupe = titleWords.length > 5 && existing.some(f => {
-    try {
-      const lines = fs.readFileSync(path.join(postsDir, f), 'utf8').split("\n");
-      const titleLine = lines.find(l => l.startsWith('title:')) || '';
-      return titleLine.toLowerCase().includes(titleWords);
-    } catch { return false; }
-  });
-  if (isDupe) { console.log("SKIP duplicate:", topic.title); return null; }
   console.log("Writing: " + topic.title);
   const today = new Date().toISOString().split("T")[0];
   const response = await client.chat.completions.create({
@@ -48,7 +37,7 @@ async function generatePost(topic) {
     max_tokens: 3000,
     messages: [{
       role: "user",
-      content: "CRITICAL: Only write about REAL scholarships. Never invent fake joint programmes. Never start with Introduction to. First sentence must name a real scholarship and who qualifies.\n\nWrite a fully SEO-optimised blog post in MARKDOWN for MigrantScholar.com.\n\nTopic: " + topic.title + "\nFocus: " + topic.focus + "\nAudience: " + topic.target + "\nCountry: " + topic.country + "\nDate: " + today + "\n\nRules:\n- Title under 60 characters\n- First sentence states what real scholarship exists and who qualifies\n- Only list REAL scholarships with real official URLs\n- Never invent fake scholarship programmes\n\nInclude:\n1. Opening sentence stating real scholarship name, who qualifies, funding amount\n2. Who qualifies section with visa categories\n3. Five REAL scholarships with name, amount, eligibility, deadline, official URL\n4. Eight numbered application steps\n5. Documents checklist\n6. Eight FAQ entries specific to migrants\n7. Two external authority links\n8. Closing sentence linking to https://migrantscholar.vercel.app/blog\n\nINTERNAL LINKS: Add 5-10 natural internal links using descriptive anchor text like [Canada scholarships](https://migrantscholar.vercel.app/countries/Canada), [fully funded scholarships](https://migrantscholar.vercel.app/by-funding/fully-funded), [PhD scholarships](https://migrantscholar.vercel.app/by-level/phd), [scholarships for refugees](https://migrantscholar.vercel.app/by-eligibility/refugees), [DAAD scholarships](https://migrantscholar.vercel.app/universities/daad), [scholarship deadlines](https://migrantscholar.vercel.app/deadlines). End with ## Related Guides section with 4 relevant internal links.\n\nMinimum 1000 words. Use ## for headings, ### for scholarship names.\n\nReturn markdown only. No backticks. No code fences."
+      content: "CRITICAL: Only write about REAL scholarships. Never invent fake programmes. Never start with Introduction to. First sentence must name a real scholarship and who qualifies.\n\nWrite a fully SEO-optimised blog post in MARKDOWN for MigrantScholar.com.\n\nTopic: " + topic.title + "\nFocus: " + topic.focus + "\nAudience: " + topic.target + "\nCountry: " + topic.country + "\nDate: " + today + "\n\nRules:\n- Title under 60 characters\n- First sentence states what real scholarship exists and who qualifies\n- Only list REAL scholarships with real official URLs\n\nInclude:\n1. Opening sentence stating real scholarship name, who qualifies, funding amount\n2. Who qualifies section with visa categories\n3. Five REAL scholarships with name, amount, eligibility, deadline, official URL\n4. Eight numbered application steps\n5. Documents checklist\n6. Eight FAQ entries specific to migrants\n7. Two external authority links\n8. Closing sentence linking to https://migrantscholar.vercel.app/blog\n\nINTERNAL LINKS: Add 5-10 natural internal links using descriptive anchor text like [Canada scholarships](https://migrantscholar.vercel.app/countries/Canada), [fully funded scholarships](https://migrantscholar.vercel.app/by-funding/fully-funded), [PhD scholarships](https://migrantscholar.vercel.app/by-level/phd), [scholarships for refugees](https://migrantscholar.vercel.app/by-eligibility/refugees), [DAAD scholarships](https://migrantscholar.vercel.app/universities/daad), [scholarship deadlines](https://migrantscholar.vercel.app/deadlines). End with ## Related Guides section with 4 relevant internal links.\n\nMinimum 1000 words. Use ## for headings, ### for scholarship names.\n\nReturn markdown only. No backticks. No code fences."
     }]
   });
   const result = response.choices[0]?.message?.content;
@@ -63,9 +52,9 @@ function savePost(topic, content) {
   if (!fs.existsSync(postsDir)) fs.mkdirSync(postsDir, { recursive: true });
   let deadline = "Unknown";
   let funding = "";
-  const dlMatch = content ? content.match(/^DEADLINE:\s*(.+)$/m) : null;
-  const fnMatch = content ? content.match(/^FUNDING:\s*(.+)$/m) : null;
-  const urlMatch = content ? content.match(/https?:\/\/(?!migrantscholar)[^\s\)\"]+/) : null;
+  const dlMatch = content.match(/^DEADLINE:\s*(.+)$/m);
+  const fnMatch = content.match(/^FUNDING:\s*(.+)$/m);
+  const urlMatch = content.match(/https?:\/\/(?!migrantscholar)[^\s\)\"]+/);
   if (dlMatch) deadline = dlMatch[1].trim();
   if (fnMatch) funding = fnMatch[1].trim();
   const applicationUrl = urlMatch ? urlMatch[0] : "";
@@ -76,6 +65,8 @@ function savePost(topic, content) {
   const readingTime = Math.max(3, Math.ceil(content.split(" ").length / 200));
   const slug = topic.slug || topic.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "").slice(0, 60);
   const filename = today + "-" + slug + ".mdx";
+  const filepath = path.join(postsDir, filename);
+  if (fs.existsSync(filepath)) { console.log("File exists, skipping: " + filename); return; }
   const frontmatter = `---
 title: "${topic.title.replace(/"/g, '\\"')}"
 date: "${new Date().toISOString()}"
@@ -91,7 +82,7 @@ metaDescription: "${metaDescription.replace(/"/g, '\\"')}"
 readingTime: ${readingTime}
 ---
 `;
-  fs.writeFileSync(path.join(postsDir, filename), frontmatter + content);
+  fs.writeFileSync(filepath, frontmatter + content);
   console.log("Saved: " + filename + " (" + readingTime + " min read)");
 }
 
