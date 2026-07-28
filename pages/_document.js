@@ -1,11 +1,11 @@
 import { Html, Head, Main, NextScript } from "next/document";
-
 export default function Document() {
   return (
     <Html lang="en">
       <Head>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="shortcut icon" href="/favicon.svg" />
+        <meta name="google-adsense-account" content="ca-pub-5850603943461862" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <style>{`
           html, body { overflow-x: hidden; width: 100%; max-width: 100vw; }
@@ -18,6 +18,7 @@ export default function Document() {
           gtag('js', new Date());
           gtag('config', 'G-0HNFZG2T3C');
         `}} />
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5850603943461862" crossOrigin="anonymous"></script>
       </Head>
       <body>
         <Main />
