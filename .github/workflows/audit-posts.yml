@@ -1,0 +1,92 @@
+name: Content Audit
+on:
+  workflow_dispatch:
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Audit posts
+        run: |
+          node << 'EOF'
+          const fs = require('fs');
+          const path = require('path');
+
+          const postsDir = path.join(__dirname, 'content/posts');
+          const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.mdx'));
+          
+          let issues = {
+            tooShort: [],
+            hasIntroTo: [],
+            missingExcerpt: [],
+            hasVercelUrl: [],
+            missingRelatedGuides: [],
+            missingLastReviewed: [],
+            duplicateSlugs: [],
+          };
+
+          let wordCounts = [];
+          let slugs = {};
+
+          for (const file of files) {
+            const fpath = path.join(postsDir, file);
+            const content = fs.readFileSync(fpath, 'utf8');
+            const parts = content.split('---');
+            if (parts.length < 3) continue;
+            const frontmatter = parts[1];
+            const body = parts.slice(2).join('---');
+
+            // Word count
+            const words = body.replace(/[#*\[\]`|]/g, '').split(/\s+/).filter(w => w.length > 0).length;
+            wordCounts.push({ file, words });
+
+            // Check issues
+            if (words < 600) issues.tooShort.push({ file, words });
+            if (body.includes('Introduction to')) issues.hasIntroTo.push(file);
+            if (!frontmatter.includes('excerpt:') || frontmatter.includes('excerpt: ""')) issues.missingExcerpt.push(file);
+            if (body.includes('vercel.app')) issues.hasVercelUrl.push(file);
+            if (!body.includes('Related Guides')) issues.missingRelatedGuides.push(file);
+            if (!body.includes('Last Reviewed') && !frontmatter.includes('lastReviewed')) issues.missingLastReviewed.push(file);
+
+            // Check duplicate slugs
+            const slugMatch = frontmatter.match(/slug: "([^"]+)"/);
+            if (slugMatch) {
+              const slug = slugMatch[1];
+              if (slugs[slug]) issues.duplicateSlugs.push({ file, slug, original: slugs[slug] });
+              else slugs[slug] = file;
+            }
+          }
+
+          // Sort by word count
+          wordCounts.sort((a,b) => a.words - b.words);
+
+          console.log('=== CONTENT AUDIT REPORT ===');
+          console.log('Total posts:', files.length);
+          console.log('');
+          console.log('❌ Too short (<600 words):', issues.tooShort.length);
+          issues.tooShort.slice(0,10).forEach(p => console.log('  -', p.file, '(' + p.words + ' words)'));
+          console.log('');
+          console.log('❌ Still has "Introduction to":', issues.hasIntroTo.length);
+          issues.hasIntroTo.slice(0,10).forEach(f => console.log('  -', f));
+          console.log('');
+          console.log('❌ Has vercel.app URLs:', issues.hasVercelUrl.length);
+          console.log('');
+          console.log('❌ Missing Related Guides:', issues.missingRelatedGuides.length);
+          console.log('');
+          console.log('❌ Missing Last Reviewed:', issues.missingLastReviewed.length);
+          console.log('');
+          console.log('❌ Duplicate slugs:', issues.duplicateSlugs.length);
+          issues.duplicateSlugs.forEach(d => console.log('  -', d.file, 'duplicates', d.original));
+          console.log('');
+          console.log('📊 Shortest posts:');
+          wordCounts.slice(0,5).forEach(p => console.log('  -', p.file, '(' + p.words + ' words)'));
+          console.log('');
+          console.log('📊 Longest posts:');
+          wordCounts.slice(-5).reverse().forEach(p => console.log('  -', p.file, '(' + p.words + ' words)'));
+          EOF
+
+      - name: Save report
+        run: echo "Audit complete"
