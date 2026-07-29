@@ -20,58 +20,86 @@ jobs:
           const TODAY = new Date().toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
           const SITE = "https://migrantscholar.com";
           const postsDir = path.join(__dirname, 'content/posts');
-          const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.mdx'));
+          const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.mdx')).sort();
           
           let fixed = 0;
-          let skipped = 0;
+          let deleted = 0;
 
+          // 1. Delete duplicate posts (keep older, delete newer)
+          const slugsSeen = {};
+          const toDelete = [];
+          
           for (const file of files) {
+            const fpath = path.join(postsDir, file);
+            const content = fs.readFileSync(fpath, 'utf8');
+            const parts = content.split('---');
+            if (parts.length < 3) continue;
+            const frontmatter = parts[1];
+            const slugMatch = frontmatter.match(/slug: "([^"]+)"/);
+            if (slugMatch) {
+              const slug = slugMatch[1];
+              if (slugsSeen[slug]) {
+                toDelete.push(file); // delete the newer duplicate
+              } else {
+                slugsSeen[slug] = file;
+              }
+            }
+          }
+
+          for (const file of toDelete) {
+            fs.unlinkSync(path.join(postsDir, file));
+            console.log('Deleted duplicate:', file);
+            deleted++;
+          }
+
+          // 2. Fix remaining posts
+          const remainingFiles = fs.readdirSync(postsDir).filter(f => f.endsWith('.mdx'));
+
+          for (const file of remainingFiles) {
             const fpath = path.join(postsDir, file);
             let content = fs.readFileSync(fpath, 'utf8');
             const parts = content.split('---');
-            if (parts.length < 3) { skipped++; continue; }
+            if (parts.length < 3) continue;
             
             let frontmatter = parts[1];
             let body = parts.slice(2).join('---').trim();
             const originalBody = body;
             const originalFm = frontmatter;
 
-            // 1. Remove "Introduction to X" at start
+            // Remove "Introduction to"
             body = body.replace(/^Introduction to [^\n]+\n+/m, '');
             body = body.replace(/^# Introduction to [^\n]+\n+/m, '');
 
-            // 2. Remove standalone first heading
+            // Remove standalone first heading
             body = body.replace(/^#{1,2} [^\n]+\n+/, '');
 
-            // 3. Remove DEADLINE/FUNDING metadata lines
+            // Remove DEADLINE/FUNDING lines
             body = body.replace(/^DEADLINE:.*$/mg, '');
             body = body.replace(/^FUNDING:.*$/mg, '');
 
-            // 4. Update vercel URLs to migrantscholar.com
+            // Fix vercel URLs
             body = body.replace(/migrantscholar\.vercel\.app/g, 'migrantscholar.com');
             frontmatter = frontmatter.replace(/migrantscholar\.vercel\.app/g, 'migrantscholar.com');
 
-            // 5. Add Last Reviewed if missing
+            // Add Last Reviewed if missing
             if (!body.includes('Last Reviewed:')) {
               body = body.trimEnd() + '\n\n---\n*Last Reviewed: ' + TODAY + '*\n';
             }
 
-            // 6. Add Related Guides if missing
+            // Add Related Guides if missing
             if (!body.includes('## Related Guides') && !body.includes('Related Guides')) {
               const countryMatch = frontmatter.match(/country: "([^"]+)"/);
               const country = countryMatch ? countryMatch[1] : '';
-              const countrySlug = country.toLowerCase().replace(/\s+/g, '-');
               const countryLink = country ? `[${country} scholarships for migrants](${SITE}/countries/${country})` : `[All scholarships](${SITE}/blog)`;
-              
               body = body.trimEnd() + `\n\n## Related Guides\n- ${countryLink}\n- [Fully funded scholarships](${SITE}/by-funding/fully-funded)\n- [Scholarships for refugees](${SITE}/by-eligibility/refugees)\n- [Scholarship deadlines 2026](${SITE}/deadlines)\n`;
             }
 
-            // 7. Add lastReviewed to frontmatter if missing
+            // Add lastReviewed to frontmatter if missing
             if (!frontmatter.includes('lastReviewed:')) {
               frontmatter = frontmatter.trimEnd() + '\nlastReviewed: "' + TODAY + '"\n';
             }
 
-            // 8. Fix excerpt - remove URLs and "Introduction to"
+            // Fix excerpt
             frontmatter = frontmatter.replace(
               /excerpt: "([^"]*)"/,
               (match, excerpt) => {
@@ -93,9 +121,9 @@ jobs:
             }
           }
 
-          console.log('Fixed: ' + fixed + ' posts');
-          console.log('Skipped: ' + skipped + ' posts');
-          console.log('Total: ' + files.length + ' posts processed');
+          console.log('Deleted duplicates:', deleted);
+          console.log('Fixed posts:', fixed);
+          console.log('Remaining posts:', remainingFiles.length - deleted);
           FIXEOF
 
       - name: Commit fixes
@@ -103,5 +131,5 @@ jobs:
           git config --global user.name "MigrantScholar Bot"
           git config --global user.email "bot@migrantscholar.com"
           git add content/posts/
-          git diff --staged --quiet || git commit -m "fix: bulk update all posts - domain, Last Reviewed, Related Guides, remove Introduction to"
+          git diff --staged --quiet || git commit -m "fix: delete 14 duplicates, fix vercel URLs, Last Reviewed, Introduction to"
           git push
