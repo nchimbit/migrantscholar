@@ -11,7 +11,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Fix Introduction to in posts
+      - name: Fix all post issues
         run: |
           node << 'FIXEOF'
           const fs = require('fs');
@@ -19,16 +19,18 @@ jobs:
 
           const TODAY = new Date().toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
           const SITE = "https://migrantscholar.com";
-
           const postsDir = path.join(__dirname, 'content/posts');
           const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.mdx'));
+          
           let fixed = 0;
+          let skipped = 0;
 
           for (const file of files) {
             const fpath = path.join(postsDir, file);
             let content = fs.readFileSync(fpath, 'utf8');
             const parts = content.split('---');
-            if (parts.length < 3) continue;
+            if (parts.length < 3) { skipped++; continue; }
+            
             let frontmatter = parts[1];
             let body = parts.slice(2).join('---').trim();
             const originalBody = body;
@@ -36,16 +38,18 @@ jobs:
 
             // 1. Remove "Introduction to X" at start
             body = body.replace(/^Introduction to [^\n]+\n+/m, '');
+            body = body.replace(/^# Introduction to [^\n]+\n+/m, '');
 
-            // 2. Remove standalone first heading if it duplicates title
+            // 2. Remove standalone first heading
             body = body.replace(/^#{1,2} [^\n]+\n+/, '');
 
             // 3. Remove DEADLINE/FUNDING metadata lines
             body = body.replace(/^DEADLINE:.*$/mg, '');
             body = body.replace(/^FUNDING:.*$/mg, '');
 
-            // 4. Update internal links from vercel to .com
+            // 4. Update vercel URLs to migrantscholar.com
             body = body.replace(/migrantscholar\.vercel\.app/g, 'migrantscholar.com');
+            frontmatter = frontmatter.replace(/migrantscholar\.vercel\.app/g, 'migrantscholar.com');
 
             // 5. Add Last Reviewed if missing
             if (!body.includes('Last Reviewed:')) {
@@ -54,24 +58,32 @@ jobs:
 
             // 6. Add Related Guides if missing
             if (!body.includes('## Related Guides') && !body.includes('Related Guides')) {
-              // Determine country from frontmatter
               const countryMatch = frontmatter.match(/country: "([^"]+)"/);
               const country = countryMatch ? countryMatch[1] : '';
+              const countrySlug = country.toLowerCase().replace(/\s+/g, '-');
               const countryLink = country ? `[${country} scholarships for migrants](${SITE}/countries/${country})` : `[All scholarships](${SITE}/blog)`;
               
               body = body.trimEnd() + `\n\n## Related Guides\n- ${countryLink}\n- [Fully funded scholarships](${SITE}/by-funding/fully-funded)\n- [Scholarships for refugees](${SITE}/by-eligibility/refugees)\n- [Scholarship deadlines 2026](${SITE}/deadlines)\n`;
-            } else {
-              // Update existing related guides links
-              body = body.replace(/migrantscholar\.vercel\.app/g, 'migrantscholar.com');
             }
 
-            // 7. Update domain in frontmatter too
-            frontmatter = frontmatter.replace(/migrantscholar\.vercel\.app/g, 'migrantscholar.com');
-
-            // 8. Add lastReviewed to frontmatter if missing
+            // 7. Add lastReviewed to frontmatter if missing
             if (!frontmatter.includes('lastReviewed:')) {
               frontmatter = frontmatter.trimEnd() + '\nlastReviewed: "' + TODAY + '"\n';
             }
+
+            // 8. Fix excerpt - remove URLs and "Introduction to"
+            frontmatter = frontmatter.replace(
+              /excerpt: "([^"]*)"/,
+              (match, excerpt) => {
+                let fixed = excerpt
+                  .replace(/Introduction to [^.]+\./g, '')
+                  .replace(/\(https?:\/\/[^\)]+\)/g, '')
+                  .replace(/https?:\/\/[^\s]+/g, '')
+                  .replace(/\s+/g, ' ')
+                  .trim();
+                return `excerpt: "${fixed}"`;
+              }
+            );
 
             body = body.trim();
 
@@ -81,10 +93,9 @@ jobs:
             }
           }
 
-          console.log('Fixed ' + fixed + ' posts');
-          console.log('Updated domain from vercel.app to migrantscholar.com');
-          console.log('Added Last Reviewed dates');
-          console.log('Added Related Guides sections');
+          console.log('Fixed: ' + fixed + ' posts');
+          console.log('Skipped: ' + skipped + ' posts');
+          console.log('Total: ' + files.length + ' posts processed');
           FIXEOF
 
       - name: Commit fixes
@@ -92,5 +103,5 @@ jobs:
           git config --global user.name "MigrantScholar Bot"
           git config --global user.email "bot@migrantscholar.com"
           git add content/posts/
-          git diff --staged --quiet || git commit -m "fix: update all posts - domain, Last Reviewed, Related Guides, remove Introduction to"
+          git diff --staged --quiet || git commit -m "fix: bulk update all posts - domain, Last Reviewed, Related Guides, remove Introduction to"
           git push
