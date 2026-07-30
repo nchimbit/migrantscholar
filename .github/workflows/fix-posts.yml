@@ -20,39 +20,42 @@ jobs:
           const TODAY = new Date().toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
           const SITE = "https://migrantscholar.com";
           const postsDir = path.join(__dirname, 'content/posts');
+          
+          // Get all files sorted by name (older files first)
           const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.mdx')).sort();
           
-          let fixed = 0;
           let deleted = 0;
+          let fixed = 0;
 
-          // 1. Delete duplicate posts (keep older, delete newer)
+          // STEP 1: Delete duplicates (keep oldest, delete newer duplicates)
           const slugsSeen = {};
-          const toDelete = [];
-          
-          for (const file of files) {
+          const specificDuplicates = [
+            "2026-06-29-turkish-scholarships-australia.mdx",
+            "2026-06-30-australia-awards-scholarships.mdx",
+            "2026-07-03-turkey-government-scholarships.mdx",
+            "2026-07-08-daad-scholarships-for-refugees.mdx",
+            "2026-07-09-australia-awards-refugee-scholarships.mdx",
+            "2026-07-09-australia-awards-scholarships.mdx",
+            "2026-07-09-uk-refugee-scholarships.mdx",
+            "2026-07-09-usa-migrant-scholarships.mdx",
+            "2026-07-10-usa-scholarships-for-refugees.mdx",
+            "2026-07-21-germany-emergency-funding-asylum-seekers.mdx",
+            "2026-07-23-uk-stem-scholarships-asylum-seekers.mdx",
+            "2026-07-25-germany-stem-scholarships-syrian-refugees.mdx",
+            "2026-07-27-usa-stem-scholarships-afghan-refugees.mdx",
+            "2026-07-29-afghan-women-stem-scholarships-australia.mdx",
+          ];
+
+          for (const file of specificDuplicates) {
             const fpath = path.join(postsDir, file);
-            const content = fs.readFileSync(fpath, 'utf8');
-            const parts = content.split('---');
-            if (parts.length < 3) continue;
-            const frontmatter = parts[1];
-            const slugMatch = frontmatter.match(/slug: "([^"]+)"/);
-            if (slugMatch) {
-              const slug = slugMatch[1];
-              if (slugsSeen[slug]) {
-                toDelete.push(file); // delete the newer duplicate
-              } else {
-                slugsSeen[slug] = file;
-              }
+            if (fs.existsSync(fpath)) {
+              fs.unlinkSync(fpath);
+              console.log('Deleted duplicate:', file);
+              deleted++;
             }
           }
 
-          for (const file of toDelete) {
-            fs.unlinkSync(path.join(postsDir, file));
-            console.log('Deleted duplicate:', file);
-            deleted++;
-          }
-
-          // 2. Fix remaining posts
+          // STEP 2: Fix remaining posts
           const remainingFiles = fs.readdirSync(postsDir).filter(f => f.endsWith('.mdx'));
 
           for (const file of remainingFiles) {
@@ -66,19 +69,19 @@ jobs:
             const originalBody = body;
             const originalFm = frontmatter;
 
-            // Remove "Introduction to"
-            body = body.replace(/^Introduction to [^\n]+\n+/m, '');
-            body = body.replace(/^# Introduction to [^\n]+\n+/m, '');
-
-            // Remove standalone first heading
-            body = body.replace(/^#{1,2} [^\n]+\n+/, '');
+            // Fix "Introduction to" - multiple patterns
+            body = body.replace(/^Introduction to [^\n]+\n+/gm, '');
+            body = body.replace(/^# Introduction to [^\n]+\n+/gm, '');
+            body = body.replace(/^## Introduction to [^\n]+\n+/gm, '');
 
             // Remove DEADLINE/FUNDING lines
             body = body.replace(/^DEADLINE:.*$/mg, '');
             body = body.replace(/^FUNDING:.*$/mg, '');
 
-            // Fix vercel URLs
+            // Fix ALL vercel URLs
+            body = body.replace(/https?:\/\/migrantscholar\.vercel\.app/g, SITE);
             body = body.replace(/migrantscholar\.vercel\.app/g, 'migrantscholar.com');
+            frontmatter = frontmatter.replace(/https?:\/\/migrantscholar\.vercel\.app/g, SITE);
             frontmatter = frontmatter.replace(/migrantscholar\.vercel\.app/g, 'migrantscholar.com');
 
             // Add Last Reviewed if missing
@@ -87,10 +90,12 @@ jobs:
             }
 
             // Add Related Guides if missing
-            if (!body.includes('## Related Guides') && !body.includes('Related Guides')) {
+            if (!body.includes('Related Guides')) {
               const countryMatch = frontmatter.match(/country: "([^"]+)"/);
               const country = countryMatch ? countryMatch[1] : '';
-              const countryLink = country ? `[${country} scholarships for migrants](${SITE}/countries/${country})` : `[All scholarships](${SITE}/blog)`;
+              const countryLink = country ? 
+                `[${country} scholarships for migrants](${SITE}/countries/${country})` : 
+                `[All scholarships](${SITE}/blog)`;
               body = body.trimEnd() + `\n\n## Related Guides\n- ${countryLink}\n- [Fully funded scholarships](${SITE}/by-funding/fully-funded)\n- [Scholarships for refugees](${SITE}/by-eligibility/refugees)\n- [Scholarship deadlines 2026](${SITE}/deadlines)\n`;
             }
 
@@ -99,17 +104,33 @@ jobs:
               frontmatter = frontmatter.trimEnd() + '\nlastReviewed: "' + TODAY + '"\n';
             }
 
-            // Fix excerpt
+            // Fix excerpt - remove URLs and Introduction to
             frontmatter = frontmatter.replace(
               /excerpt: "([^"]*)"/,
               (match, excerpt) => {
-                let fixed = excerpt
+                let cleaned = excerpt
                   .replace(/Introduction to [^.]+\./g, '')
                   .replace(/\(https?:\/\/[^\)]+\)/g, '')
-                  .replace(/https?:\/\/[^\s]+/g, '')
+                  .replace(/https?:\/\/[^\s"]+/g, '')
+                  .replace(/migrantscholar\.vercel\.app/g, 'migrantscholar.com')
                   .replace(/\s+/g, ' ')
                   .trim();
-                return `excerpt: "${fixed}"`;
+                return `excerpt: "${cleaned}"`;
+              }
+            );
+
+            // Fix metaDescription too
+            frontmatter = frontmatter.replace(
+              /metaDescription: "([^"]*)"/,
+              (match, meta) => {
+                let cleaned = meta
+                  .replace(/Introduction to [^.]+\./g, '')
+                  .replace(/\(https?:\/\/[^\)]+\)/g, '')
+                  .replace(/https?:\/\/[^\s"]+/g, '')
+                  .replace(/migrantscholar\.vercel\.app/g, 'migrantscholar.com')
+                  .replace(/\s+/g, ' ')
+                  .trim();
+                return `metaDescription: "${cleaned}"`;
               }
             );
 
@@ -121,9 +142,10 @@ jobs:
             }
           }
 
+          console.log('=== FIX COMPLETE ===');
           console.log('Deleted duplicates:', deleted);
           console.log('Fixed posts:', fixed);
-          console.log('Remaining posts:', remainingFiles.length - deleted);
+          console.log('Remaining posts:', remainingFiles.length);
           FIXEOF
 
       - name: Commit fixes
@@ -131,5 +153,5 @@ jobs:
           git config --global user.name "MigrantScholar Bot"
           git config --global user.email "bot@migrantscholar.com"
           git add content/posts/
-          git diff --staged --quiet || git commit -m "fix: delete 14 duplicates, fix vercel URLs, Last Reviewed, Introduction to"
+          git diff --staged --quiet || git commit -m "fix: delete 14 duplicates, fix vercel URLs, Introduction to, Last Reviewed"
           git push
