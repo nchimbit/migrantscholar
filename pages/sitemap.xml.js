@@ -6,6 +6,9 @@ function generateSitemap(posts) {
   const filters = ["masters","phd","undergraduate","postdoctoral","refugees","asylum-seekers","without-ielts","migrants","fully-funded","partial"];
   const nationalities = ["syrian","afghan","sudanese","somali","congolese","venezuelan","ukrainian","rohingya","iraqi","eritrean","south-sudanese","myanmar","ethiopian","nigerian","pakistani","kenyan","bangladeshi","zimbabwean","yemeni","libyan","burundian","malian","cameroonian","ghanaian","tanzanian","ugandan","rwandan","iranian","turkish"];
   const compareSlugs = ["daad-vs-chevening","uk-vs-germany","masters-vs-phd","canada-vs-australia","fully-funded-vs-partial","turkey-vs-canada","masters-vs-undergraduate","uk-vs-canada","germany-vs-turkey","phd-vs-postdoc"];
+  const universities = ["oxford","university-of-edinburgh","daad","tu-munich","humboldt-berlin","chevening","vanier","university-of-toronto","mcgill","australia-awards","fulbright","harvard","mit","columbia","turkiye-burslari"];
+  const guides = ["study-in-germany-free","f1-visa-guide-migrants","canada-study-permit","germany-student-visa","uk-student-visa-refugees"];
+  const lists = ["top-10-fully-funded-scholarships-refugees","top-10-germany-scholarships-migrants","top-10-usa-scholarships-migrants","top-10-women-scholarships-migrants","top-10-stem-scholarships-migrants"];
 
   return `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url><loc>${SITE}/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
@@ -18,6 +21,8 @@ function generateSitemap(posts) {
 <url><loc>${SITE}/universities</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 <url><loc>${SITE}/about</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
 <url><loc>${SITE}/alerts</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>${SITE}/privacy</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+<url><loc>${SITE}/terms</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
 <url><loc>${SITE}/by-eligibility/refugees</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 <url><loc>${SITE}/by-eligibility/asylum-seekers</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 <url><loc>${SITE}/by-eligibility/without-ielts</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
@@ -36,13 +41,9 @@ function generateSitemap(posts) {
 <url><loc>${SITE}/countries/Australia</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 <url><loc>${SITE}/countries/USA</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 <url><loc>${SITE}/countries/Turkey</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-<url><loc>${SITE}/universities/oxford</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/universities/daad</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/universities/chevening</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/universities/vanier</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/universities/fulbright</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/universities/australia-awards</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>${SITE}/universities/turkiye-burslari</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+${universities.map(u=>`<url><loc>${SITE}/universities/${u}</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>`).join("")}
+${guides.map(g=>`<url><loc>${SITE}/guides/${g}</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>`).join("")}
+${lists.map(l=>`<url><loc>${SITE}/lists/${l}</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>`).join("")}
 ${nationalities.map(n=>`<url><loc>${SITE}/nationality/${n}</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>`).join("")}
 ${compareSlugs.map(s=>`<url><loc>${SITE}/compare/${s}</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>`).join("")}
 ${countries.flatMap(c=>filters.map(f=>`<url><loc>${SITE}/scholarships/${c}/${f}</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>`)).join("")}
