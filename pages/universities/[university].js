@@ -29,13 +29,13 @@ const universityData = {
   "daad": {
     name: "DAAD — German Academic Exchange Service",
     country: "Germany", flag: "🇩🇪",
-    description: "DAAD is Germany's largest scholarship organisation, offering fully funded Master's and PhD scholarships for migrants, asylum seekers and international students.",
+    description: "DAAD (Deutscher Akademischer Austauschdienst) is Germany's largest scholarship organisation, offering fully funded scholarships for refugees, asylum seekers and international students. DAAD scholarships cover full tuition, €934/month living allowance, health insurance and travel costs. Applications open October–November each year at daad.de.",
     scholarship: "DAAD Development-Related Postgraduate Courses",
-    funding: "Full tuition + €934/month + travel + health insurance",
+    funding: "Full tuition + €934/month + health insurance + travel",
     deadline: "October–November each year",
-    eligibility: ["Refugees", "Asylum seekers", "International students", "Migrants"],
+    eligibility: ["Refugees", "Asylum seekers", "International students", "Migrants", "Displaced researchers"],
     website: "https://www.daad.de/en/study-and-research-in-germany/scholarships/",
-    searchTerm: "DAAD Germany scholarship"
+    searchTerm: "DAAD Germany scholarship refugee"
   },
   "tu-munich": {
     name: "Technical University of Munich (TUM)",
