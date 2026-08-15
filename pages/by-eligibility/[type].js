@@ -5,8 +5,8 @@ import { getAllPosts, formatDate } from "../../lib/posts";
 
 const eligibilityInfo = {
   "refugees": {
-    title: "Scholarships for Refugees",
-    description: "Verified fully-funded scholarships open to refugees with documentation worldwide. Updated daily.",
+    title: "Fully Funded Scholarships for Refugees 2026",
+    description: "Fully funded scholarships for refugees 2026. UK Sanctuary Scholarships, DAAD Germany, Chevening and more. No settled status required. Updated daily.",
     keywords: ["refugee scholarship", "scholarships for refugees", "fully funded refugee scholarship"],
     intro: "If you are a refugee with UNHCR documentation or a national refugee status, these scholarships are specifically designed for you. Many cover full tuition, living costs, and travel.",
     filter: (p) => {
@@ -15,8 +15,8 @@ const eligibilityInfo = {
     }
   },
   "asylum-seekers": {
-    title: "Scholarships for Asylum Seekers",
-    description: "Scholarships open to asylum seekers with pending claims. No settled status required. Updated daily.",
+    title: "Scholarships for Asylum Seekers 2026 — No Settled Status Required",
+    description: "Scholarships for asylum seekers 2026 with pending claims. Apply without settled status. DAAD, UK Sanctuary, Chevening and more. Updated daily.",
     keywords: ["asylum seeker scholarship", "scholarships for asylum seekers", "pending claim scholarship"],
     intro: "You do not need a final decision on your asylum claim to apply for many of these scholarships. Several UK Sanctuary Scholarships, DAAD awards, and others explicitly welcome applicants with pending claims.",
     filter: (p) => {
@@ -25,8 +25,8 @@ const eligibilityInfo = {
     }
   },
   "without-ielts": {
-    title: "Scholarships Without IELTS",
-    description: "Fully funded scholarships that do not require IELTS for migrants and refugees. Updated daily.",
+    title: "Scholarships Without IELTS 2026 — For Refugees & Migrants",
+    description: "Fully funded scholarships without IELTS 2026. Many universities waive English tests for refugees and migrants. Updated daily.",
     keywords: ["scholarship without IELTS", "no IELTS scholarship", "scholarship without English test"],
     intro: "Many scholarships for migrants and refugees waive the IELTS requirement, especially if you have studied in English before or if English is your first language. These guides cover awards that either waive or do not require IELTS.",
     filter: (p) => {
@@ -35,7 +35,7 @@ const eligibilityInfo = {
     }
   },
   "migrants": {
-    title: "Scholarships for Migrants",
+    title: "Scholarships for Migrants 2026 — Verified Fully Funded Awards",
     description: "Verified scholarships for migrants and displaced students worldwide. Free, updated daily.",
     keywords: ["migrant scholarship", "scholarships for migrants", "displaced student scholarship"],
     intro: "Migrants, displaced students, and forced migrants can access hundreds of scholarships across the UK, Germany, Canada, Australia, USA and Turkey. These guides explain eligibility in plain language.",
@@ -45,7 +45,7 @@ const eligibilityInfo = {
     }
   },
   "fully-funded": {
-    title: "Fully Funded Scholarships for Migrants",
+    title: "Fully Funded Scholarships for Migrants 2026",
     description: "Complete coverage — tuition, living costs, travel, and health insurance for migrants and refugees.",
     keywords: ["fully funded scholarship migrants", "full scholarship refugees", "free scholarship migrants"],
     intro: "Fully funded scholarships cover everything — tuition fees, monthly living allowance, travel costs, and sometimes health insurance. These are the most competitive but most life-changing awards available to migrants and refugees.",

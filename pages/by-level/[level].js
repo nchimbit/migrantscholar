@@ -5,25 +5,25 @@ import { getAllPosts, formatDate } from "../../lib/posts";
 
 const levelInfo = {
   "masters": {
-    title: "Master's Scholarships for Migrants & Refugees",
-    description: "Fully funded Master's degree scholarships for migrants, refugees and asylum seekers. Updated daily.",
+    title: "Fully Funded Master's Scholarships 2026 — For Migrants & Refugees",
+    description: "Fully funded Master's scholarships 2026 for migrants, refugees and asylum seekers. Chevening, DAAD, Vanier and more. Updated daily.",
     intro: "These Master's scholarships are specifically available to migrants, refugees and asylum seekers. Many cover full tuition plus a monthly living allowance.",
     keywords: ["masters scholarship migrants", "masters scholarship refugees", "postgraduate scholarship asylum seekers"],
   },
   "phd": {
-    title: "PhD Scholarships for Migrants & Refugees",
-    description: "Doctoral scholarships for migrants, refugees and forced migrants worldwide. Updated daily.",
+    title: "Fully Funded PhD Scholarships 2026 — For Migrants & Researchers",
+    description: "Fully funded PhD scholarships 2026 for migrants and refugees. Vanier $50,000/year, DAAD, Fulbright and more. Updated daily.",
     intro: "PhD scholarships for migrants and refugees offer full funding for doctoral research. The Vanier Scholarship in Canada offers $50,000/year for 3 years.",
     keywords: ["phd scholarship migrants", "doctoral scholarship refugees", "research scholarship asylum seekers"],
   },
   "undergraduate": {
-    title: "Undergraduate Scholarships for Migrants & Refugees",
+    title: "Undergraduate Scholarships 2026 — For Migrants & Refugees",
     description: "Bachelor's degree scholarships for migrants, refugees and asylum seekers. Updated daily.",
     intro: "Undergraduate scholarships for migrants and refugees fund your first degree. UK Sanctuary Scholarships cover full tuition at over 70 universities.",
     keywords: ["undergraduate scholarship migrants", "bachelors scholarship refugees", "degree scholarship asylum seekers"],
   },
   "postdoctoral": {
-    title: "Postdoctoral Scholarships for Migrants & Refugees",
+    title: "Postdoctoral Scholarships 2026 — For Migrant Researchers",
     description: "Postdoctoral research funding for migrants and displaced researchers worldwide.",
     intro: "Postdoctoral fellowships and research grants are available for displaced researchers and migrant academics at universities worldwide.",
     keywords: ["postdoc scholarship migrants", "research fellowship refugees", "postdoctoral funding displaced"],

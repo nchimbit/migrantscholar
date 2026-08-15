@@ -5,19 +5,19 @@ import { getAllPosts, formatDate } from "../../lib/posts";
 
 const fundingInfo = {
   "fully-funded": {
-    title: "Fully Funded Scholarships for Migrants & Refugees",
-    description: "Complete coverage — tuition, living costs, travel, and health insurance for migrants and refugees. Updated daily.",
+    title: "Fully Funded Scholarships 2026 — Complete Guide for Refugees & Migrants",
+    description: "Fully funded scholarships 2026 covering tuition, living costs, travel and health insurance for refugees and migrants. DAAD, Chevening, Vanier and more.",
     intro: "Fully funded scholarships cover everything — tuition fees, monthly living allowance, travel costs, and health insurance. These are the most competitive but most life-changing awards for migrants and refugees.",
     keywords: ["fully funded","full tuition","full scholarship","complete funding","all expenses"],
   },
   "partial": {
-    title: "Partial Scholarships for Migrants & Refugees",
+    title: "Partial Scholarships 2026 — For Migrants & Refugees",
     description: "Tuition waivers and partial bursaries for migrants, refugees and asylum seekers. Updated daily.",
     intro: "Partial scholarships reduce the cost of studying abroad by covering tuition fees or providing a monthly stipend. Combined with other funding, they can make studying abroad affordable.",
     keywords: ["partial","tuition waiver","bursary","grant","partial funding"],
   },
   "tuition-waiver": {
-    title: "Tuition Waiver Scholarships for Migrants & Refugees",
+    title: "Tuition Waiver Scholarships 2026 — For Migrants & Refugees",
     description: "Tuition fee waivers for migrants, refugees and asylum seekers at universities worldwide.",
     intro: "Tuition waivers cover your university fees while you arrange living costs separately. Many UK Sanctuary Scholarships offer full tuition waivers plus a maintenance grant.",
     keywords: ["tuition waiver","fee waiver","tuition reduction","fee reduction"],

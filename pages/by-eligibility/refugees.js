@@ -16,7 +16,7 @@ export default function RefugeesPage({ posts }) {
   return (
     <>
       <Head>
-        <title>Fully Funded Scholarships for Refugees 2026 — Verified Awards | MigrantScholar</title>
+        <title>Fully Funded Fully Funded Fully Funded Scholarships for Refugees 2026 — Verified Awards 2026 — Verified Awards 2026 — Verified Awards | MigrantScholar</title>
         <meta name="description" content="Fully funded scholarships for refugees 2026. UK Sanctuary Scholarships, DAAD Germany, Chevening, Vanier Canada and more. No settled status required. Updated daily." />
         <link rel="canonical" href="https://migrantscholar.com/by-eligibility/refugees" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
@@ -33,7 +33,7 @@ export default function RefugeesPage({ posts }) {
           "@type":"BreadcrumbList",
           "itemListElement":[
             {"@type":"ListItem","position":1,"name":"Home","item":"https://migrantscholar.com"},
-            {"@type":"ListItem","position":2,"name":"Scholarships for Refugees","item":"https://migrantscholar.com/by-eligibility/refugees"}
+            {"@type":"ListItem","position":2,"name":"Fully Funded Fully Funded Scholarships for Refugees 2026 — Verified Awards 2026 — Verified Awards","item":"https://migrantscholar.com/by-eligibility/refugees"}
           ]
         })}} />
       </Head>
@@ -43,7 +43,7 @@ export default function RefugeesPage({ posts }) {
         <div style={{maxWidth:"1080px",margin:"0 auto"}}>
           <div style={{background:"linear-gradient(135deg,#0D6E6E 0%,#0A5555 100%)",borderRadius:"14px",padding:"2rem",textAlign:"center"}}>
             <div style={{display:"inline-block",background:"#F5A623",color:"#0A2A2A",fontSize:"11px",fontWeight:700,padding:"4px 12px",borderRadius:"4px",marginBottom:"1rem",textTransform:"uppercase",letterSpacing:".08em"}}>Updated Daily · 2026</div>
-            <h1 style={{fontSize:"1.75rem",fontWeight:900,color:"#fff",marginBottom:".75rem",lineHeight:1.3}}>Fully Funded Scholarships for Refugees 2026</h1>
+            <h1 style={{fontSize:"1.75rem",fontWeight:900,color:"#fff",marginBottom:".75rem",lineHeight:1.3}}>Fully Funded Fully Funded Fully Funded Scholarships for Refugees 2026 — Verified Awards 2026 — Verified Awards 2026</h1>
             <p style={{fontSize:"13px",color:"rgba(255,255,255,.8)",maxWidth:"600px",margin:"0 auto .875rem"}}>Verified fully funded scholarships specifically for refugees. No settled status required. UK, Germany, Canada, Australia, USA and Turkey. Updated daily.</p>
             <div style={{display:"flex",gap:".5rem",justifyContent:"center",flexWrap:"wrap"}}>
               <Link href="/by-eligibility/asylum-seekers" style={{background:"rgba(255,255,255,.15)",color:"#fff",padding:"6px 14px",borderRadius:"20px",fontSize:"12px",textDecoration:"none",fontWeight:600}}>Asylum Seekers →</Link>
@@ -56,12 +56,12 @@ export default function RefugeesPage({ posts }) {
 
       <div style={{maxWidth:"1080px",margin:"0 auto",padding:"2rem"}}>
         <div style={{fontSize:"12px",color:"#6b7280",marginBottom:"1.5rem"}}>
-          <Link href="/" style={{color:"#0D6E6E",textDecoration:"none"}}>Home</Link> › Scholarships for Refugees
+          <Link href="/" style={{color:"#0D6E6E",textDecoration:"none"}}>Home</Link> › Fully Funded Fully Funded Scholarships for Refugees 2026 — Verified Awards 2026 — Verified Awards
         </div>
 
         {/* Top scholarships table */}
         <div style={{background:"#fff",border:"1.5px solid #e2f0f0",borderRadius:"12px",padding:"1.5rem",marginBottom:"2rem"}}>
-          <h2 style={{fontSize:"1.1rem",fontWeight:800,color:"#0A2A2A",marginBottom:"1rem"}}>🏆 Top Fully Funded Scholarships for Refugees 2026</h2>
+          <h2 style={{fontSize:"1.1rem",fontWeight:800,color:"#0A2A2A",marginBottom:"1rem"}}>🏆 Top Fully Funded Fully Funded Fully Funded Scholarships for Refugees 2026 — Verified Awards 2026 — Verified Awards 2026</h2>
           <div style={{overflowX:"auto"}}>
             <table style={{width:"100%",borderCollapse:"collapse",fontSize:"12px"}}>
               <thead>
