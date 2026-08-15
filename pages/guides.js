@@ -4,6 +4,13 @@ import { Navbar, Footer } from "../components/Layout";
 
 const guides = [
   {
+    slug: "daad-scholarship-guide",
+    title: "DAAD Scholarship Germany 2026 — Complete Guide",
+    desc: "Everything about DAAD scholarships in Germany for migrants and refugees — funding, eligibility, deadlines and application tips.",
+    icon: "🇩🇪",
+    time: "12 min read",
+  },
+  {
     slug: "how-to-apply-scholarship-refugee",
     title: "How to Apply for a Scholarship as a Refugee",
     desc: "Complete step-by-step guide for refugees applying for scholarships — from finding awards to submitting your application.",
