@@ -27,15 +27,15 @@ const universityData = {
     searchTerm: "Edinburgh UK scholarship refugee asylum"
   },
   "daad": {
-    name: "DAAD — German Academic Exchange Service",
+    name: "DAAD Scholarship Germany 2026 — German Academic Exchange Service",
     country: "Germany", flag: "🇩🇪",
-    description: "DAAD (Deutscher Akademischer Austauschdienst) is Germany's largest scholarship organisation, offering fully funded scholarships for refugees, asylum seekers and international students. DAAD scholarships cover full tuition, €934/month living allowance, health insurance and travel costs. Applications open October–November each year at daad.de.",
-    scholarship: "DAAD Development-Related Postgraduate Courses",
+    description: "The DAAD scholarship (Deutscher Akademischer Austauschdienst) is Germany's largest scholarship for 2026, offering fully funded Master's and PhD awards for refugees, asylum seekers and international students. Covers full tuition + €934/month living allowance + health insurance + travel costs. Open to migrants from 180+ countries. Applications open October–November 2026 at daad.de.",
+    scholarship: "DAAD Development-Related Postgraduate Courses 2026",
     funding: "Full tuition + €934/month + health insurance + travel",
-    deadline: "October–November each year",
-    eligibility: ["Refugees", "Asylum seekers", "International students", "Migrants", "Displaced researchers"],
+    deadline: "October–November 2026",
+    eligibility: ["Refugees", "Asylum seekers", "International students", "Migrants", "Displaced researchers", "Postdoctoral researchers"],
     website: "https://www.daad.de/en/study-and-research-in-germany/scholarships/",
-    searchTerm: "DAAD Germany scholarship refugee"
+    searchTerm: "DAAD Germany scholarship refugee migrant"
   },
   "tu-munich": {
     name: "Technical University of Munich (TUM)",

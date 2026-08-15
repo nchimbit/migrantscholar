@@ -12,6 +12,45 @@ const countryInfo = {
   Turkey: { flag:"🇹🇷", color:"#92400E", description:"Türkiye Bursları is one of the most accessible fully-funded scholarships in the world, open to students from 180+ countries including migrants and refugees.", topAward:"Full funding", topScholarship:"Türkiye Bursları" },
 };
 
+const countryFAQs = {
+  UK: [
+    { q: "Can asylum seekers study in the UK?", a: "Yes — asylum seekers in the UK can apply for Sanctuary Scholarships at over 70 UK universities without settled status. You need proof of your asylum seeker status." },
+    { q: "What is the Chevening Scholarship?", a: "Chevening is the UK government flagship scholarship covering full tuition plus £1,236/month for international students including migrants." },
+    { q: "Do I need IELTS for UK scholarships?", a: "Some UK Sanctuary Scholarships waive IELTS for refugees. Chevening requires IELTS 6.5. Check each scholarship individually." },
+    { q: "How much does it cost to study in the UK?", a: "Tuition fees range from £10,000–£38,000/year. Most scholarships for migrants cover full tuition plus living costs." },
+  ],
+  Germany: [
+    { q: "Is studying in Germany really free?", a: "Yes — most public universities in Germany charge no tuition fees, only a semester contribution of €100–€350. This applies to all students including migrants and refugees." },
+    { q: "What is the DAAD scholarship?", a: "DAAD is Germany largest scholarship covering full tuition plus €934/month for living costs, health insurance and travel. Open to migrants and refugees." },
+    { q: "Do I need German language skills?", a: "Not for English-taught programmes. Many Master programmes in Germany are in English. German helps with daily life." },
+    { q: "Can asylum seekers study in Germany?", a: "Yes — in most German states asylum seekers can enrol at public universities. Rules vary by state." },
+  ],
+  Canada: [
+    { q: "What is the Vanier Scholarship?", a: "The Vanier Canada Graduate Scholarship offers $50,000 CAD per year for 3 years for PhD students including migrants." },
+    { q: "Can refugees study in Canada?", a: "Yes — refugees with permanent resident status can study without restrictions. Asylum seekers may also be eligible — contact IRCC." },
+    { q: "Can I work while studying in Canada?", a: "Yes — study permit holders can work up to 20 hours per week off-campus during studies." },
+    { q: "What is the Post-Graduation Work Permit?", a: "The PGWP lets you work in Canada for up to 3 years after graduation — a pathway to permanent residence." },
+  ],
+  Australia: [
+    { q: "What are Australia Awards?", a: "Australia Awards are fully funded scholarships from the Australian government covering tuition, living costs, travel and health insurance for students from developing countries." },
+    { q: "Can migrants apply for Australian scholarships?", a: "Yes — migrants and refugees can apply for Australia Awards and university-specific scholarships." },
+    { q: "Do I need IELTS for Australian scholarships?", a: "Australia Awards require IELTS 6.5. Some universities may waive for refugees — check individually." },
+    { q: "How much does it cost to study in Australia?", a: "Tuition fees range from AUD 20,000–45,000/year. Australia Awards cover full costs including flights." },
+  ],
+  USA: [
+    { q: "What is the Fulbright Scholarship?", a: "Fulbright is the US government flagship scholarship covering full tuition plus living costs for graduate students from 160+ countries including migrants." },
+    { q: "Can asylum seekers get scholarships in the USA?", a: "Asylum seekers in the USA may access scholarships. Many universities offer dedicated funding for displaced students." },
+    { q: "Do DACA recipients qualify for scholarships?", a: "Some private scholarships accept DACA recipients. Federal Fulbright requires non-US citizen status. Check each scholarship individually." },
+    { q: "Can I work on an F1 student visa?", a: "Yes — up to 20 hours per week on campus during studies and full-time during holidays." },
+  ],
+  Turkey: [
+    { q: "What is Türkiye Bursları?", a: "Türkiye Bursları is Turkey government scholarship open to students from 180+ countries covering full tuition, accommodation, monthly stipend, health insurance and return flights." },
+    { q: "Do I need IELTS for Turkey scholarships?", a: "No — Türkiye Bursları does not require IELTS. It is one of the few fully funded scholarships without language test requirements." },
+    { q: "Can refugees apply for Turkish scholarships?", a: "Yes — Türkiye Bursları is open to students from 180+ countries including refugees and migrants." },
+    { q: "What is the monthly stipend for Türkiye Bursları?", a: "The monthly stipend is TRY 1,700 for undergraduate students and more for postgraduate students. Accommodation is also provided." },
+  ],
+};
+
 export default function CountryPage({ country, posts }) {
   const info = countryInfo[country] || { flag:"🌍", color:"#0D6E6E", description:"", topAward:"", topScholarship:"" };
 
