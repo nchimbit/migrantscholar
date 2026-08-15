@@ -294,7 +294,7 @@ export default function ComparePage({ slug, data }) {
       <Head>
         <title>{data.title} — MigrantScholar</title>
         <meta name="description" content={data.description} />
-        <link rel="canonical" href={`https://migrantscholar.vercel.app/compare/${slug}`} />
+        <link rel="canonical" href={`https://migrantscholar.com/compare/${slug}`} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
           "@context":"https://schema.org",
           "@type":"Article",

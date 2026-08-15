@@ -42,13 +42,13 @@ export default function NationalityPage({ nationality, posts, info }) {
       <Head>
         <title>Scholarships for {info.adjective} Students & Refugees 2026 — MigrantScholar</title>
         <meta name="description" content={`Verified scholarships for ${info.adjective} students, refugees and migrants. Find fully funded awards in UK, Germany, Canada, Australia and USA.`} />
-        <link rel="canonical" href={`https://migrantscholar.vercel.app/nationality/${nationality}`} />
+        <link rel="canonical" href={`https://migrantscholar.com/nationality/${nationality}`} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
           "@context":"https://schema.org",
           "@type":"CollectionPage",
           "name":`Scholarships for ${info.adjective} Students and Refugees`,
           "description":`Verified scholarships for ${info.adjective} students, refugees and migrants.`,
-          "url":`https://migrantscholar.vercel.app/nationality/${nationality}`
+          "url":`https://migrantscholar.com/nationality/${nationality}`
         })}} />
       </Head>
       <Navbar />

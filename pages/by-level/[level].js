@@ -45,13 +45,13 @@ export default function LevelPage({ level, posts, info }) {
       <Head>
         <title>{info.title} 2026 — MigrantScholar</title>
         <meta name="description" content={info.description} />
-        <link rel="canonical" href={`https://migrantscholar.vercel.app/by-level/${level}`} />
+        <link rel="canonical" href={`https://migrantscholar.com/by-level/${level}`} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
           "@context":"https://schema.org",
           "@type":"CollectionPage",
           "name":info.title,
           "description":info.description,
-          "url":`https://migrantscholar.vercel.app/by-level/${level}`
+          "url":`https://migrantscholar.com/by-level/${level}`
         })}} />
       </Head>
       <Navbar />

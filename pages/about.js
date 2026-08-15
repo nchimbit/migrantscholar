@@ -21,7 +21,7 @@ export default function About({ totalGuides, totalCountries }) {
       <Head>
         <title>About MigrantScholar — Our Mission and Story</title>
         <meta name="description" content="MigrantScholar is a free scholarship resource built for migrants, refugees, and asylum seekers. Learn about our mission and how we can help." />
-        <link rel="canonical" href="https://migrantscholar.vercel.app/about" />
+        <link rel="canonical" href="https://migrantscholar.com/about" />
       </Head>
       <Navbar />
 

@@ -28,7 +28,7 @@ export default function BlogIndex({ posts, countries }) {
       <Head>
         <title>Scholarship Guides for Migrants — MigrantScholar</title>
         <meta name="description" content="Browse all scholarship guides for migrants, refugees, and asylum seekers. Updated daily." />
-        <link rel="canonical" href="https://migrantscholar.vercel.app/blog" />
+        <link rel="canonical" href="https://migrantscholar.com/blog" />
       </Head>
       <Navbar />
 

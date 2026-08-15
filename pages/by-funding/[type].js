@@ -31,7 +31,7 @@ export default function FundingPage({ type, posts, info }) {
       <Head>
         <title>{info.title} 2026 — MigrantScholar</title>
         <meta name="description" content={info.description} />
-        <link rel="canonical" href={`https://migrantscholar.vercel.app/by-funding/${type}`} />
+        <link rel="canonical" href={`https://migrantscholar.com/by-funding/${type}`} />
       </Head>
       <Navbar />
 

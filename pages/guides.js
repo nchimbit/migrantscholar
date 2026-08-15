@@ -67,13 +67,13 @@ export default function GuidesPage() {
       <Head>
         <title>Scholarship Guides for Migrants & Refugees — MigrantScholar</title>
         <meta name="description" content="Free step-by-step scholarship guides for migrants, refugees and asylum seekers. How to apply, motivation letters, IELTS waivers and more." />
-        <link rel="canonical" href="https://migrantscholar.vercel.app/guides" />
+        <link rel="canonical" href="https://migrantscholar.com/guides" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
           "@context":"https://schema.org",
           "@type":"CollectionPage",
           "name":"Scholarship Guides for Migrants & Refugees",
           "description":"Free step-by-step scholarship guides for migrants, refugees and asylum seekers.",
-          "url":"https://migrantscholar.vercel.app/guides"
+          "url":"https://migrantscholar.com/guides"
         })}} />
       </Head>
       <Navbar />

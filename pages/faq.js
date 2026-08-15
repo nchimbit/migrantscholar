@@ -123,7 +123,7 @@ export default function FAQPage() {
       <Head>
         <title>FAQ — Scholarships for Migrants & Refugees — MigrantScholar</title>
         <meta name="description" content="Frequently asked questions about scholarships for migrants, refugees and asylum seekers. Eligibility, IELTS waivers, fully funded awards and more." />
-        <link rel="canonical" href="https://migrantscholar.vercel.app/faq" />
+        <link rel="canonical" href="https://migrantscholar.com/faq" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
           "@context":"https://schema.org",
           "@type":"FAQPage",

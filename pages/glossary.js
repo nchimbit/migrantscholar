@@ -38,12 +38,12 @@ export default function GlossaryPage() {
       <Head>
         <title>Scholarship Glossary for Migrants & Refugees — MigrantScholar</title>
         <meta name="description" content="Plain-language definitions of scholarship terms for migrants and refugees — asylum seeker, refugee, fully funded, IELTS waiver, stipend and more." />
-        <link rel="canonical" href="https://migrantscholar.vercel.app/glossary" />
+        <link rel="canonical" href="https://migrantscholar.com/glossary" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
           "@context":"https://schema.org",
           "@type":"DefinedTermSet",
           "name":"Scholarship Glossary for Migrants and Refugees",
-          "url":"https://migrantscholar.vercel.app/glossary",
+          "url":"https://migrantscholar.com/glossary",
           "hasDefinedTerm": terms.map(t=>({
             "@type":"DefinedTerm",
             "name":t.term,

@@ -89,21 +89,21 @@ export default function Home({ posts, totalCountries, trending }) {
         <meta property="og:title" content="MigrantScholar — Free Scholarships for Migrants and Refugees" />
         <meta property="og:description" content="Find verified fully funded scholarships for migrants, refugees, and asylum seekers. Updated daily." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://migrantscholar.vercel.app" />
-        <meta property="og:image" content="https://migrantscholar.vercel.app/og-image.png" />
+        <meta property="og:url" content="https://migrantscholar.com" />
+        <meta property="og:image" content="https://migrantscholar.com/og-image.png" />
         <meta property="og:site_name" content="MigrantScholar" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="MigrantScholar — Free Scholarships for Migrants and Refugees" />
         <meta name="twitter:description" content="Find verified fully funded scholarships for migrants, refugees, and asylum seekers. Updated daily." />
-        <meta name="twitter:image" content="https://migrantscholar.vercel.app/og-image.png" />
-        <link rel="canonical" href="https://migrantscholar.vercel.app" />
+        <meta name="twitter:image" content="https://migrantscholar.com/og-image.png" />
+        <link rel="canonical" href="https://migrantscholar.com" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
           "@context":"https://schema.org",
           "@type":"WebSite",
           "name":"MigrantScholar",
-          "url":"https://migrantscholar.vercel.app",
+          "url":"https://migrantscholar.com",
           "description":"Free verified scholarships for migrants, refugees, asylum seekers and international students. Updated daily.",
-          "potentialAction":{"@type":"SearchAction","target":"https://migrantscholar.vercel.app/blog?search={search_term_string}","query-input":"required name=search_term_string"},
+          "potentialAction":{"@type":"SearchAction","target":"https://migrantscholar.com/blog?search={search_term_string}","query-input":"required name=search_term_string"},
           "speakable":{"@type":"SpeakableSpecification","cssSelector":["h1","h2",".hero-description"]}
         })}} />
       </Head>

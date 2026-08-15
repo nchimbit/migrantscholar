@@ -25,7 +25,7 @@ export default function ByDeadlinePage({ posts }) {
       <Head>
         <title>Scholarships by Deadline 2026-2027 for Migrants — MigrantScholar</title>
         <meta name="description" content="Browse scholarships for migrants and refugees sorted by deadline. Find the next closing scholarship and apply before it's too late." />
-        <link rel="canonical" href="https://migrantscholar.vercel.app/by-deadline" />
+        <link rel="canonical" href="https://migrantscholar.com/by-deadline" />
       </Head>
       <Navbar />
 

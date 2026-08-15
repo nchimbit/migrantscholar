@@ -24,7 +24,7 @@ export default function DeadlinesPage({ totalPosts }) {
       <Head>
         <title>Scholarship Deadlines 2026-2027 for Migrants & Refugees — MigrantScholar</title>
         <meta name="description" content="Upcoming scholarship deadlines for migrants, refugees and asylum seekers in 2026 and 2027. DAAD, Chevening, Fulbright, Vanier and more." />
-        <link rel="canonical" href="https://migrantscholar.vercel.app/deadlines" />
+        <link rel="canonical" href="https://migrantscholar.com/deadlines" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
           "@context":"https://schema.org",
           "@type":"ItemList",

@@ -55,7 +55,7 @@ export default function Alerts() {
       <Head>
         <title>Get Free Scholarship Alerts — MigrantScholar</title>
         <meta name="description" content="Subscribe to free scholarship alerts for migrants, refugees, and asylum seekers. Get notified the moment new awards open." />
-        <link rel="canonical" href="https://migrantscholar.vercel.app/alerts" />
+        <link rel="canonical" href="https://migrantscholar.com/alerts" />
       </Head>
       <Navbar />
 

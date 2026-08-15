@@ -32,13 +32,13 @@ export default function CountryFilterPage({ country, filter, posts, cData, fData
       <Head>
         <title>{fData.label} Scholarships in {cData.fullName} for Migrants 2026 — MigrantScholar</title>
         <meta name="description" content={`Verified ${fData.label} scholarships in ${cData.fullName} for migrants, refugees and asylum seekers. ${cData.topScholarship} and more. Updated daily.`} />
-        <link rel="canonical" href={`https://migrantscholar.vercel.app/scholarships/${country}/${filter}`} />
+        <link rel="canonical" href={`https://migrantscholar.com/scholarships/${country}/${filter}`} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
           "@context":"https://schema.org",
           "@type":"CollectionPage",
           "name":`${fData.label} Scholarships in ${cData.fullName} for Migrants`,
           "description":`Verified ${fData.label} scholarships in ${cData.fullName} for migrants and refugees.`,
-          "url":`https://migrantscholar.vercel.app/scholarships/${country}/${filter}`
+          "url":`https://migrantscholar.com/scholarships/${country}/${filter}`
         })}} />
       </Head>
       <Navbar />

@@ -64,13 +64,13 @@ export default function EligibilityPage({ type, posts, info }) {
       <Head>
         <title>{info.title} 2026 — MigrantScholar</title>
         <meta name="description" content={info.description} />
-        <link rel="canonical" href={`https://migrantscholar.vercel.app/by-eligibility/${type}`} />
+        <link rel="canonical" href={`https://migrantscholar.com/by-eligibility/${type}`} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
           "@context":"https://schema.org",
           "@type":"CollectionPage",
           "name":info.title,
           "description":info.description,
-          "url":`https://migrantscholar.vercel.app/by-eligibility/${type}`
+          "url":`https://migrantscholar.com/by-eligibility/${type}`
         })}} />
       </Head>
       <Navbar />
