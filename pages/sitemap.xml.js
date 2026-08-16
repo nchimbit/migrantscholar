@@ -7,7 +7,7 @@ function generateSitemap(posts) {
   const nationalities = ["syrian","afghan","sudanese","somali","congolese","venezuelan","ukrainian","rohingya","iraqi","eritrean","south-sudanese","myanmar","ethiopian","nigerian","pakistani","kenyan","bangladeshi","zimbabwean","yemeni","libyan","burundian","malian","cameroonian","ghanaian","tanzanian","ugandan","rwandan","iranian","turkish"];
   const compareSlugs = ["daad-vs-chevening","uk-vs-germany","masters-vs-phd","canada-vs-australia","fully-funded-vs-partial","turkey-vs-canada","masters-vs-undergraduate","uk-vs-canada","germany-vs-turkey","phd-vs-postdoc"];
   const universities = ["oxford","university-of-edinburgh","daad","tu-munich","humboldt-berlin","chevening","vanier","university-of-toronto","mcgill","australia-awards","fulbright","harvard","mit","columbia","turkiye-burslari"];
-  const guides = ["study-in-germany-free","f1-visa-guide-migrants","canada-study-permit","germany-student-visa","uk-student-visa-refugees","daad-scholarship-guide"];
+  const guides = ["study-in-germany-free","f1-visa-guide-migrants","canada-study-permit","germany-student-visa","uk-student-visa-refugees","daad-scholarship-guide","chevening-scholarship-guide","fulbright-scholarship-guide"];
   const lists = ["top-10-fully-funded-scholarships-refugees","top-10-germany-scholarships-migrants","top-10-usa-scholarships-migrants","top-10-women-scholarships-migrants","top-10-stem-scholarships-migrants"];
 
   return `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

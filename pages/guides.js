@@ -4,6 +4,20 @@ import { Navbar, Footer } from "../components/Layout";
 
 const guides = [
   {
+    slug: "chevening-scholarship-guide",
+    title: "Chevening Scholarship 2026 — Complete Guide",
+    desc: "Complete guide to the UK government Chevening Scholarship for migrants and international students.",
+    icon: "🇬🇧",
+    time: "10 min read",
+  },
+  {
+    slug: "fulbright-scholarship-guide",
+    title: "Fulbright Scholarship 2026 — Complete Guide",
+    desc: "Complete guide to the US Fulbright Scholarship for migrants and international students worldwide.",
+    icon: "🇺🇸",
+    time: "10 min read",
+  },
+  {
     slug: "daad-scholarship-guide",
     title: "DAAD Scholarship Germany 2026 — Complete Guide",
     desc: "Everything about DAAD scholarships in Germany for migrants and refugees — funding, eligibility, deadlines and application tips.",
@@ -44,6 +58,20 @@ const guides = [
     desc: "You don't need a final decision to apply. Learn which scholarships accept pending asylum claims.",
     icon: "⏳",
     time: "9 min read",
+  },
+  {
+    slug: "chevening-scholarship-guide",
+    title: "Chevening Scholarship 2026 — Complete Guide",
+    desc: "Complete guide to the UK government Chevening Scholarship for migrants and international students.",
+    icon: "🇬🇧",
+    time: "10 min read",
+  },
+  {
+    slug: "fulbright-scholarship-guide",
+    title: "Fulbright Scholarship 2026 — Complete Guide",
+    desc: "Complete guide to the US Fulbright Scholarship for migrants and international students worldwide.",
+    icon: "🇺🇸",
+    time: "10 min read",
   },
   {
     slug: "daad-scholarship-guide",
