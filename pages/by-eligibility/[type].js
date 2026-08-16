@@ -2,6 +2,40 @@ import Head from "next/head";
 import Link from "next/link";
 import { Navbar, Footer } from "../../components/Layout";
 import { getAllPosts, formatDate } from "../../lib/posts";
+const eligibilityFAQs = {
+  "refugees": [
+    { q: "Can I apply for scholarships as a refugee?", a: "Yes — many scholarships are specifically designed for refugees including DAAD, Chevening and UK Sanctuary Scholarships." },
+    { q: "Do I need settled status to get a scholarship?", a: "No — most refugee scholarships do not require settled status. Over 70 UK universities accept asylum seekers without permanent residence." },
+    { q: "What documents do refugees need to apply?", a: "Typically UNHCR refugee card, academic transcripts, personal statement and 2 reference letters. Requirements vary by scholarship." },
+    { q: "Which country has the most scholarships for refugees?", a: "The UK leads with 70+ Sanctuary Scholarships. Germany is second with DAAD. Canada, Australia, USA and Turkey also have strong options." },
+  ],
+  "asylum-seekers": [
+    { q: "Can asylum seekers apply for scholarships?", a: "Yes — many scholarships accept asylum seekers with pending claims. UK Sanctuary Scholarships and DAAD accept pending applications." },
+    { q: "What proof do asylum seekers need?", a: "A Home Office letter or ARC card showing your asylum claim is pending. Requirements vary by country and institution." },
+    { q: "Can I get student finance as an asylum seeker?", a: "Generally no. Sanctuary Scholarships exist specifically to replace student finance for asylum seekers." },
+    { q: "Are there emergency scholarships for asylum seekers?", a: "Yes — some universities offer emergency bursaries. Contact the financial aid office of your target university." },
+  ],
+  "without-ielts": [
+    { q: "Which scholarships do not require IELTS?", a: "DAAD often waives IELTS for those who studied in English. Turkiye Burslari has no IELTS requirement. Many Sanctuary Scholarships also waive it for refugees." },
+    { q: "What can replace IELTS?", a: "A medium of instruction letter from your university, TOEFL, or Duolingo English Test are accepted by many scholarships instead of IELTS." },
+    { q: "Does DAAD require IELTS?", a: "Not always — DAAD accepts students who studied in English or who apply to English-taught programmes. Check daad.de for specific requirements." },
+    { q: "Can I get a scholarship without any English test?", a: "Yes if you have studied in English for 2+ years. A letter from your university confirming English as medium of instruction is usually sufficient." },
+  ],
+  "migrants": [
+    { q: "What scholarships are available for migrants?", a: "Chevening (UK), DAAD (Germany), Vanier (Canada), Australia Awards, Fulbright (USA) and Turkiye Burslari (Turkey) all welcome migrants." },
+    { q: "Do I need to be in the destination country to apply?", a: "No — most scholarships require you to apply from your current country of residence before travelling." },
+    { q: "Can I apply for multiple scholarships at once?", a: "Yes — applying to multiple scholarships simultaneously is strongly recommended to maximise your chances." },
+    { q: "What is the difference between migrant and refugee scholarships?", a: "Refugee scholarships require official refugee status. Migrant scholarships are broader and include international students and skilled workers." },
+  ],
+  "fully-funded": [
+    { q: "What does fully funded mean?", a: "A fully funded scholarship covers all costs: tuition, monthly living allowance, travel costs and usually health insurance. You pay nothing." },
+    { q: "Which fully funded scholarships are open to migrants?", a: "DAAD (934 euros/month), Chevening (1236 pounds/month), Vanier (50000 CAD/year), Turkiye Burslari and Australia Awards all offer full funding." },
+    { q: "How competitive are fully funded scholarships?", a: "Very competitive with 5-25% acceptance rates. Apply to multiple scholarships simultaneously to maximise your chances." },
+    { q: "Can I apply for multiple fully funded scholarships?", a: "Yes — most scholarships do not require exclusivity at the application stage, only at the acceptance stage." },
+  ],
+};
+
+
 
 const eligibilityInfo = {
   "refugees": {
@@ -71,7 +105,7 @@ export default function EligibilityPage({ type, posts, info }) {
           "itemListElement":[
             {"@type":"ListItem","position":1,"name":"Home","item":"https://migrantscholar.com"},
             {"@type":"ListItem","position":2,"name":"Scholarships by Eligibility","item":"https://migrantscholar.com/blog"},
-            {"@type":"ListItem","position":3,"name":info.title,"item":`https://migrantscholar.com/by-eligibility/${type}`}
+            {"@type":"ListItem","position":3,"name":type.replace(/-/g," "),"item":`https://migrantscholar.com/by-eligibility/${type}`}
           ]
         })}} />
         {eligibilityFAQs[type] && (
