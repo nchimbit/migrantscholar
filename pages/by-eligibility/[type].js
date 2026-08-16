@@ -67,6 +67,26 @@ export default function EligibilityPage({ type, posts, info }) {
         <link rel="canonical" href={`https://migrantscholar.com/by-eligibility/${type}`} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
           "@context":"https://schema.org",
+          "@type":"BreadcrumbList",
+          "itemListElement":[
+            {"@type":"ListItem","position":1,"name":"Home","item":"https://migrantscholar.com"},
+            {"@type":"ListItem","position":2,"name":"Scholarships by Eligibility","item":"https://migrantscholar.com/blog"},
+            {"@type":"ListItem","position":3,"name":info.title,"item":`https://migrantscholar.com/by-eligibility/${type}`}
+          ]
+        })}} />
+        {eligibilityFAQs[type] && (
+          <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
+            "@context":"https://schema.org",
+            "@type":"FAQPage",
+            "mainEntity":(eligibilityFAQs[type]||[]).map(({q,a})=>({
+              "@type":"Question",
+              "name":q,
+              "acceptedAnswer":{"@type":"Answer","text":a}
+            }))
+          })}} />
+        )}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
+          "@context":"https://schema.org",
           "@type":"CollectionPage",
           "name":info.title,
           "description":info.description,

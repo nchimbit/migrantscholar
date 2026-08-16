@@ -32,6 +32,25 @@ export default function FundingPage({ type, posts, info }) {
         <title>{info.title} 2026 — MigrantScholar</title>
         <meta name="description" content={info.description} />
         <link rel="canonical" href={`https://migrantscholar.com/by-funding/${type}`} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
+          "@context":"https://schema.org",
+          "@type":"BreadcrumbList",
+          "itemListElement":[
+            {"@type":"ListItem","position":1,"name":"Home","item":"https://migrantscholar.com"},
+            {"@type":"ListItem","position":2,"name":"Scholarships by Funding","item":"https://migrantscholar.com/blog"},
+            {"@type":"ListItem","position":3,"name":info.title,"item":`https://migrantscholar.com/by-funding/${type}`}
+          ]
+        })}} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
+          "@context":"https://schema.org",
+          "@type":"FAQPage",
+          "mainEntity":[
+            {"@type":"Question","name":"What does fully funded scholarship mean?","acceptedAnswer":{"@type":"Answer","text":"A fully funded scholarship covers all costs including tuition fees, monthly living allowance, travel costs to and from the host country, and usually health insurance. You pay nothing out of pocket. Examples include DAAD (€934/month + tuition), Chevening (£1,236/month + tuition) and Türkiye Bursları (full coverage including accommodation)."}},
+            {"@type":"Question","name":"Which fully funded scholarships are open to refugees?","acceptedAnswer":{"@type":"Answer","text":"Top fully funded scholarships for refugees include: DAAD Germany (full tuition + €934/month), Chevening UK (full tuition + £1,236/month), Oxford Sanctuary Scholarship (full tuition + £17,635/year), Vanier Canada ($50,000 CAD/year), Türkiye Bursları (full coverage), and Australia Awards (full coverage including flights)."}},
+            {"@type":"Question","name":"How do I apply for a fully funded scholarship?","acceptedAnswer":{"@type":"Answer","text":"To apply for a fully funded scholarship: 1) Research scholarships matching your eligibility on migrantscholar.com, 2) Check specific requirements and deadlines, 3) Prepare documents (transcripts, personal statement, reference letters), 4) Apply before the deadline, 5) Await results. Most deadlines fall October-March."}},
+            {"@type":"Question","name":"What is the difference between fully funded and partial scholarships?","acceptedAnswer":{"@type":"Answer","text":"A fully funded scholarship covers all costs (tuition + living + travel + health). A partial scholarship covers only some costs — typically tuition only or a monthly stipend only. You need additional funding to cover remaining costs with a partial scholarship."}}
+          ]
+        })}} />
       </Head>
       <Navbar />
 

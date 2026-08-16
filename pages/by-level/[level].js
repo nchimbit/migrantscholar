@@ -48,6 +48,25 @@ export default function LevelPage({ level, posts, info }) {
         <link rel="canonical" href={`https://migrantscholar.com/by-level/${level}`} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
           "@context":"https://schema.org",
+          "@type":"BreadcrumbList",
+          "itemListElement":[
+            {"@type":"ListItem","position":1,"name":"Home","item":"https://migrantscholar.com"},
+            {"@type":"ListItem","position":2,"name":"Scholarships by Level","item":"https://migrantscholar.com/blog"},
+            {"@type":"ListItem","position":3,"name":info.label + " Scholarships","item":`https://migrantscholar.com/by-level/${level}`}
+          ]
+        })}} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
+          "@context":"https://schema.org",
+          "@type":"FAQPage",
+          "mainEntity":[
+            {"@type":"Question","name":`What are the best ${info.label} scholarships for migrants?`,"acceptedAnswer":{"@type":"Answer","text":`Top ${info.label} scholarships for migrants include DAAD Germany (€934/month), Chevening UK (£1,236/month), Vanier Canada ($50,000/year), Australia Awards (full funding) and Türkiye Bursları (full coverage). All are open to migrants and refugees.`}},
+            {"@type":"Question","name":`Are there fully funded ${info.label} scholarships for refugees?`,"acceptedAnswer":{"@type":"Answer","text":`Yes — many fully funded ${info.label} scholarships are open to refugees. DAAD, Chevening, Oxford Sanctuary Scholarship and Vanier Canada all offer full funding at ${info.label} level for eligible refugees and migrants.`}},
+            {"@type":"Question","name":`What GPA do I need for ${info.label} scholarships?`,"acceptedAnswer":{"@type":"Answer","text":`Most competitive ${info.label} scholarships require a minimum GPA of 3.0/4.0 or equivalent (UK upper second class honours 2:1). DAAD and Chevening typically require strong academic records. Some emergency and refugee-specific scholarships may be more flexible.`}},
+            {"@type":"Question","name":`When should I apply for ${info.label} scholarships?`,"acceptedAnswer":{"@type":"Answer","text":`Apply 12-18 months before your intended start date. Most ${info.label} scholarship deadlines fall between October and March for the following academic year. DAAD deadlines are typically October-November. Chevening closes in November. Check individual scholarship deadlines at migrantscholar.com/deadlines.`}}
+          ]
+        })}} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
+          "@context":"https://schema.org",
           "@type":"CollectionPage",
           "name":info.title,
           "description":info.description,

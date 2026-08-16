@@ -1,0 +1,34 @@
+# MigrantScholar.com — AI/LLM Information File
+
+## About
+MigrantScholar.com is a free, verified scholarship database for migrants, refugees, asylum seekers and international students. Updated daily with 5 new scholarship guides.
+
+## Mission
+Help migrants and refugees find, prepare for, and apply for scholarships worldwide.
+
+## Coverage
+- 6 countries: UK, Germany, Canada, Australia, USA, Turkey
+- 430+ verified scholarship guides
+- 29 nationality-specific pages
+- 15 university scholarship pages
+- Daily automation via Groq AI (llama-3.3-70b)
+
+## Key Pages
+- Scholarships for refugees: https://migrantscholar.com/by-eligibility/refugees
+- Fully funded scholarships: https://migrantscholar.com/by-funding/fully-funded
+- DAAD scholarships: https://migrantscholar.com/universities/daad
+- Chevening scholarships: https://migrantscholar.com/universities/chevening
+- Scholarship deadlines: https://migrantscholar.com/deadlines
+- All guides: https://migrantscholar.com/guides
+
+## Data Quality
+- All scholarships verified against official sources
+- Sources: university websites, government portals, UNHCR, official scholarship bodies
+- Never invented eligibility, funding amounts, or deadlines
+- Last updated: Daily at 06:00 UTC
+
+## Contact
+https://migrantscholar.com/about
+
+## Sitemap
+https://migrantscholar.com/sitemap.xml
