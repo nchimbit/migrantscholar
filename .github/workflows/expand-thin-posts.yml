@@ -1,0 +1,77 @@
+name: Expand thin posts
+on:
+  workflow_dispatch:
+jobs:
+  expand:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Find and expand thin posts
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        run: |
+          node << 'EOF'
+          import { readFileSync, writeFileSync, readdirSync } from 'fs';
+          import { join, dirname } from 'path';
+          import { fileURLToPath } from 'url';
+          import Groq from 'groq-sdk';
+
+          const __dirname = dirname(fileURLToPath(import.meta.url));
+          const client = new Groq({ apiKey: process.env.GROQ_API_KEY });
+          const postsDir = join(__dirname, 'content/posts');
+          const files = readdirSync(postsDir).filter(f => f.endsWith('.mdx'));
+          
+          let expanded = 0;
+          const MAX_EXPAND = 10; // expand 10 per run
+
+          for (const file of files) {
+            if (expanded >= MAX_EXPAND) break;
+            const fpath = join(postsDir, file);
+            const content = readFileSync(fpath, 'utf8');
+            const parts = content.split('---');
+            if (parts.length < 3) continue;
+            const fm = parts[1];
+            const body = parts.slice(2).join('---').trim();
+            const words = body.split(/\s+/).length;
+            if (words >= 900) continue;
+
+            const titleMatch = fm.match(/title: "([^"]+)"/);
+            const countryMatch = fm.match(/country: "([^"]+)"/);
+            if (!titleMatch) continue;
+
+            console.log(`Expanding: ${file} (${words} words)`);
+            
+            try {
+              const response = await client.chat.completions.create({
+                model: "llama-3.3-70b-versatile",
+                max_tokens: 2000,
+                messages: [{
+                  role: "user",
+                  content: `Expand this scholarship article to 1500+ words. Keep all existing content. Add more detail to: Who Qualifies section, Application Steps, FAQ section, and Required Documents. Only use verified information. Country: ${countryMatch?.[1]||''}. Title: ${titleMatch[1]}\n\nExisting content:\n${body}\n\nReturn the complete expanded markdown only. No backticks.`
+                }]
+              });
+              
+              const expanded_content = response.choices[0]?.message?.content;
+              if (!expanded_content || expanded_content.split(/\s+/).length < words) continue;
+              
+              writeFileSync(fpath, '---' + fm + '---\n' + expanded_content.trim() + '\n');
+              console.log(`Expanded: ${file} to ${expanded_content.split(/\s+/).length} words`);
+              expanded++;
+            } catch(e) {
+              console.log(`Failed: ${file} - ${e.message}`);
+            }
+          }
+          console.log(`Done: expanded ${expanded} posts`);
+          EOF
+      - name: Commit
+        run: |
+          git config --global user.name "MigrantScholar Bot"
+          git config --global user.email "bot@migrantscholar.com"
+          git add content/posts/
+          git diff --staged --quiet || git commit -m "fix: expand thin posts to 1500+ words"
+          git push

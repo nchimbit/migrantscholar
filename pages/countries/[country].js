@@ -59,7 +59,7 @@ export default function CountryPage({ country, posts }) {
       <Head>
         <title>{info.flag} {country} Scholarships for Migrants & Refugees — MigrantScholar</title>
         <meta name="description" content={`Find fully-funded scholarships in ${country} for migrants, refugees and asylum seekers. ${info.description}`} />
-        <link rel="canonical" href={`https://migrantscholar.com/countries/${country.toLowerCase()}`} />
+        <link rel="canonical" href={`https://migrantscholar.com/countries/${country}`} />
       </Head>
       <Navbar />
 
