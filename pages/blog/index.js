@@ -29,7 +29,7 @@ export default function BlogIndex({ posts, countries }) {
         <title>Scholarship Guides for Migrants & Refugees 2026 — MigrantScholar</title>
         <meta name="description" content="Browse 440+ verified scholarship guides for migrants, refugees and asylum seekers. Updated daily across UK, Germany, Canada, Australia, USA and Turkey." />
         <link rel="canonical" href="https://migrantscholar.com/blog" />
-        {(search || filterCountry !== "All Countries" || filterLevel !== "All Levels" || filterFunding !== "All Types") && (
+        {typeof window !== "undefined" && window.location.search && (
           <meta name="robots" content="noindex, follow" />
         )}
       </Head>
