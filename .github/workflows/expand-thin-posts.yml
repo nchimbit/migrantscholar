@@ -11,23 +11,24 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Find and expand thin posts
+      - name: Install dependencies
+        run: npm install groq-sdk
+      - name: Expand thin posts
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: |
-          node << 'EOF'
+          node --input-type=module << 'EOF'
           import { readFileSync, writeFileSync, readdirSync } from 'fs';
           import { join, dirname } from 'path';
           import { fileURLToPath } from 'url';
           import Groq from 'groq-sdk';
 
-          const __dirname = dirname(fileURLToPath(import.meta.url));
           const client = new Groq({ apiKey: process.env.GROQ_API_KEY });
-          const postsDir = join(__dirname, 'content/posts');
+          const postsDir = 'content/posts';
           const files = readdirSync(postsDir).filter(f => f.endsWith('.mdx'));
           
           let expanded = 0;
-          const MAX_EXPAND = 10; // expand 10 per run
+          const MAX_EXPAND = 10;
 
           for (const file of files) {
             if (expanded >= MAX_EXPAND) break;
@@ -52,15 +53,16 @@ jobs:
                 max_tokens: 2000,
                 messages: [{
                   role: "user",
-                  content: `Expand this scholarship article to 1500+ words. Keep all existing content. Add more detail to: Who Qualifies section, Application Steps, FAQ section, and Required Documents. Only use verified information. Country: ${countryMatch?.[1]||''}. Title: ${titleMatch[1]}\n\nExisting content:\n${body}\n\nReturn the complete expanded markdown only. No backticks.`
+                  content: `You are expanding a scholarship article for MigrantScholar.com. Keep all existing content and ADD more detail to reach 1500+ words total. Add more to: Who Qualifies section, Application Steps, Required Documents checklist, and FAQ section. Only use verified information. Never invent scholarship details.\n\nCountry: ${countryMatch?.[1]||''}\nTitle: ${titleMatch[1]}\n\nExisting content:\n${body}\n\nReturn the complete expanded markdown only. No backticks. No code fences.`
                 }]
               });
               
-              const expanded_content = response.choices[0]?.message?.content;
-              if (!expanded_content || expanded_content.split(/\s+/).length < words) continue;
+              const expandedContent = response.choices[0]?.message?.content;
+              if (!expandedContent) { console.log('Empty response, skipping'); continue; }
+              if (expandedContent.split(/\s+/).length <= words) { console.log('Not expanded enough, skipping'); continue; }
               
-              writeFileSync(fpath, '---' + fm + '---\n' + expanded_content.trim() + '\n');
-              console.log(`Expanded: ${file} to ${expanded_content.split(/\s+/).length} words`);
+              writeFileSync(fpath, '---' + fm + '---\n' + expandedContent.trim() + '\n');
+              console.log(`Expanded: ${file} to ${expandedContent.split(/\s+/).length} words`);
               expanded++;
             } catch(e) {
               console.log(`Failed: ${file} - ${e.message}`);
