@@ -12,7 +12,7 @@ async function getTrendingTopics() {
   const postsDir = path.join(__dirname, "../content/posts");
   const existing = fs.existsSync(postsDir) ? fs.readdirSync(postsDir).slice(-30).map(f => f.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/.mdx$/, '').replace(/-/g, ' ')).join(', ') : '';
   const response = await client.chat.completions.create({
-    model: "llama-3.3-70b-versatile",
+    model: "llama3-70b-8192",
     max_tokens: 1000,
     messages: [{
       role: "user",
@@ -33,7 +33,7 @@ async function generatePost(topic) {
   console.log("Writing: " + topic.title);
   const today = new Date().toISOString().split("T")[0];
   const response = await client.chat.completions.create({
-    model: "llama-3.3-70b-versatile",
+    model: "llama3-70b-8192",
     max_tokens: 3000,
     messages: [{
       role: "user",
