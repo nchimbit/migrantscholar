@@ -297,6 +297,15 @@ export default function ComparePage({ slug, data }) {
         <link rel="canonical" href={`https://migrantscholar.com/compare/${slug}`} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
           "@context":"https://schema.org",
+          "@type":"BreadcrumbList",
+          "itemListElement":[
+            {"@type":"ListItem","position":1,"name":"Home","item":"https://migrantscholar.com"},
+            {"@type":"ListItem","position":2,"name":"Scholarship Comparisons","item":"https://migrantscholar.com/guides"},
+            {"@type":"ListItem","position":3,"name":data.title,"item":`https://migrantscholar.com/compare/${slug}`}
+          ]
+        })}} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
+          "@context":"https://schema.org",
           "@type":"Article",
           "headline":data.title,
           "description":data.description

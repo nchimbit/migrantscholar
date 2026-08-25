@@ -181,6 +181,15 @@ export default function UniversityPage({ university, posts, info }) {
         <link rel="canonical" href={`https://migrantscholar.com/universities/${university}`} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
           "@context":"https://schema.org",
+          "@type":"BreadcrumbList",
+          "itemListElement":[
+            {"@type":"ListItem","position":1,"name":"Home","item":"https://migrantscholar.com"},
+            {"@type":"ListItem","position":2,"name":"Universities","item":"https://migrantscholar.com/universities"},
+            {"@type":"ListItem","position":3,"name":info.name,"item":`https://migrantscholar.com/universities/${university}`}
+          ]
+        })}} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
+          "@context":"https://schema.org",
           "@type":"EducationalOrganization",
           "name":info.name,
           "description":info.description,

@@ -24,7 +24,7 @@ export default function UniversitiesPage() {
   return (
     <>
       <Head>
-        <title>Universities Offering Scholarships for Migrants & Refugees — MigrantScholar</title>
+        <title>University Scholarships for Migrants & Refugees 2026</title>
         <meta name="description" content="Top universities offering scholarships for migrants, refugees and asylum seekers. Harvard, MIT, Oxford, DAAD, Toronto, McGill and more. Free, updated daily." />
         <link rel="canonical" href="https://migrantscholar.com/universities" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({

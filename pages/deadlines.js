@@ -22,7 +22,7 @@ export default function DeadlinesPage({ totalPosts }) {
   return (
     <>
       <Head>
-        <title>Scholarship Deadlines 2026-2027 for Migrants & Refugees — MigrantScholar</title>
+        <title>Scholarship Deadlines 2026 for Migrants & Refugees</title>
         <meta name="description" content="Upcoming scholarship deadlines for migrants, refugees and asylum seekers in 2026 and 2027. DAAD, Chevening, Fulbright, Vanier and more." />
         <link rel="canonical" href="https://migrantscholar.com/deadlines" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({

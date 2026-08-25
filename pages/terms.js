@@ -7,7 +7,8 @@ export default function Terms() {
     <>
       <Head>
         <title>Terms of Use — MigrantScholar</title>
-        <meta name="description" content="MigrantScholar terms of use. Read our terms before using our scholarship resource." />
+                <link rel="canonical" href="https://migrantscholar.com/terms" />
+<meta name="description" content="MigrantScholar terms of use. Read our terms before using our scholarship resource." />
       </Head>
       <Navbar />
       <div style={{background:"#E6F4F1",minHeight:"100vh",padding:"1rem 2rem 2rem"}}>

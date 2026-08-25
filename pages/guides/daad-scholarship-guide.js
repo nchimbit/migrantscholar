@@ -17,7 +17,7 @@ export default function DAADGuidePage() {
   return (
     <>
       <Head>
-        <title>DAAD Scholarship Germany 2026 — Complete Guide for Migrants & Refugees | MigrantScholar</title>
+        <title>DAAD Scholarship Germany 2026 — Full Guide for Migrants</title>
         <meta name="description" content="Complete guide to DAAD scholarships Germany 2026. Full tuition + €934/month for migrants, refugees and asylum seekers. Deadlines, eligibility and application tips." />
         <link rel="canonical" href="https://migrantscholar.com/guides/daad-scholarship-guide" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({

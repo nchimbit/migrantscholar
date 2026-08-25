@@ -84,8 +84,8 @@ export default function Home({ posts, totalCountries, trending }) {
   return (
     <>
       <Head>
-        <title>MigrantScholar — Free Scholarships for Migrants and Refugees</title>
-        <meta name="description" content="Find verified fully funded scholarships for migrants, refugees, and asylum seekers. Updated daily across UK, Germany, Canada, Australia, USA and Turkey." />
+        <title>Scholarships for Migrants & Refugees 2026 — Free Verified Awards | MigrantScholar</title>
+        <meta name="description" content="Free verified scholarships for migrants, refugees and asylum seekers 2026. DAAD, Chevening, Vanier, Fulbright and 440+ more. Updated daily. No settled status required." />
         <meta property="og:title" content="MigrantScholar — Free Scholarships for Migrants and Refugees" />
         <meta property="og:description" content="Find verified fully funded scholarships for migrants, refugees, and asylum seekers. Updated daily." />
         <meta property="og:type" content="website" />

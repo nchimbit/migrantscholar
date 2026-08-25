@@ -7,7 +7,8 @@ export default function Privacy() {
     <>
       <Head>
         <title>Privacy Policy — MigrantScholar</title>
-        <meta name="description" content="MigrantScholar privacy policy. Learn how we collect, use, and protect your information." />
+                <link rel="canonical" href="https://migrantscholar.com/privacy" />
+<meta name="description" content="MigrantScholar privacy policy. Learn how we collect, use, and protect your information." />
       </Head>
       <Navbar />
       <div style={{background:"#E6F4F1",minHeight:"100vh",padding:"1rem 2rem 2rem"}}>

@@ -17,7 +17,7 @@ export default function FulbrightGuidePage() {
   return (
     <>
       <Head>
-        <title>Fulbright Scholarship 2026 — Complete Guide for Migrants & International Students | MigrantScholar</title>
+        <title>Fulbright Scholarship 2026 — Full Guide for Migrants</title>
         <meta name="description" content="Complete guide to the Fulbright Scholarship 2026. Fully funded graduate study in the USA for migrants and international students. Deadlines, eligibility and application tips." />
         <link rel="canonical" href="https://migrantscholar.com/guides/fulbright-scholarship-guide" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({

@@ -45,6 +45,24 @@ export default function NationalityPage({ nationality, posts, info }) {
         <link rel="canonical" href={`https://migrantscholar.com/nationality/${nationality}`} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
           "@context":"https://schema.org",
+          "@type":"BreadcrumbList",
+          "itemListElement":[
+            {"@type":"ListItem","position":1,"name":"Home","item":"https://migrantscholar.com"},
+            {"@type":"ListItem","position":2,"name":"Scholarships by Nationality","item":"https://migrantscholar.com/blog"},
+            {"@type":"ListItem","position":3,"name":`Scholarships for ${info.adjective} Students`,"item":`https://migrantscholar.com/nationality/${nationality}`}
+          ]
+        })}} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
+          "@context":"https://schema.org",
+          "@type":"FAQPage",
+          "mainEntity":[
+            {"@type":"Question","name":`Can ${info.adjective} refugees apply for scholarships?`,"acceptedAnswer":{"@type":"Answer","text":`Yes — ${info.adjective} refugees can apply for scholarships including DAAD Germany, UK Sanctuary Scholarships, Chevening, Vanier Canada and Australia Awards. Many programmes specifically welcome ${info.adjective} displaced students.`}},
+            {"@type":"Question","name":`What is the best scholarship for ${info.adjective} students?`,"acceptedAnswer":{"@type":"Answer","text":`Top scholarships for ${info.adjective} students include DAAD (full tuition + €934/month), Chevening UK (full tuition + £1,236/month), Vanier Canada ($50,000 CAD/year), Türkiye Bursları (full coverage) and Australia Awards (full coverage including flights).`}},
+            {"@type":"Question","name":`Do ${info.adjective} asylum seekers qualify for scholarships?`,"acceptedAnswer":{"@type":"Answer","text":`Yes — many scholarships accept ${info.adjective} asylum seekers with pending claims. UK Sanctuary Scholarships, DAAD and several university programmes do not require a final asylum decision.`}}
+          ]
+        })}} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
+          "@context":"https://schema.org",
           "@type":"CollectionPage",
           "name":`Scholarships for ${info.adjective} Students and Refugees`,
           "description":`Verified scholarships for ${info.adjective} students, refugees and migrants.`,
