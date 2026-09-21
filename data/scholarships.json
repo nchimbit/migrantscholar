@@ -1,0 +1,68 @@
+[
+  {
+    "id": "chevening",
+    "name": "Chevening Scholarships",
+    "country": "United Kingdom",
+    "countrySlug": "united-kingdom",
+    "officialUrl": "https://www.chevening.org/",
+    "levels": ["Masters"],
+    "verified": true,
+    "lastVerified": "2026-09-18",
+    "notes": "Use the official website to verify current eligibility, deadlines and funding details."
+  },
+  {
+    "id": "daad",
+    "name": "DAAD Scholarships",
+    "country": "Germany",
+    "countrySlug": "germany",
+    "officialUrl": "https://www.daad.de/en/",
+    "levels": ["Masters", "PhD"],
+    "verified": true,
+    "lastVerified": "2026-09-18",
+    "notes": "Specific DAAD programmes have different requirements and funding conditions."
+  },
+  {
+    "id": "fulbright",
+    "name": "Fulbright Foreign Student Program",
+    "country": "United States",
+    "countrySlug": "united-states",
+    "officialUrl": "https://foreign.fulbrightonline.org/",
+    "levels": ["Masters", "PhD"],
+    "verified": true,
+    "lastVerified": "2026-09-18",
+    "notes": "Eligibility and application procedures vary by participating country."
+  },
+  {
+    "id": "turkiye-burslari",
+    "name": "Türkiye Scholarships",
+    "country": "Turkey",
+    "countrySlug": "turkey",
+    "officialUrl": "https://www.turkiyeburslari.gov.tr/",
+    "levels": ["Undergraduate", "Masters", "PhD"],
+    "verified": true,
+    "lastVerified": "2026-09-18",
+    "notes": "Verify current programme requirements and application dates on the official website."
+  },
+  {
+    "id": "australia-awards",
+    "name": "Australia Awards Scholarships",
+    "country": "Australia",
+    "countrySlug": "australia",
+    "officialUrl": "https://www.dfat.gov.au/people-to-people/australia-awards",
+    "levels": ["Masters"],
+    "verified": true,
+    "lastVerified": "2026-09-18",
+    "notes": "Participating countries and eligibility requirements differ."
+  },
+  {
+    "id": "vanier",
+    "name": "Vanier Canada Graduate Scholarships",
+    "country": "Canada",
+    "countrySlug": "canada",
+    "officialUrl": "https://vanier.gc.ca/",
+    "levels": ["PhD"],
+    "verified": true,
+    "lastVerified": "2026-09-18",
+    "notes": "Check current programme information and institutional nomination requirements."
+  }
+]
